@@ -1,0 +1,8760 @@
+{
+ "built": "2026-11-23T21:30:50.505Z",
+ "source": "Open Food Facts (openfoodfacts.org), ODbL licence",
+ "legend": {
+  "N": "Not safe",
+  "U": "Uncertain",
+  "O": "Over sugar limit",
+  "S": "Safe"
+ },
+ "products": [
+  {
+   "code": "5411188112709",
+   "name": "Geröstete Mandel Ohne Zucker · alpro",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [
+    "Schalenfrüchte (keine Erdnüsse)"
+   ],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5449000000996",
+   "name": "Coca-Cola · COCA-COLA SERVICES SA/NV",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 36,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "80176800",
+   "name": "Nutella 750g · Ferrero",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 22.4,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5449000131805",
+   "name": "Coca-Cola Zero Sugar · Coca-Cola",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "80135876",
+   "name": "Nutella Hazelnut Spread with Cocoa · Nutella",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8.4,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8410076600448",
+   "name": "Nature valley crunchy oats and berries · Nature Valley",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "peanuts"
+   ],
+   "mayContain": [
+    "gluten",
+    "nuts",
+    "peanuts",
+    "soybeans"
+   ],
+   "sugarPerServing": 12.7,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "80310891",
+   "name": "Kinder Joy · Kinder",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 10.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "3451790941610",
+   "name": "Le Beurre Tendre Plaquette Doux · Elle & Vire",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8901262010016",
+   "name": "Amul Pasteurized Butter · Amul",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8410707000197",
+   "name": "Zumo Juver Disfruta Melocot. 1L · Juver",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "80050278",
+   "name": "Ferrero Rocher t3 · Ferrero",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans",
+    "Contains Gluten",
+    "Contains Hazelnuts",
+    "Contains Milk",
+    "Contains Soy",
+    "Contains Wheat",
+    "Contains:Milk",
+    "Soy Contains Whey"
+   ],
+   "sugarPerServing": 15,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8992803658439",
+   "name": "PT SPARINDO MUSTIKA · rdl",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5411188119753",
+   "name": "Kokosnussdrink mit Soja, Barista · alpro",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 6.6,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8410076600486",
+   "name": "Crunchy Oats & Honey · Nature Valley",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 10.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8001090582133",
+   "name": "Herbel Essences Step 4",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281001112044",
+   "name": "Triple action mint toothpaste · Colgate",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "Toothpaste"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3560071172015",
+   "name": "Dentifrice fraîcheur · Carrefour",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9310072000282",
+   "name": "Tim Tam · Arnott's",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "eggs",
+    "nuts",
+    "peanuts",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": 8.4,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3161911364531",
+   "name": "Elv. unt Gourmet nesarat · Elle & Vire",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3451790562631",
+   "name": "Unsalted dairy fat spread (60% fat content) · Elle & Vire",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000396014877",
+   "name": "Digestive biscuits · McVities",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 17,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5011835101058",
+   "name": "Smooth Peanut Butter · Whole Earth",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "peanuts"
+   ],
+   "mayContain": [
+    "peanuts"
+   ],
+   "sugarPerServing": 4.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007032261",
+   "name": "Almarai milk full fat · Almarai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 12.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "3504105035778",
+   "name": "Gentle cleansing gel · Mustela",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5900020044839",
+   "name": "nesquik minis 300g · Nesquik",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 7.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5760466738040",
+   "name": "Puck spreadable processed cream cheese analogue 500g · Puck",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9501100014122",
+   "name": "Chips Oman · Oman",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "milk",
+    "soybeans"
+   ],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3068320109596",
+   "name": "Evian Mineral Water · Evian",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "Bicarbonate",
+    "Calcium",
+    "Chloride",
+    "Fluoride",
+    "Magnesium",
+    "Nitrate",
+    "Potassium",
+    "Silicon Dioxide",
+    "Sodium",
+    "Sulfate"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6297000611020",
+   "name": "Mai Dubai Water Bottle · Mai dubai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291100850044",
+   "name": "Al ain water · Al ain",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3451790188831",
+   "name": "Dairy dessert Mon Grec - honey · Elle & Vire",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "Lait"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 17.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6281057010011",
+   "name": "نادك حليب 1 لتر · nadec",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 4.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5012427141100",
+   "name": "Country Garden Soup · Baxters",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 7.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5053827185806",
+   "name": "Corn Flakes · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7622201765286",
+   "name": "Oreo Cookies · Oreo",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 14.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6281007040655",
+   "name": "زبادي المراعي · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 6.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000127049307",
+   "name": "Crunchy Nut · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "9312231001215",
+   "name": "Organic Almond Unsweetened · Pure Harvest",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.3,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7311311021169",
+   "name": "Tortilla Original Large 6pk · Santa Maria",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "none"
+   ],
+   "sugarPerServing": 1.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000108022824",
+   "name": "Quick Cooking White Oats · Quaker",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans",
+    "Βρώμης"
+   ],
+   "mayContain": [
+    "gluten",
+    "soybeans",
+    "Αλάτι"
+   ],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7622201747152",
+   "name": "RITZ · Ritz",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 1.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8716200674942",
+   "name": "rainbow milk can 160 ml · Rainbow",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5202175002192",
+   "name": "Wraps el sabor · Family time",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7622210624840",
+   "name": "Philadelphia Original · Philadelphia",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5013665103554",
+   "name": "Organic vegetable stock cubes · Kallo",
+   "from": "UAE",
+   "contains": [
+    "celery"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4823077646287",
+   "name": "Lovita Blondie Brownie Lemon · Roshen",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk",
+    "nuts",
+    "peanuts",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": 4.3,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9310885115517",
+   "name": "100% Natural Crunchy Peanut Butter · Mayver's",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "nuts",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": 0.8,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0753950000872",
+   "name": "Doctor's Best, High Absorption Magnesium · Doctor's Best",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5060107337237",
+   "name": "Ella's Kitchen Melty Puffs Strawberries + Bananas · Ella's Kitchen",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "soybeans"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007044417",
+   "name": "Sliced Bread white · Almarai",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8410076800442",
+   "name": "Nature valley crunchy oats and berries · Nature Valley",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts",
+    "soybeans"
+   ],
+   "sugarPerServing": 12.7,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "3179730011857",
+   "name": "perrier · Perrier",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5024121885303",
+   "name": "Melty Carrot Puffs 7+ Months · Organix",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8410066128624",
+   "name": "Heinz Garlic Sauce 230 g · Heinz",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "mustard"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000197154239",
+   "name": "Prawn Crackers · Sharwood's",
+   "from": "UAE",
+   "contains": [
+    "crustaceans"
+   ],
+   "mayContain": [
+    "crustaceans",
+    "fish",
+    "gluten",
+    "soybeans"
+   ],
+   "sugarPerServing": 2.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007120401",
+   "name": "المراعي حليب · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "Casein"
+   ],
+   "mayContain": [
+    "حليب كامل الدسم"
+   ],
+   "sugarPerServing": 12,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "9501100040107",
+   "name": "Abu walad",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5024121805127",
+   "name": "Strawberry rice cake clouds · Organix",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8445290145215",
+   "name": "Nescafe Gold · Nescafé",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 50.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4610274540063",
+   "name": "Scandic Strawberry Mints · Scandic",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0076950450479",
+   "name": "Purely Peppermint · Yogi Tea",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3451790408892",
+   "name": "Le Beurre Tendre plaquette Demi-Sel · Elle & Vire",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291100850068",
+   "name": "Al ain pure natural bottled water · Al ain",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7640155340502",
+   "name": "Double Chocolate Hazelnut Biscuits · Rhythm 108",
+   "from": "UAE",
+   "contains": [
+    "nuts",
+    "noisettes"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 7.4,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "U",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291007902181",
+   "name": "Digestive Sugar Free Biscuits · Britannia",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000169605141",
+   "name": "Vine Ripened Tomato & Basil soup · Waitrose",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5011025045001",
+   "name": "Sudocrem Antiseptic Cream 250gm · Sudocrem",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5410228313854",
+   "name": "Corona Cero · Corona",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8720608632756",
+   "name": "شاي لبتون خفيف · Lipton",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007033565",
+   "name": "Almarai lacto free milk full fat · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 12,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5760466738095",
+   "name": "Arla cream cheese spread · Arla",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7613036691277",
+   "name": "Nestle Cerelac apple carrot mango · Nestlé",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281100081029",
+   "name": "SLICED BREAD BROWN · Lustine",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4810168035785",
+   "name": "Антарктик-криль классический · Санта Бремор",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "milk"
+   ],
+   "mayContain": [
+    "fish"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5021638001059",
+   "name": "Rachel's Organic Greek style Rhubarb · Rachel's",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5285000390589",
+   "name": "Indomie instant noodles fried noodles",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007031202",
+   "name": "cooking cream ff · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5059319024882",
+   "name": "Kelloggs coco pops original · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 5.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3560070823840",
+   "name": "Epeautre & lentilles Petits pois & soja · Carrefour",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [
+    "mustard",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": 0.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7891000315606",
+   "name": "Cafe Soluvel Nescafe Vidro 200G Matinal · Nescafé",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9310047070234",
+   "name": "Olive oil butter · Good man Fielder group",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291021210316",
+   "name": "Aqua fresh · Aqua",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8718444725206",
+   "name": "Edam · Président",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5701397301330",
+   "name": "Kettle Cooked Salt & Vinegar Chips · OK snacks a/s",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7622201746667",
+   "name": "Biscuit Bran · Belvita",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 5.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7640155340533",
+   "name": "Vegan coconut crunch · Rhythm 108",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "gluten"
+   ],
+   "sugarPerServing": 7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000193730574",
+   "name": "Slimline Lemonade · Schweppes",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "Contains source of Phenylalanine"
+   ],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5410081202555",
+   "name": "Chocolat au lait · Côte d'Or",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 25.4,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6003770000168",
+   "name": "PERi-PERi Sauce Medium · Nando's",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281018143949",
+   "name": "NADA GREEK YOGHURT drink plain 330ml · nada",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 4.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281100084013",
+   "name": "CHEESE PUFF · lusine",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "00265270",
+   "name": "Smoked sardines · Trader Joe's",
+   "from": "UAE",
+   "contains": [
+    "fish"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0850027880280",
+   "name": "FEASTABLES PEANUT BUTTER · MR BEAST",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 12.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291109600381",
+   "name": "Unfiltered Ginger Brew 2yrs prod · Up",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7394376621642",
+   "name": "Barista Edition Oat Drink · Oatly",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 4.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291016024027",
+   "name": "Milk Chocolate · Lacnor",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 18,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8906020580121",
+   "name": "Malabar Parota · iD",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0789673000042",
+   "name": "Rye Wraps · Mountain Bread Pty Ltd",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9501100010223",
+   "name": "Cheese Coated Crispy Corn Curls · Emirates Pofaki",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281018130246",
+   "name": "Greek Style Yoghurt · nada",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5285000910572",
+   "name": "steviana sweetener · STEVANA",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0617241011148",
+   "name": "Mezete go hummus 02g",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "sesame-seeds"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8801069417387",
+   "name": "Mentos lemon & mint · Mentos",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281012033185",
+   "name": "Sun top orange · Sun top",
+   "from": "UAE",
+   "contains": [
+    "orange"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007063067",
+   "name": "Fresh Yoghurt · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 17.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5449000060303",
+   "name": "Ginger ale · Schweppes",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8714800018289",
+   "name": "Peach-non alcoholic malt drink · Bavaria",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5060337220118",
+   "name": "Honey & ginger kefir · biotiful",
+   "from": "UAE",
+   "contains": [
+    "apple"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 13,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6281018143741",
+   "name": "NADA GRK DRNKNG YOG STRWBRRY /CRL 330ML · Nada",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "3178530417340",
+   "name": "سانت ميشيل كيك براوني · St Michel",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "nuts",
+    "soybeans"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007046053",
+   "name": "حلى شوكلاه · Almarai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8901393020557",
+   "name": "Tubes mini · Chupa Chups",
+   "from": "UAE",
+   "contains": [
+    "apple",
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281036110206",
+   "name": "Lay’s · Lay's",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0070221008703",
+   "name": "Spearmint · Trident",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007070775",
+   "name": "المراعي عصير فواكه مشكله · Almarai",
+   "from": "UAE",
+   "contains": [
+    "apple",
+    "banana",
+    "orange"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 24,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4803925061141",
+   "name": "Gatorade blue bolt flavor · Gatorade",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 12,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4820179256581",
+   "name": "REEVA Vegetable flavour Instant noodles · Reeva",
+   "from": "UAE",
+   "contains": [
+    "celery",
+    "gluten"
+   ],
+   "mayContain": [
+    "eggs",
+    "milk"
+   ],
+   "sugarPerServing": 3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8902246003727",
+   "name": "Budwiser Magnum · BUDWISER",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5011835101232",
+   "name": "Smooth Organic Peanut Butter · Whole earth",
+   "from": "UAE",
+   "contains": [
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4003994111901",
+   "name": "Kellogg's Corn Flakes The Original · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281022118063",
+   "name": "اكتيفيا لبن قليل الدسم · Activia",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281123036013",
+   "name": "nahool vanilla cake · Nahool",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "eggs",
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "sugarPerServing": 3.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281036564108",
+   "name": "Doritos Nacho Cheese · Doritos",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281034007041",
+   "name": "barbican malt beer b1 · Barbican",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 6.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8032793344186",
+   "name": "Двойно концентрирана доматена паста · Pomì",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0305734758501",
+   "name": "Centrum Silver Men 50+ Complete Multivitamin · Centrum",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0717273508620",
+   "name": "Peanut Butter · Unknown",
+   "from": "UAE",
+   "contains": [
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9345544001580",
+   "name": "Shiitake Mushroom Crisps · DJ&A",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9501100014627",
+   "name": "Sohar Chips · Al Jufair Food",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9501100017413",
+   "name": "Chilli flavour chips oman · Al jufair food",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3451790019739",
+   "name": "Elle & vire desserts lactes fruits peche · Elle & Vire",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "Lait"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 16,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291016011010",
+   "name": "Full Cream Milk · Lacnor",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8682983760007",
+   "name": "Almond Unsweetened Almond Drink · nilky",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.2,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007073110",
+   "name": "حليب بروتين بالشوكلاته · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 35.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8019428004080",
+   "name": "Bio Rice Drink Coconut · The Bridge",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 11.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8076809519960",
+   "name": "Casarecce · Barilla",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "eggs",
+    "soybeans"
+   ],
+   "sugarPerServing": 2.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0032894010902",
+   "name": "Fava Beans Lebanese Recipe · California Garden",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7613036438100",
+   "name": "Go up · Nestlé",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "sugarPerServing": 15,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5024121217319",
+   "name": "Organix Banana, Peach & Apple Muesli · Organix",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000167023985",
+   "name": "Strepsils lemon sugar free · Reckitt Benckiser",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5281009568219",
+   "name": "Castania",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281036284204",
+   "name": "Sunbites Bread Bites Cheese & Herbs · Sunbites",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000169042816",
+   "name": "Nonpareille capers · Waitrose",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5701397326616",
+   "name": "Kettle Cooked Chips Sweet BBQ · Kettle cooked",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5285000910220",
+   "name": "steviana sweetener · Steviana",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5203912390862",
+   "name": "Betty Crocker Chocolate Chip muffin mix · Betty Crocker",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5901104004398",
+   "name": "Organiczny Coconut Veganurt · VegupBIO",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9556001302793",
+   "name": "Instant Noodles Soup with Curry Flavour · Maggi",
+   "from": "UAE",
+   "contains": [
+    "chicken",
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6223003803995",
+   "name": "Digestive المحجر · McVitie's",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 25,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0064579330791",
+   "name": "100% Natural Organic Coconut Water · Rubicon",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4901005512696",
+   "name": "Pocky Cacao 60% · Pocky",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "peanuts"
+   ],
+   "sugarPerServing": 9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "1110000130191",
+   "name": "White Bread · Modern Bakery",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7340001805628",
+   "name": "Protein Bar Caramel Cashew · Baked",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291108586587",
+   "name": "HIBISCUS TEA CHILLED · BARAKAT",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 12,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "7640110709825",
+   "name": "Dark Chocolate with Sea Salt* · Canterel",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "29628858",
+   "name": "Macadamia Chocolate Spread · SpinneysFOOD",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [
+    "milk",
+    "nuts"
+   ],
+   "sugarPerServing": 14.1,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8001090409089",
+   "name": "Oral b",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3606000560994",
+   "name": "cera ve · CeraVe",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0720516021916",
+   "name": "Orgran Multigrain O's With Quinoa · Orgran",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000159031103",
+   "name": "Maltesers cashier · Maltesers",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 23,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5015285811734",
+   "name": "Egg replacer · Free and Easy",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007023962",
+   "name": "Cream cheese*12 · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291003000577",
+   "name": "Delights Bourbon Creams · Tiffany",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans",
+    "Wheat Gluten"
+   ],
+   "mayContain": [
+    "eggs",
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 12.4,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8410510010215",
+   "name": "Chocolate Negro Dark Chocolate · Dulcinea",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "milk",
+    "nuts"
+   ],
+   "sugarPerServing": 29,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "U",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8412700120100",
+   "name": "Cacaolat 0% · Cacaolat",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281036287106",
+   "name": "Bread bites · Sunbites",
+   "from": "UAE",
+   "contains": [
+    "celery",
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0046000287324",
+   "name": "Soft taco dinner kit imp · Old El Paso",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5711953000782",
+   "name": "Cheese Sticks · Puck",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9556345008573",
+   "name": "مياو مياو مقرمشات بالروبيان 60 جرام · Miaow Miaow",
+   "from": "UAE",
+   "contains": [
+    "crustaceans",
+    "fish",
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.3,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5010392005236",
+   "name": "Crystallised stem ginger · Opies",
+   "from": "UAE",
+   "contains": [
+    "sulphur-dioxide-and-sulphites"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007049825",
+   "name": "Grenade juice · Almarai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007032544",
+   "name": "Strawberry Flavoured Milk · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000171054432",
+   "name": "LIGHT MEAT TUNA CHUNKS IN WATER · JOHN WEST",
+   "from": "UAE",
+   "contains": [
+    "fish"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4061458021609",
+   "name": "Chocolate bourbon vanille · Aldi",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 11.5,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6281022118209",
+   "name": "low fat stirred yoghurt · Activia",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0012000804144",
+   "name": "7up · 7UP",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 27.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4800818808302",
+   "name": "Frutos · Columbia's",
+   "from": "UAE",
+   "contains": [
+    "gelatin",
+    "orange",
+    "soybeans",
+    "LECITHIN"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 10,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6299200002899",
+   "name": "barbacue sauce · ama",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0733603092683",
+   "name": "beetroot chips · Hunter's",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8908001017121",
+   "name": "Nacho Chips Cheese And Herbs · Cornitos",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7613037574425",
+   "name": "Granola fitness quinoa almond chocolate · Nestlé",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9421905756006",
+   "name": "Barista Oat Milk · All Good",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7613037059816",
+   "name": "NutriPuffs Raspberry & Banana · Nestlé",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "nuts",
+    "Allergen information: May contain Peanuts and Nuts- Contains Gluten."
+   ],
+   "sugarPerServing": 0.2,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0076150982398",
+   "name": "MICROWAVE POPCORN · ACT II",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281100089056",
+   "name": "Chocolate Puff · L'Usine",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8997035600133",
+   "name": "Pocari Sweat Ion Supply Drink · Otsuka Pharmaceutical",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 72.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291031020202",
+   "name": "Strawberry Yoghurt",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281018154747",
+   "name": "NADA PROTEIN MILK VANILLA 320ML · nada",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 9.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291003081934",
+   "name": "Happy Break · Tiffany",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 6,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6290340041502",
+   "name": "Chips kettle cooked - Sea sat · Kitco",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291107559261",
+   "name": "Peanut butter · Earth goods",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 3.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0841165147502",
+   "name": "Pran potata Spicy Biscuit · pran",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9501100017611",
+   "name": "Salada Chips · Al Alali",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291100930531",
+   "name": "Just watermelon · Barakat",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 23.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6281007061278",
+   "name": "Vanilla Protein Milk · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 18.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "3251350161003",
+   "name": "Abu walad  16 portions · Bel",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0629002072299",
+   "name": "Dry Salami Original - Frantino And Mondello · Fantino & Mondello",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8801069417400",
+   "name": "Mentos apple soda · Mentos",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8690504037743",
+   "name": "Nibbles (Dark Chocolate) · McVitie's",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4000521586102",
+   "name": "Löffelglück Rote Grütze mit Bourbon-Vanillesoße · Dr. Oetker",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "nuts",
+    "Kirschkerne und Teile davon"
+   ],
+   "sugarPerServing": 27.2,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4009900545808",
+   "name": "Spearmint Flavor Gum · WRIGLEYS",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9556001302748",
+   "name": "Noodles soup with chicken flavour · Maggi",
+   "from": "UAE",
+   "contains": [
+    "celery",
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [
+    "celery",
+    "crustaceans",
+    "fish",
+    "gluten",
+    "milk",
+    "mustard",
+    "soybeans"
+   ],
+   "sugarPerServing": 2.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6363367732439",
+   "name": "Harva German capsules natural Weight Loss support 400 ml 30 Capsule · ",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3073781010725",
+   "name": "Kiri spread cream cheese · Kiri",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4903015560223",
+   "name": "Crispy Corn Chips Cheese Flavor - Aerial Cheddar Cheese · YBC",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans",
+    "クリーミングパウダー",
+    "チーズパウダー",
+    "乳等を主要原料とする食品",
+    "乳糖"
+   ],
+   "mayContain": [
+    "gluten",
+    "soybeans"
+   ],
+   "sugarPerServing": 0.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5202178001901",
+   "name": "Yogurt greco alla pesca · Olympus",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6298044151787",
+   "name": "Protein Gummies · Freelife",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0629025442352",
+   "name": "Yogurt · Logo",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6294017118375",
+   "name": "MACKINTOSHS QUALITY 150g",
+   "from": "UAE",
+   "contains": [
+    "celery",
+    "eggs",
+    "gluten",
+    "milk",
+    "sesame-seeds"
+   ],
+   "mayContain": [
+    "nuts",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8906117090762",
+   "name": "Rice Popped Chips - Classic Salted · BRB",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 0.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291043125001",
+   "name": "Hibiscus Drink",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6299200051248",
+   "name": "Dar chocolate · Chic n-choc",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 48,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "9814622000000",
+   "name": "TURKISH MILK CAKE · GRANDIOSE BAKER",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "sesame-seeds"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 16.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291106530070",
+   "name": "Almonds Roasted and salted · Goodness Foods",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4823077638572",
+   "name": "Roshen Fudgenta Candies 68pcs · Roshen Fudgenta",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 22,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0256649019556",
+   "name": "Beef Dry Wors · SpinneysFOOD",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8859253501107",
+   "name": "White Pomelo (Peeled) · Spinneys food",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8906083020473",
+   "name": "Quinoa Bar · Mindful Superfood",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [
+    "gluten",
+    "milk",
+    "nuts",
+    "peanuts",
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "U",
+    "milk": "U",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291106459876",
+   "name": "Junior Brown Sliced Bread · Saumi",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291028127204",
+   "name": "Salad Chips · Mr.Krisps",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6294004122033",
+   "name": "Pizza flavoured crunchy coated peanuts · Al Douri",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6298044154061",
+   "name": "PLAAY SNAZZY SALTED CARAMEL 35 GM · Plaay",
+   "from": "UAE",
+   "contains": [
+    "nuts",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 3.9,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "N",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5060300440000",
+   "name": "Xlube concentrated powder · Xlube",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8904037212318",
+   "name": "Noni Juice Concentrate Ayurvedic Medicine · Well",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "80775010",
+   "name": "Pure musky breeze scent with Talc and absorbing molecules anti-door dr",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8001841054940",
+   "name": "Head & Shoulders shampoo charcoal detox 400ml · head & shoulders",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5201168815399",
+   "name": "Feta cheese (P.D.O.) lactose free · Dodoni",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3451790878015",
+   "name": "Crème Fraîche Advantage · Elle & Vire",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5010029214420",
+   "name": "Alpen light Summer fruits · Weetabix",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291003010347",
+   "name": "Tiffany delight Choco Chip Cookie's · Tiffany",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts",
+    "\u001fen:nuts\u001f"
+   ],
+   "sugarPerServing": 9.5,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291007904345",
+   "name": "Gobbles Double Choco Cake · Britannia",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 15.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291104282278",
+   "name": "Sun Blast Apple · Sun Blast",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 10,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6294003532987",
+   "name": "Nestle Kitkat 4 Fingers Chocolate · Nestlé",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 10.3,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8001060008403",
+   "name": "Whole Cherry Tomato Sauce with Chilli · Saclà",
+   "from": "UAE",
+   "contains": [
+    "celery",
+    "nuts"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "80177173",
+   "name": "Nutella · Ferrero",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "sugarPerServing": 8.4,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "2062629775859",
+   "name": "White Sliced Bread · Carrefour",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291016011027",
+   "name": "Milk · Lacnor",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "1110000120765",
+   "name": "Protein Bread · Modern Bakery",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6295134131032",
+   "name": "royal bakers",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7610184007806",
+   "name": "Natural Blossom Honey · nectaflor",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5021638100820",
+   "name": "Greek Style Natural · Rachel's",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6290090036018",
+   "name": "Creamy Caesar · Heinz",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "fish",
+    "gluten",
+    "milk",
+    "mustard"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 7.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007118231",
+   "name": "almarai · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5941192110335",
+   "name": "Création cheese · Président",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291011054562",
+   "name": "Chocodate Assorted · Chocodate",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "\u001fen:milk\u001f  \u001fen:nuts\u001f  \u001fen:soybeans\u001f"
+   ],
+   "sugarPerServing": 6.3,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291104283350",
+   "name": "Organic Honey Forest 2yrs prod · Larder",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "10207680",
+   "name": "Quality Milk · Rainbow",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 17.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4800035102023",
+   "name": "Classic Peanut Butter · Lily's",
+   "from": "UAE",
+   "contains": [
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0041570120651",
+   "name": "Almond Breeze Almondmilk · Almond Breeze",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0859795006311",
+   "name": "100% Whey platinum standard · muscle core nutrition",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "nuts",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "U",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0858385007097",
+   "name": "Oat Plant-Based Milk imp · Centrale del latte di Vicenza",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 11.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291056211012",
+   "name": "Al Ain Farms Lemon Mont Drink",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 27.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8410076482730",
+   "name": "Tortilla chips · Old El Paso",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "celery",
+    "milk",
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0658010118033",
+   "name": "Organic Plant Protein grain Free Smooth chocolate flavor · Garden of L",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291016025017",
+   "name": "Strawberry milk · Lacnor",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0733603094182",
+   "name": "Hunter's  snap pea chips",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 2.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8410076482723",
+   "name": "Nachips · Old El Paso",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000169068540",
+   "name": "Lemonade · Waitrose",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291100800018",
+   "name": "Large Arabic Bread · Al-Arz",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "gluten"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291003602931",
+   "name": "Cookies & creem · Igloo",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5060273440809",
+   "name": "Gluten free pizza base",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0024000101895",
+   "name": "Golden Sweet Corn · Del Monte",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8713621670003",
+   "name": "Mini caramel waffles · Daelmans Banket B.V.",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5060433990359",
+   "name": "Watermelon Hibiscus Drink · Nix and Kix",
+   "from": "UAE",
+   "contains": [
+    "apple"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "2062629775880",
+   "name": "BROWN SLICED BREAD · Carrefour",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "sugarPerServing": 2.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5032722304932",
+   "name": "Mustard Wholegrain · Biona",
+   "from": "UAE",
+   "contains": [
+    "mustard"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4610046800012",
+   "name": "Condensed milk · Карламанский молочный комбинат",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281050115034",
+   "name": "Beef meat balls · Americana",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9369998005215",
+   "name": "Lower carb bread · herman brot",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "lupin",
+    "soybeans"
+   ],
+   "mayContain": [
+    "eggs",
+    "milk",
+    "nuts",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": 1.5,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6290090014993",
+   "name": "Thousand Island Dressing · Heinz",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "fish",
+    "gluten",
+    "mustard"
+   ],
+   "mayContain": [
+    "celery",
+    "eggs",
+    "fish",
+    "gluten",
+    "mustard"
+   ],
+   "sugarPerServing": 1.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291107558899",
+   "name": "Granola mix · Earth Foods",
+   "from": "UAE",
+   "contains": [
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 5.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5060178070934",
+   "name": "Sundried tomato pesto",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9345544008114",
+   "name": "Teriyaki green peas · Dj&a",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [
+    "celery",
+    "eggs",
+    "fish",
+    "gluten",
+    "lupin",
+    "milk",
+    "nuts",
+    "peanuts",
+    "sesame-seeds",
+    "sulphur-dioxide-and-sulphites",
+    "Shellfish"
+   ],
+   "sugarPerServing": 3.1,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "U",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6297001144022",
+   "name": "Oats Bread · Reef",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4013200780364",
+   "name": "Taco Kit · Don Enrico",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007057783",
+   "name": "Mixed fruit · Almarai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "apple",
+    "banana",
+    "orange"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7613036727471",
+   "name": "Organic pumkin Banana Carrot · Gerber",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291105692120",
+   "name": "Dark Chocolate Cake Mix · Betty Crocker",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6297001144015",
+   "name": "High fiber bread · Reef",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6297000670317",
+   "name": "ayran · baladé farms",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 4.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5391532120300",
+   "name": "FulFil protein bar · Fulfil",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291011003751",
+   "name": "Raja · راجا",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans",
+    "sulphur-dioxide-and-sulphites"
+   ],
+   "mayContain": [
+    "gluten",
+    "soybeans"
+   ],
+   "sugarPerServing": 0.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291030501023",
+   "name": "Chocolate milk",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8906015720020",
+   "name": "Big mishra pedha · Big mishra",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007028363",
+   "name": "Sour cream · Almarai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281034904036",
+   "name": "Guava fruit drink · Rani",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0064579332177",
+   "name": "Cranberry Fruit Drink",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 20,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0705016353170",
+   "name": "ISO100 HYDROLYZED PROTEIN POWDER 100% WHEY PROTEIN ISOLATE STRAWBERRY ",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0295444110358",
+   "name": "Laban up · safa",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5711953157981",
+   "name": "Puck Jars White · PUCK",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9415007015741",
+   "name": "Anchor Fortified Full Cream Milk Powder · Anchor",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "soybeans"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291105811231",
+   "name": "Zero bottled drinking water · Al ain",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6297001558065",
+   "name": "Zen Mini Cookies · Keto Real",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "Dairy Products",
+    "Food Additives"
+   ],
+   "mayContain": [
+    "Produced in a facility that handles gluten"
+   ],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5907443600352",
+   "name": "Dark Chocolate · Amsterdam",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "peanuts"
+   ],
+   "mayContain": [
+    "eggs",
+    "gluten",
+    "nuts"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "U",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5033712160057",
+   "name": "Chicken Samosas · Al Kabeer",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281022118070",
+   "name": "اكتيفيا لبن قليل الدسم",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291108586860",
+   "name": "JUICE POP MANGO PASSION · BARAKAT",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 13.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8901200200127",
+   "name": "Parachute lite · Coconut hair oil",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6290090033185",
+   "name": "Chili mayonnaise · Heing",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "mustard",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007035187",
+   "name": "Evaporated milk · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9000133145686",
+   "name": "Milky Lux Burger Cheese Slices imp · Rupp",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "سعرت"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291031002567",
+   "name": "Marmum Milk · Marmum",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 12.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8410076610683",
+   "name": "Peanut And Chocolate Protine · Nature Valley",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 6.8,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6297000915357",
+   "name": "Extra Power · Extra Power Energy Drink",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5027952007869",
+   "name": "Brioche Swirls · St Pierre",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 7.3,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "2062629775873",
+   "name": "Sliced Milk Bread · Carrefour",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "sesame-seeds"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8691216024953",
+   "name": "Marshmallows · Haribo",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5903205740298",
+   "name": "Chocolate Caramel w/ Salt · Super Fudgio",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "milk",
+    "nuts",
+    "peanuts",
+    "soybeans"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5059319034102",
+   "name": "Froot loops · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "orange"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 7.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291003634192",
+   "name": "Day BREAK Chocolate · Tiffany",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6298044072969",
+   "name": "Zulal",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291003157561",
+   "name": "Noor mayonnaise light · Noor",
+   "from": "UAE",
+   "contains": [
+    "eggs"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6298044154047",
+   "name": "Salty Peanut Bar · Plaay",
+   "from": "UAE",
+   "contains": [
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9555432807747",
+   "name": "Gluten free Chocolate butter cookies · NHF",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6298044003291",
+   "name": "Natural salted popcorn · Dubai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7340001805642",
+   "name": "WHITE CHOCOLATE ALMOND · Barebells",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.2,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291108639153",
+   "name": "Filled Dates With Orange Peel · Jomara",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 62,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5285007490602",
+   "name": "extra virgin olive oil",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291029100015",
+   "name": "Labneh · Chtoora",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6295151960455",
+   "name": "Milk Strawberry Organic Full Fat · Meliha",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5203225003985",
+   "name": "peanut butter wafer coated in milk chocolate · Riddle",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts",
+    "sesame-seeds"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291044100175",
+   "name": "Strawberry Milk · Safa",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 24.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291103570840",
+   "name": "Karasev · Roasters",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6251001302004",
+   "name": "Bugles",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "gluten"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "U",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4032900148175",
+   "name": "Winston",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0087034040653",
+   "name": "HOT SAUCE · Excellence",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0606076240243",
+   "name": "CHIPSTICKS · Smiths",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291107061252",
+   "name": "JUICE POP LEMON MINT · BARAKAT",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 10,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6298044177268",
+   "name": "Protein chips · Soul Pantry",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6299200056502",
+   "name": "Chocolate crêpes · CHIC n CHOC",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 35,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6299200056519",
+   "name": "Caramel Crêpes · Chic n Choc",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "nuts",
+    "soybeans"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8682874611340",
+   "name": "Delicado · Niveen",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "eggs",
+    "gluten",
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 10.5,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291031000709",
+   "name": "Fresh Greek Yogurt - Strawberry · Marmum",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6297001135198",
+   "name": "Chocolate milk · Hayatna",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6161101251761",
+   "name": "High Fibre Biscuits · Manji",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0793618133535",
+   "name": "Peanut Butter Cookies · Koala Picks",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291106538601",
+   "name": "Activated Walnuts (Mildly Salted) · Goodness Foods",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.3,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6290360088242",
+   "name": "Cleopatra Gold 24K Water · G&V Ltd.",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291003628931",
+   "name": "Noor tomato ketchup less 50% sugar and salt · Noor",
+   "from": "UAE",
+   "contains": [
+    "celery"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291109982586",
+   "name": "Mixed Nut Butter · Earth Goods",
+   "from": "UAE",
+   "contains": [
+    "nuts",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281022134049",
+   "name": "يوبرو شوكولاتة · YOPRO",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0207618275541",
+   "name": "Greek Drinking Yoghurt passion fruit with chia seeds with mixed fruit ",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6297000526676",
+   "name": "Fine Nuts Salted Cashews · Fine Nuts",
+   "from": "UAE",
+   "contains": [
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4100290056124",
+   "name": "ارلا شوكولاتة · Atlanta",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7217101111112",
+   "name": "Arla protein strawberry · Arla Foods",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3343144182674",
+   "name": "Apple Cinnamon · Me love kombucha",
+   "from": "UAE",
+   "contains": [
+    "apple"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6290360331539",
+   "name": "Lemon Soda Star",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6932728920244",
+   "name": "Organic Peeled Roasted Chestnuts · R&J",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3343154112210",
+   "name": "Frozen Margherita Pizza · Gusto Italiano",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "soybeans"
+   ],
+   "sugarPerServing": 2.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4299066052542",
+   "name": "Kibbeh Chicken · AL HABIBI",
+   "from": "UAE",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 0.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "29634477",
+   "name": "Sour cream and onion crisps · SpinneysFOOD",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6161103802749",
+   "name": "Tenderstem Broccoli · SpinneysFOOD",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 2.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8012566017516",
+   "name": "Organic Salad · SpinneysFOOD",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "11155553",
+   "name": "Pure bottled drinking water · Masafi",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6299200010337",
+   "name": "Peanuts salted with skin · EATISTAAN",
+   "from": "UAE",
+   "contains": [
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8859408701109",
+   "name": "Dried Peach · Tan Tan",
+   "from": "UAE",
+   "contains": [
+    "peach"
+   ],
+   "mayContain": [
+    "sulphur-dioxide-and-sulphites"
+   ],
+   "sugarPerServing": 8.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0850677000021",
+   "name": "Chancapiedra Stonebreaker · Hanan",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0032894010667",
+   "name": "Sliced Pineapple (in light syrup) · California Garden",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 14,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6221033001015",
+   "name": "Heinz Tomato Ketchup · Heinz",
+   "from": "UAE",
+   "contains": [
+    "celery"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291003021237",
+   "name": "astro",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 14.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5065007841099",
+   "name": "Organic Oat Dairy Free Drink · Planet Y",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291106530148",
+   "name": "Roasted and Salted Almonds · Goodness Foods",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0733603093789",
+   "name": "Brown Rice Crackers Sea Salt · Hunters Gourmet",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291062100690",
+   "name": "Mini Bread · Golden spike",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291062200017",
+   "name": "Large Sliced Bread · Golden Loaf",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6295134131001",
+   "name": "Sliced White Bread · Royal Bakers",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291106450385",
+   "name": "Whole Wheat Sliced Bread · Yaumi",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291109984504",
+   "name": "Organic Brown Rice Cakes Unsalted · Earth Goods",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4808680022314",
+   "name": "Lady's Choice Bacon Spread · Lady's Choice",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "soybeans"
+   ],
+   "mayContain": [
+    "milk",
+    "mustard"
+   ],
+   "sugarPerServing": 3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5056784901069",
+   "name": "Monster Energy Rio Punch · Monster",
+   "from": "UAE",
+   "contains": [
+    "apple"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 33.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8697430822269",
+   "name": "Chifferini Rigate",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291028123046",
+   "name": "Doodles spicy cheese · Mr.Krisps",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8991002133600",
+   "name": "Cappuccino · Good Day",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 15,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6291003104329",
+   "name": "King cone butterscotch · Igloo",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 9.8,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007070393",
+   "name": "Sandwich Roll BRIOCHE · l'usine",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "gluten",
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "sugarPerServing": 8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9506000025032",
+   "name": "Masala Munch STIX · 2PM",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291107069098",
+   "name": "Tumeric Root Shot · Barakat",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0647409780500",
+   "name": "Dubai mino salad · Dubai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0647409780487",
+   "name": "Dubai mino cheeze puffed corn · Dubai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6294004122071",
+   "name": "Salt and vinegar crunchy coated peanuts · Al Douri",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5283013331261",
+   "name": "Light Meat Tuna (Water) · Siblou",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6291016004333",
+   "name": "High Protein Milk · Lacnor",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3516664540006",
+   "name": "DCL Instant Yeast · DCL",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281022133042",
+   "name": "Danon",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 19.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6281033167555",
+   "name": "Americana Cupcake Strawberry · Americana Cake",
+   "from": "UAE",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5063210013968",
+   "name": "Sicilian Lemon & White Chocolate All Butter Cookies · Waitrose",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 6.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007066563",
+   "name": "LUSINE",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 4.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6297001326473",
+   "name": "Milk chocolate covered date with Himalayan pink salt",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 16,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0840370901381",
+   "name": "Cheddar cheese · Kraft",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6299200061650",
+   "name": "Dried Mango Slices · Natur's",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0725765711526",
+   "name": "Wafer Filled with Vanilla cream · Verde care",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0012000022869",
+   "name": "7up zero sugar",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0012000802843",
+   "name": "Mirinda orange · Mirinda",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0038000317101",
+   "name": "Frosted strawberry toaster pastries, strawberry · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gelatin",
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "soybeans"
+   ],
+   "sugarPerServing": 16,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0046000287386",
+   "name": "Dinner kit fajita iml · Old El Paso",
+   "from": "UAE",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0050700559124",
+   "name": "Solid Pack Pumpkin · Parade",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 4.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0680275029212",
+   "name": "Organic ginger peach tea imp · English tea shop organic",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0863769000243",
+   "name": "Soy Plant-Based Milk · Koita",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3505920056757",
+   "name": "Saucisse sèche · Vallée du Sor",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000159462037",
+   "name": "Snickers Ice Cream · Snickers",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 15.3,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5053827144056",
+   "name": "crunchy muesli · Kellogg's",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007028288",
+   "name": "Al Marai Low fat milk · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007032575",
+   "name": "low fat milk · Almarai",
+   "from": "UAE",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007806831",
+   "name": "orange & carrot juice · Almarai",
+   "from": "UAE",
+   "contains": [
+    "orange"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6290400013425",
+   "name": "Quaker Whole Oats · Quaker",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "Contains oats (cereal containing gluten)"
+   ],
+   "sugarPerServing": 0.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291014101263",
+   "name": "Salted peanuts · Best",
+   "from": "UAE",
+   "contains": [
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291100880744",
+   "name": "Luxury dates with nuts · Nadiya",
+   "from": "UAE",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 27,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8857122559655",
+   "name": "Tom Yam imp · Desiam",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7613034215406",
+   "name": "Lion Caramel and Chocolate · Nestlé",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 25,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "4005561424186",
+   "name": "Lentils, like &quot;du Puy&quot; · Bohlsener Mühle",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0058449160007",
+   "name": "Sunrise breakfast touch of honey & chia biscuits · Nature's Path",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 11,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "1110000130467",
+   "name": "multigrain bread · modern bakery",
+   "from": "UAE",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "sesame-seeds",
+    "soybeans"
+   ],
+   "sugarPerServing": 0.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9349809000097",
+   "name": "protein balls · health lab",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "nuts"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 6.2,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0016000275546",
+   "name": "Gmills frty cheerios sweetened whl grn oat cereal · Cheerios",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "9118119877886",
+   "name": "fruity cheerios · general mills",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 2.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007044462",
+   "name": "fresh Laban vetal · almarai",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8697439061577",
+   "name": "natural snack · fitfit",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "nuts",
+    "dioxyde de soufre"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0863769000229",
+   "name": "organic skim milk · koita",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 5.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6294001820680",
+   "name": "Bounty Minis · Bounty",
+   "from": "UAE",
+   "contains": [
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 14.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0032894015419",
+   "name": "tuna slices · California garden",
+   "from": "UAE",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "80466468",
+   "name": "DOVE Déodorant Femme Anti-Transpirant Stick Original 50ml · Dove",
+   "from": "Saudi Arabia",
+   "contains": [
+    "Gs1:T4078:AI",
+    "Gs1:T4078:BA",
+    "Gs1:T4078:BB",
+    "Gs1:T4078:BO",
+    "Gs1:T4078:BP",
+    "Gs1:T4078:BS",
+    "Gs1:T4078:CN",
+    "Gs1:T4078:EG",
+    "Gs1:T4078:GE",
+    "Gs1:T4078:HX"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "80052760",
+   "name": "Kinder Bueno · Kinder",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "sugarPerServing": 8.8,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7613287431943",
+   "name": "Nesquik Cocoa · Nestlé",
+   "from": "Saudi Arabia",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3600541177741",
+   "name": "68YN5T 400ml · Ultra doux",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5900951311505",
+   "name": "SNICKERS · MARS POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+   "from": "Saudi Arabia",
+   "contains": [
+    "eggs",
+    "milk",
+    "nuts",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 25.5,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5011321361058",
+   "name": "شامبو",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8410376033267",
+   "name": "zero sin azúcares añadidos · GALLETAS GULLON S.A.",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk",
+    "soybeans"
+   ],
+   "sugarPerServing": 0.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3600540539397",
+   "name": "garnier · Garnier",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4005900008985",
+   "name": "nivea Soft · Nivea",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8410376023831",
+   "name": "Digestive · gullón",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk",
+    "soybeans"
+   ],
+   "sugarPerServing": 2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000108478119",
+   "name": "Quaker White Oats · Quaker",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7613287413048",
+   "name": "Nestle Nesquick · Nesquik",
+   "from": "Saudi Arabia",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 374,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8410076600479",
+   "name": "Crunchy Oats & Dark Chocolate · Nature Valley",
+   "from": "Saudi Arabia",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "peanuts",
+    "soybeans"
+   ],
+   "sugarPerServing": 11.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "U",
+    "milk": "S",
+    "gluten": "U",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5000159559485",
+   "name": "Twix · Twix",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "gluten",
+    "nuts"
+   ],
+   "sugarPerServing": 24,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "0089686120714",
+   "name": "Instant Noodles Mi Goreng · indomie",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000159555715",
+   "name": "Maltesers · Maltesers",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "none"
+   ],
+   "sugarPerServing": 19.6,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "50064861",
+   "name": "Vaseline lip therapy · unilever",
+   "from": "Saudi Arabia",
+   "contains": [
+    "linalool"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6111245470054",
+   "name": "hala",
+   "from": "Saudi Arabia",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [
+    "61112445470054"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3610340634185",
+   "name": "ultra doux shampoo · garnier",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0009800800056",
+   "name": "nutella & GO! with Breadsticks · Nutella",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "75235356"
+   ],
+   "sugarPerServing": 23,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5410076881840",
+   "name": "Champú PANTENE · ttyw",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281035000034",
+   "name": "Nova water 40x330ml · NOVA",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8076809513739",
+   "name": "BASILICO · Barilla G. e R. Fratelli SpA",
+   "from": "Saudi Arabia",
+   "contains": [
+    "Garlic",
+    "Tomatoes"
+   ],
+   "mayContain": [
+    "Basil oil",
+    "Pesticides"
+   ],
+   "sugarPerServing": 5.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4000196901187",
+   "name": "جليسوليد · cRE",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5900020045348",
+   "name": "Fitness Granola Crunchy Oat · Nestlé",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0033200005469",
+   "name": "Essentials with NATURAL DEODORIZERS JUNIPER BERRY DEODORANT · Arm & Ha",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000159459228",
+   "name": "Twix Twin · Mars Wrigley",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans",
+    "sojalecithin"
+   ],
+   "mayContain": [
+    "gluten",
+    "nuts"
+   ],
+   "sugarPerServing": 49,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "3387390335859",
+   "name": "Nesquik · CEREAL PARTNERS FRANCE",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk",
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 6.7,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8690526055640",
+   "name": "Eti Wafe'up extra Hazelnut Wafer · Eti",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "peanuts"
+   ],
+   "mayContain": [
+    "soybeans"
+   ],
+   "sugarPerServing": 9.7,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281006506572",
+   "name": "vaseline",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3401578653709",
+   "name": "Sébium gel mousse · Bioderma",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0072140024611",
+   "name": "Eucerin, Roughness Relief Lotion, Fragrance Free · Eucerin",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0305210287303",
+   "name": "Vaseline Cocoa Radiant Body Oil · Vaseline",
+   "from": "Saudi Arabia",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [
+    "coco"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000396008784",
+   "name": "Digestive (Biscuits) (Light) · McVitie's",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 11.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "50396238",
+   "name": "Mc Vities Digestives · McVitie's",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": 9,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5032722312920",
+   "name": "Organic Rye Bread Chia & Flax Seed · Biona Organic",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 2.1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5027952012986",
+   "name": "4 Seeded Brioche Burger Buns · ST. PIERRE",
+   "from": "Saudi Arabia",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "sesame-seeds"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0769915190977",
+   "name": "The Ordinary Glycolic Acid 7% Toning Solution (Solução tonificante de ",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [
+    "null"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6287025900247",
+   "name": "OSKA",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5053827185226",
+   "name": "hony nut · Kellogg's",
+   "from": "Saudi Arabia",
+   "contains": [
+    "peanuts"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 35,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8850124037350",
+   "name": "Nescafe 3 in 1 classic · Nescafé",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 2.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "3038351480100",
+   "name": "Panzani Lasagne wheat pasta · Panzani",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "eggs",
+    "gluten"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281039701012",
+   "name": "TOMATO PASTE · saudia",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 8.7,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5900020025067",
+   "name": "Fitness chocolate · Nestlé",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7610400068369",
+   "name": "Chocolat Lindor Hazelnut Lindt (100G) · Lindt",
+   "from": "Saudi Arabia",
+   "contains": [
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281035000010",
+   "name": "Nova",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3401348840421",
+   "name": "BIODERMA Sébium Hydra 40 ml e · Bioderma",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281006425385",
+   "name": "Dove",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0012000014383",
+   "name": "bottle · Aquafina",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281101220786",
+   "name": "Wate · Berain",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8595229918615",
+   "name": "Crunchy Granola Triple Chocolate · Emco",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": 12.1,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "7622210624697",
+   "name": "Light philadelphia · Philadelphia",
+   "from": "Saudi Arabia",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "7622210956163",
+   "name": "s ib m Oreo Brownie · Milka",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk",
+    "nuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 8.8,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "0089686120226",
+   "name": "Indomie instant noodles vegetable flavor · indomie",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 6.8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "5000396001730",
+   "name": "Digestives · McVitie's",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [
+    "milk"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7891000361917",
+   "name": "NESCAFÉ CLASSIC · Nescafé",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "4009900482806",
+   "name": "Wrigley's Extra Peppermint · Wrigley's",
+   "from": "Saudi Arabia",
+   "contains": [
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8908000105010",
+   "name": "PYAAR SOAP · pyaar",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "9300652803020",
+   "name": "Almond · So Good",
+   "from": "Saudi Arabia",
+   "contains": [
+    "nuts"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 8.5,
+   "expected": {
+    "treeNuts": "N",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281007023122",
+   "name": "لبن المراعي · Almarai",
+   "from": "Saudi Arabia",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 8.3,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281014110020",
+   "name": "Peanut butter · Goody",
+   "from": "Saudi Arabia",
+   "contains": [
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "N",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6281012033178",
+   "name": "Suntop orange 125ml · sun top",
+   "from": "Saudi Arabia",
+   "contains": [
+    "orange"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "5000159461122",
+   "name": "Snickers · Mars Wrigley Confectionery UK Limited",
+   "from": "Saudi Arabia",
+   "contains": [
+    "eggs",
+    "milk",
+    "peanuts",
+    "soybeans"
+   ],
+   "mayContain": [
+    "nuts"
+   ],
+   "sugarPerServing": 25.9,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "N",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "8901138500054",
+   "name": "Himalaya Aloe Vera Özlü Nemlendirici Yüz Temizleyici · Himalaya",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0857183005380",
+   "name": "Banza Rigatoni Made from Chickpeas · Banza",
+   "from": "Saudi Arabia",
+   "contains": [
+    "Xanthan gum"
+   ],
+   "mayContain": [
+    "Chickpea skins"
+   ],
+   "sugarPerServing": 1,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6291107221106",
+   "name": "Body gel",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6288004001030",
+   "name": "Milaf cola · Milaf",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 8,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "4003994112427",
+   "name": "Kelloggs corn flakes the original · Kellogg's Corn Flakes",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "8594017140573",
+   "name": "Emco Musli With Fruit Pieces Crunchy · Emco",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten",
+    "milk"
+   ],
+   "mayContain": [
+    "nuts",
+    "peanuts"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "U",
+    "peanut": "U",
+    "milk": "U",
+    "gluten": "N",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3228022970195",
+   "name": "Fresh Butter Unsalted · Président",
+   "from": "Saudi Arabia",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "0072140633820",
+   "name": "Advanced Repair Hand Cream · Eucerin",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6287034100010",
+   "name": "Carbonated Drink (Cola) · Kinza",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 11,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "6221134004922",
+   "name": "alphonso mango drink · sun top",
+   "from": "Saudi Arabia",
+   "contains": [
+    "milk"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 20,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "O"
+   }
+  },
+  {
+   "code": "5740900403550",
+   "name": "Unsalted · Lurpak",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6281007047654",
+   "name": "Sliced Bread Bran · Almarai",
+   "from": "Saudi Arabia",
+   "contains": [
+    "gluten"
+   ],
+   "mayContain": [],
+   "sugarPerServing": 1.2,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "8426944000296",
+   "name": "Premium Potato Chips · Torres",
+   "from": "Saudi Arabia",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": 0.5,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "S"
+   }
+  },
+  {
+   "code": "6111035000430",
+   "name": "sidi ali · Sidi Ali",
+   "from": "UK",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "6111035000058",
+   "name": "Eau minérale naturelle · Sidi Ali",
+   "from": "UK",
+   "contains": [],
+   "mayContain": [],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "3274080005003",
+   "name": "Cristaline · Cristaline",
+   "from": "UK",
+   "contains": [
+    "none"
+   ],
+   "mayContain": [
+    "none"
+   ],
+   "sugarPerServing": null,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "S",
+    "gluten": "S",
+    "diabetes10g": "U"
+   }
+  },
+  {
+   "code": "7622210449283",
+   "name": "Prince Goût Chocolat au Blé Complet · LU",
+   "from": "UK",
+   "contains": [
+    "eggs",
+    "gluten",
+    "milk",
+    "soybeans"
+   ],
+   "mayContain": [
+    "eggs"
+   ],
+   "sugarPerServing": 6.4,
+   "expected": {
+    "treeNuts": "S",
+    "peanut": "S",
+    "milk": "N",
+    "gluten": "N",
+    "diabetes10g": "S"
+   }
+  }
+ ]
+}
