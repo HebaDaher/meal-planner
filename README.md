@@ -6,7 +6,7 @@ A mobile-first web app for people with food allergies or diabetes, and parents o
 
 ## What it does
 - **Sign up and create a profile:** allergens with severity, or a sugar limit per serving.
-- **Scan a packaged product:** clear Safe / Not safe / Uncertain results, with the reason.
+- **Check real packaged food:** scan the barcode with the phone camera (looked up in the Open Food Facts database), photograph the ingredient label (read on the device), or type the ingredients. Results are Safe / Not safe / Uncertain, with the reason, and every result is cross-checked against the product's listed allergens.
 - **Find recipes that fit the profile:** suggested sugar swaps.
 - **Plan the week:** a weekly meal plan with a shopping list.
 

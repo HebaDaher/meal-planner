@@ -220,6 +220,16 @@ textarea.a-input{min-height:120px;resize:none;line-height:24px}
 .shutter{width:78px;height:78px;border-radius:39px;border:4px solid #fff;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .shutter span{width:62px;height:62px;border-radius:31px;background:#fff}
 .holding{font-size:13px;color:#C9D3E6;border:1px dashed rgba(255,255,255,.35);border-radius:10px;padding:6px 10px;text-align:center}
+.vf.live{height:300px;background:#000}
+#reader{position:absolute;inset:0}#reader video{width:100%!important;height:100%!important;object-fit:cover}#reader img,#reader__dashboard,#reader__header_message{display:none!important}
+.cam-msg{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);text-align:center;font-size:15px;line-height:21px;color:#E5E7EB}
+.cam-msg[hidden]{display:none}
+.bc-row{display:flex;gap:8px;margin:0}.bc-row .a-input{flex:1;min-width:0;background:#fff;color:#111827}.bc-row .a-btn{width:auto;padding:0 20px;flex:none}
+.label-vf{height:220px;display:flex;align-items:center;justify-content:center}.label-tip{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:0 24px;font-size:15px;color:#E5E7EB}.label-tip b{color:#fff;font-size:17px}
+.samples{color:#C9D3E6;font-size:15px}.samples summary{cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:center;text-decoration:underline}
+.pick-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-top:4px}.pick-row button{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;cursor:pointer;min-height:40px}
+.busy{position:absolute;inset:0;background:rgba(15,20,33,.6);display:flex;align-items:center;justify-content:center;z-index:60}.busy>div{background:#fff;color:#111827;border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:12px;font-weight:600;max-width:300px}
+.spin{width:22px;height:22px;border-radius:50%;border:3px solid #DBE6FE;border-top-color:#1D4ED8;animation:spin .8s linear infinite;flex:none}@keyframes spin{to{transform:rotate(360deg)}}
 .cam-link{background:none;border:0;color:#fff;font-weight:600;text-decoration:underline;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;width:100%}
 .food{border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -242,14 +252,14 @@ const WORD={bad:'Not safe',unc:'Uncertain',safe:'Safe'};
 const badge=(k,l)=>`<span class="a-badge ${k}">${sic(k,18)}${esc(l||WORD[k])}</span>`;
 
 /* ============ domain data ============ */
-const ALLERGENS={milk:{label:'Milk',names:['milk','casein','whey','butter','cream','lactose','cheese','yogurt','yoghurt']},egg:{label:'Egg',names:['egg','albumin','mayonnaise']},gluten:{label:'Gluten',names:['wheat','barley','rye','gluten','spelt','semolina']},peanut:{label:'Peanut',names:['peanut','arachis','groundnut']},tree:{label:'Tree nuts',names:['almond','prunus dulcis','cashew','walnut','hazelnut','pecan','pistachio','brazil nut','macadamia']},soy:{label:'Soy',names:['soy','soya','tofu','edamame']},fish:{label:'Fish',names:['fish','anchovy','salmon','tuna','cod']},shellfish:{label:'Shellfish',names:['shrimp','prawn','crab','lobster','shellfish']},sesame:{label:'Sesame',names:['sesame','tahini']}};
+const ALLERGENS={milk:{label:'Milk',names:['milk','casein','caseinate','whey','butter','cream','lactose','cheese','yogurt','yoghurt','ghee','curd','حليب','لبن','جبن','زبدة','قشدة','كريمة','مصل','كازين','لاكتوز','سمن'],not:['cocoa butter','shea butter','peanut butter','nut butter','coconut milk','coconut cream','almond milk','oat milk','soy milk','soya milk','rice milk','cream of tartar','زبدة الكاكاو','زبدة الفول السوداني','حليب جوز الهند']},egg:{label:'Egg',names:['egg','albumin','ovalbumin','mayonnaise','lysozyme','بيض','زلال','مايونيز'],not:['eggplant']},gluten:{label:'Gluten',names:['wheat','barley','rye','gluten','spelt','semolina','malt','couscous','bulgur','قمح','شعير','جاودار','غلوتين','جلوتين','سميد','برغل','شعيرية'],not:['buckwheat']},peanut:{label:'Peanut',names:['peanut','arachis','groundnut','فول سوداني','فستق سوداني']},tree:{label:'Tree nuts',names:['almond','prunus dulcis','cashew','walnut','hazelnut','pecan','pistachio','brazil nut','macadamia','tree nut','لوز','جوز','كاجو','بندق','فستق حلبي','بيكان','مكاديميا'],not:['nutmeg','جوز الهند','جوزة الطيب']},soy:{label:'Soy',names:['soy','soya','tofu','edamame','صويا','الصويا']},fish:{label:'Fish',names:['fish','anchovy','salmon','tuna','cod','sardine','mackerel','سمك','أسماك','تونة','سلمون','أنشوجة','سردين']},shellfish:{label:'Shellfish',names:['shrimp','prawn','crab','lobster','shellfish','crustacean','mussel','oyster','squid','روبيان','جمبري','قريدس','سلطعون','كركند','محار']},sesame:{label:'Sesame',names:['sesame','tahini','tahina','سمسم','طحينة','طحينية','طحينه']}};
 const ORDER=['milk','egg','gluten','peanut','tree','soy','fish','shellfish','sesame'];
 const sevWord=n=>['','mild','mild to moderate','moderate','severe','life-threatening'][n]||'';
 const PRODUCTS={
  granola:{name:'Granola Bar',size:'45 g',sugar:12,ings:['Whole grain rolled oats','Honey','Brown rice syrup','Almonds (Prunus dulcis)','Sunflower oil','Dried cranberries','Sugar','Sea salt','Natural flavour','Rice crisps','Glucose syrup','Soy lecithin','Cinnamon','Vitamin E'],may:['peanut'],label:'Whole grain rolled oats, honey, brown rice syrup, almonds (Prunus dulcis), sunflower oil, dried cranberries, sugar, sea salt, natural flavour, rice crisps, glucose syrup, soy lecithin, cinnamon, vitamin E.',mayText:'MAY CONTAIN: PEANUTS.'},
  crackers:{name:'Rice Crackers',size:'100 g',sugar:2,ings:['Rice flour','Brown rice','Sesame oil','Soy sauce (soy, wheat)','Sugar','Sea salt','Rosemary extract','Sunflower lecithin','Rice bran'],may:[],label:'Rice flour, brown rice, sesame oil, soy sauce (soy, wheat), sugar, sea salt, rosemary extract, sunflower lecithin, rice bran.',mayText:'Store in a cool, dry place.'},
  oat:{name:'Oat Biscuits',size:'200 g',sugar:7,ings:['Rolled oats','Wholewheat flour','Butter','Brown sugar','Golden syrup','Baking soda','Salt'],may:[]},
- choc:{name:'Chocolate Spread',size:'350 g',sugar:17,ings:['Sugar','Palm oil','Cocoa powder','Skimmed milk powder','Whey powder','Soy lecithin','Hazelnut paste','Vanillin','Salt','Rapeseed oil','Natural flavour'],may:[],unread:[6,7]},
+ choc:{name:'Chocolate Spread',size:'350 g',sugar:17,ings:['Sugar','Palm oil','Cocoa powder','Skimmed milk powder','Whey powder','Soy lecithin','Hazelnut paste','Vanillin','Salt','Rapeseed oil','Natural flavour'],may:[]},
  trail:{name:'Trail Mix',size:'150 g',sugar:9,ings:['Cashews','Raisins','Sunflower seeds','Dark chocolate chips','Peanuts'],may:[]}
 };
 const RECIPES=[
@@ -266,21 +276,47 @@ const RECIPES=[
  {id:'stir-fry',name:'Chicken & veg stir-fry',meal:'Dinner',mins:30,serv:4,color:'#F1ECE4',sugar:7,carbs:20,ings:[['Chicken breast','400 g'],['Mixed vegetables','300 g'],['Soy sauce','2 tbsp']]},
  {id:'salmon',name:'Baked salmon & greens',meal:'Dinner',mins:25,serv:2,color:'#E6EEF7',sugar:3,carbs:10,ings:[['Salmon fillets','2'],['Green beans','200 g'],['Lemon','1']]}
 ];
+Object.values(PRODUCTS).forEach(p=>{p.source='sample';if(!p.label)p.label=p.ings.join(', ')+'.';});
 const R=id=>RECIPES.find(r=>r.id===id);
 const MEALS=['Breakfast','Lunch','Dinner','Snack'];
 const WEEK=(()=>{const d=new Date();const day=(d.getDay()+6)%7;const mon=new Date(d.getFullYear(),d.getMonth(),d.getDate()-day);return ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((n,i)=>{const x=new Date(mon.getFullYear(),mon.getMonth(),mon.getDate()+i);return {n,d:x.getDate(),m:x.toLocaleString('en',{month:'short'})};});})();
 const DAYFULL=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
-function matchAllergen(ing,key){const s=ing.toLowerCase();return ALLERGENS[key].names.some(n=>s.includes(n));}
+function matchAllergen(ing,key){let s=String(ing).toLowerCase();(ALLERGENS[key].not||[]).forEach(x=>{s=s.split(x).join(' ');});return ALLERGENS[key].names.some(n=>s.includes(n));}
 function evalIngs(ings,prof,unread){
   const keys=Object.keys(prof.allergens||{});const out=ings.map((n,i)=>{if(unread&&unread.includes(i))return{n:'Ingredient '+(i+1)+': unreadable',k:'unc',unread:true};const hit=keys.find(k=>matchAllergen(n,k));return hit?{n,k:'bad',allergen:hit}:{n,k:'safe'};});
   return out;}
 function evaluate(p,prof,unread){
-  const list=evalIngs(p.ings,prof,unread);const probs=list.filter(x=>x.k==='bad');const unr=list.filter(x=>x.unread);
-  const may=(p.may||[]);const mayHit=may.filter(k=>prof.allergens&&prof.allergens[k]);
-  const over=prof.sugar&&p.sugar>prof.sugar;
-  let status=probs.length?'bad':(unr.length||mayHit.length)?'unc':over?'unc':'safe';
-  return {status,list,probs,unr,may,mayHit,over};}
+  const list=evalIngs(p.ings||[],prof,unread);const probs=list.filter(x=>x.k==='bad');const unr=list.filter(x=>x.unread);
+  const keys=Object.keys(prof.allergens||{});const may=(p.may||[]);const mayHit=may.filter(k=>keys.includes(k));
+  const over=!!(prof.sugar&&p.sugar!=null&&p.sugar>prof.sugar);
+  const refMiss=(p.ref||[]).filter(k=>keys.includes(k)&&!probs.some(x=>x.allergen===k));
+  const why=[];
+  if(p.noIngs)why.push('noings');
+  if(unr.length)why.push('unread');
+  if(refMiss.length&&!probs.length)why.push('ref');
+  if(mayHit.length)why.push('may');
+  if(prof.sugar&&p.sugar==null&&!p.noIngs)why.push('nosugar');
+  if(over)why.push('over');
+  const status=probs.length?'bad':why.length?'unc':'safe';
+  return {status,list,probs,unr,may,mayHit,over,why,refMiss};}
+const lc=a=>a.map(k=>ALLERGENS[k].label.toLowerCase()).join(', ');
+function resultSub(p,ev,P){const keys=Object.keys(P.allergens||{});
+  if(ev.status==='bad')return 'Contains '+[...new Set(ev.probs.map(x=>ALLERGENS[x.allergen].label.toLowerCase()))].join(', ')+' ('+[...new Set(ev.probs.map(x=>x.n.replace(/\s*\(.*\)/,'').toLowerCase()))].join(', ')+')';
+  if(ev.status==='unc'){const w=ev.why[0];
+    if(w==='noings')return p.notFound?(p.offline?'No connection to the product database':'Barcode not found — check it another way'):'No ingredient list found for this product';
+    if(w==='unread')return ev.unr.length+' of '+(p.ings||[]).length+' ingredients couldn’t be read';
+    if(w==='ref')return 'Product database lists '+lc(ev.refMiss)+' — check the pack';
+    if(w==='may')return 'May contain '+lc(ev.mayHit);
+    if(w==='nosugar')return 'Sugar per serving isn’t listed';
+    return p.sugar+' g sugar per serving — limit is '+P.sugar+' g';}
+  return keys.length?'No '+lc(keys)+' found':'No conflicts with '+P.name+'’s profile';}
+function uncCard(w,p,ev,P){const t={noings:[p.notFound?(p.offline?'Couldn’t reach the product database':'This barcode isn’t in the product database yet'):'This product has no ingredient list',p.offline?'Check your internet connection — or photograph or type the ingredients.':'Photograph the ingredient list or type it, and we’ll check it for '+P.name+'.'],
+   unread:['Some ingredients couldn’t be read','Retake the photo or type the missing ingredients.'],
+   ref:['Product database lists: '+lc(ev.refMiss),'The ingredient list didn’t show this, so we won’t mark it safe. Check the pack.'],
+   nosugar:['Sugar per serving isn’t listed',p.sugar100!=null?'This product has '+p.sugar100+' g sugar per 100 g but no serving size. Check the pack.':'Check the nutrition label on the pack.'],
+   over:['Sugar: '+p.sugar+' g per serving','That’s over '+P.name+'’s limit of '+P.sugar+' g per serving.']}[w];
+  if(!t)return '';return `<div class="a-reason unc"><div class="a-row" style="gap:8px">${sic('unc',22)}<span class="a-strong">${esc(t[0])}</span></div><span class="a-cap">${esc(t[1])}</span></div>`;}
 function recipeStatus(r,prof,swap){
   const ings=effIngs(r,swap);const keys=Object.keys(prof.allergens||{});const allergenHit=keys.find(k=>ings.some(([n])=>matchAllergen(n,k)));
   const sugar=swap&&r.swaps?r.swaps[swap].sugar:r.sugar;const limit=prof.sugar||null;
@@ -289,10 +325,78 @@ function recipeStatus(r,prof,swap){
   return{k:'fits',sugar};}
 function effIngs(r,swap){if(!swap||!r.swaps)return r.ings;const s=r.swaps[swap];return r.ings.map(x=>x[2]?[s.name,s.amt,0,1]:x);}
 
+/* ============ real product checking ============ */
+const OFF_MAP={'en:milk':'milk','en:eggs':'egg','en:gluten':'gluten','en:peanuts':'peanut','en:nuts':'tree','en:soybeans':'soy','en:fish':'fish','en:crustaceans':'shellfish','en:molluscs':'shellfish','en:sesame-seeds':'sesame'};
+const SRC={barcode:'Barcode → product database',photo:'Photo of the label',typed:'Typed ingredients',sample:'Sample product'};
+const MAY_RE=/(may (also )?contain|may be present|traces? of|produced in a (factory|facility)|made in a (factory|facility)|قد يحتوي|قد تحتوي|آثار)[^.]*\.?/gi;
+function stripMay(t){return String(t||'').replace(MAY_RE,' ');}
+function mayFromText(t){const m=String(t||'').match(MAY_RE);if(!m)return[];const s=m.join(' ');return ORDER.filter(k=>matchAllergen(s,k));}
+function splitIngs(text){const t=String(text||'').replace(/^\s*(ingredients|ingrédients|المكونات|المكوّنات)\s*[:：]?\s*/i,'').replace(/[_*]/g,'');let depth=0,cur='';const out=[];
+ for(const ch of t){if('([{'.includes(ch))depth++;if(')]}'.includes(ch))depth=Math.max(0,depth-1);if(depth===0&&/[,;،\n]/.test(ch)){out.push(cur);cur='';}else cur+=ch;}
+ out.push(cur);return out.map(s=>s.replace(/\s+/g,' ').replace(/[.:]\s*$/,'').trim()).filter(s=>s.length>1);}
+function makeProduct(o){const id='L'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);PRODUCTS[id]=o;const a=A();a.live=a.live||{};a.live[id]=o;return id;}
+function fromOFF(p,code){const text=p.ingredients_text_en||p.ingredients_text||'';const ings=splitIngs(stripMay(text));
+ const may=[...new Set([...(p.traces_tags||[]).map(t=>OFF_MAP[t]).filter(Boolean),...mayFromText(text)])];
+ const ref=[...new Set((p.allergens_tags||[]).map(t=>OFF_MAP[t]).filter(Boolean))];
+ const n=p.nutriments||{};let sugar=null,sugar100=n.sugars_100g!=null?+(+n.sugars_100g).toFixed(1):null;
+ if(n.sugars_serving!=null)sugar=+(+n.sugars_serving).toFixed(1);else if(sugar100!=null&&+p.serving_quantity>0)sugar=+(sugar100*p.serving_quantity/100).toFixed(1);
+ const nm=p.product_name_en||p.product_name||'';const br=(p.brands||'').split(',')[0].trim();
+ return{name:[nm,br].filter(Boolean).join(' · ')||'Barcode '+code,size:[p.quantity,p.serving_size?'serving '+p.serving_size:''].filter(Boolean).join(' · ')||'Barcode '+code,ings,may,ref,refKnown:!!ings.length&&Array.isArray(p.allergens_tags),sugar,sugar100,noIngs:!ings.length,source:'barcode',barcode:code,text:text.slice(0,400)};}
+async function lookupBarcode(code,how){const a=A();if(!a)return;code=String(code||'').replace(/\D/g,'');
+ if(code.length<8||code.length>14){toast('Barcode numbers have 8 to 13 digits');renderApp();return;}
+ logClick('scan','Barcode '+(how==='camera'?'scanned with camera':'typed')+': '+code);S.c.scans++;
+ a.busy='Looking up the product…';renderApp();let prod=null,err=null;
+ try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),10000);
+  const r=await fetch('https://world.openfoodfacts.org/api/v2/product/'+code+'.json?fields=product_name,product_name_en,brands,quantity,serving_size,serving_quantity,ingredients_text,ingredients_text_en,allergens_tags,traces_tags,nutriments',{signal:ctl.signal});
+  clearTimeout(tm);const j=await r.json();if(j&&j.status===1&&j.product)prod=j.product;}catch(e){err=e;}
+ if(A()!==a)return;a.busy=null;
+ const o=prod?fromOFF(prod,code):{name:err?'Couldn’t reach the product database':'Product not found',size:'Barcode '+code,ings:[],may:[],ref:[],sugar:null,noIngs:true,notFound:true,offline:!!err,source:'barcode',barcode:code,text:''};
+ a.cur=makeProduct(o);go('checking');}
+/* camera barcode scanning (html5-qrcode) and label reading (tesseract.js), loaded only when needed */
+const LIBS={};function lib(src){return LIBS[src]||(LIBS[src]=new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=res;s.onerror=()=>{delete LIBS[src];rej(new Error('load'));};document.head.appendChild(s);}));}
+const QR_SRC='https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js';
+const OCR_SRC='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+let CAM=null,camEl=null;
+async function stopCam(){const c=CAM;CAM=null;camEl=null;if(c){try{if(c.isScanning)await c.stop();}catch(e){}try{c.clear();}catch(e){}}}
+function camMsg(t){const a=A();if(a)a.camErr=t;const m=document.getElementById('camMsg');if(m){m.textContent=t;m.hidden=false;}}
+async function syncCam(){const a=A();const el=document.getElementById('reader');
+ if(!a||a.screen!=='scan'||a.camMode==='label'||!el||a.busy||a.sheet){if(CAM||camEl)stopCam();return;}
+ if(el===camEl)return;await stopCam();camEl=el;
+ try{await lib(QR_SRC);}catch(e){if(camEl===el)camMsg('The camera scanner couldn’t load. Type the barcode number below.');return;}
+ if(camEl!==el)return;
+ let c;try{c=new Html5Qrcode('reader',{formatsToSupport:[Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E],verbose:false});}catch(e){camMsg('The camera scanner couldn’t start. Type the barcode number below.');return;}
+ CAM=c;
+ try{await c.start({facingMode:'environment'},{fps:10,qrbox:(w,h)=>({width:Math.max(120,Math.min(300,Math.floor(w*.85))),height:Math.max(80,Math.min(150,Math.floor(h*.45)))})},code=>{if(CAM!==c)return;stopCam();try{navigator.vibrate&&navigator.vibrate(40);}catch(e){}lookupBarcode(code,'camera');},()=>{});
+  if(CAM===c){const m=document.getElementById('camMsg');if(m)m.hidden=true;if(A())A().camErr=null;}}
+ catch(e){if(CAM===c)CAM=null;const denied=/NotAllowed|Permission/i.test(String(e&&(e.name||e)));camMsg(denied?'Camera permission was not given. Allow the camera in your browser, or type the barcode number below.':'No camera found on this device. Type the barcode number below, or try a sample product.');}}
+async function runOCR(file){const a=A();if(!file||!a)return;logClick('photo','Took a photo of the ingredient label');if(a.scanT0==null)a.scanT0=Date.now();
+ a.busy='Reading the label… 0%';await stopCam();renderApp();
+ try{await lib(OCR_SRC);const r=await Tesseract.recognize(file,'eng',{logger:m=>{if(m&&m.status==='recognizing text'&&A()===a&&a.busy){a.busy='Reading the label… '+Math.round((m.progress||0)*100)+'%';const b=document.getElementById('busyTxt');if(b)b.textContent=a.busy;}}});
+  const text=((r&&r.data&&r.data.text)||'').replace(/\s*\n\s*/g,' ').replace(/\s{2,}/g,' ').trim();
+  if(A()!==a)return;a.busy=null;
+  if(text.length<8){failMark();a.typed={name:'Label photo',text:'',sugar:'',source:'photo',note:'We couldn’t read the text. Take a closer, sharper photo in good light — or type the ingredients.'};}
+  else a.typed={name:a.typed&&a.typed.name||'Label photo',text,sugar:'',source:'photo',note:'We read this from your photo. Fix anything that looks wrong, then tap Check ingredients.'};
+  logClick('photo',text.length<8?'Label photo could not be read':'Label photo read ('+text.length+' characters)');go('typed');}
+ catch(e){if(A()!==a)return;a.busy=null;failMark();a.typed={name:'',text:'',sugar:'',source:'typed',note:'The photo reader couldn’t start on this device. Please type the ingredients instead.'};go('typed');}}
+function failMark(){if(!S)return;S.c.failed=(S.c.failed||0)+1;if(S.failAt==null)S.failAt=Date.now();}
+function afterResult(){const a=A(),p=curProduct(),ev=resultEval(),P=prof();
+ const sec=a.scanT0!=null?+((Date.now()-a.scanT0)/1000).toFixed(1):null;a.scanT0=null;
+ const keys=Object.keys(P.allergens||{});
+ let ref=null;if(p.source==='sample')ref=TRUTH[a.cur]||null;else if(p.source==='barcode'&&p.refKnown)ref=p.ref||[];
+ const refBad=ref?keys.filter(k=>ref.includes(k)):[];
+ let auto='No reference — check against the pack';
+ if(!keys.length)auto='Sugar check only (no allergens in profile)';
+ else if(ref){if(ev.status==='safe'&&refBad.length)auto='FALSE SAFE';else if(ev.status==='bad'&&!refBad.length)auto='False alarm';else if(ev.status==='unc'&&refBad.length)auto='Caught — shown Uncertain';else auto='Agrees with reference';}
+ S.checks.push({t:secs(),profile:P.name+' ('+profSummary(P)+')',product:p.name,barcode:p.barcode||'',source:SRC[p.source]||p.source,ings:(p.text||(p.ings||[]).join(', ')).slice(0,300),shown:WORD[ev.status],why:resultSub(p,ev,P),ref:ref?(ref.map(k=>ALLERGENS[k].label).join(', ')||'None listed'):'',auto,sec,falseSafe:auto==='FALSE SAFE'});
+ if(sec!=null){S.fast=S.fast==null?sec:Math.min(S.fast,sec);S.slow=S.slow==null?sec:Math.max(S.slow,sec);}
+ const failed=ev.why.includes('noings')||ev.why.includes('unread');
+ if(failed)failMark();else if(S.failAt!=null){const r=+((Date.now()-S.failAt)/1000).toFixed(1);S.recov=S.recov==null?r:Math.max(S.recov,r);S.failAt=null;}
+ mark('firstResult');sendToSheet('scan');}
+
 /* ============ visitor tracking (sent to your Google Sheet) ============ */
 const GROUPS={allergy:'Has food allergies',diabetes:'Has diabetes',parent:'Parent of a child with allergies',other:'Just exploring'};
 const SCREEN_NAMES={home:'Home',profiles:'Profiles',p1:'Create profile · step 1',p2:'Create profile · step 2',p3:'Create profile · review',scan:'Camera',checking:'Checking ingredients',result:'Result',ingredients:'Ingredient list',typed:'Type ingredients',report:'Report issue',history:'Scan history',recipes:'Recipes',recipe:'Recipe',plan:'Meal plan'};
-const FIELD_NAMES={aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
+const FIELD_NAMES={aBarcode:'Barcode typed',aTypedSugar:'Sugar per serving typed',aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
 const TRUTH={granola:['tree','soy'],crackers:['sesame','soy','gluten'],oat:['gluten','milk'],choc:['milk','soy','tree'],trail:['tree','peanut']};
 let S=null, checkingTimer=null, saveT=null, W={name:'',group:'',consent:false,t0:Date.now()};
 const A=()=>S&&S.app;
@@ -300,40 +404,41 @@ const prof=()=>A().profiles.find(p=>p.id===A().active);
 const secs=()=>+((Date.now()-S.t0)/1000).toFixed(1);
 function newSession(name,group,signupS){const id='v'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
  return {id,name:name.trim(),group,startedAt:new Date().toISOString(),t0:Date.now(),lastAct:Date.now(),lastSent:0,signupS,device:(innerWidth<=640?'Phone':'Laptop / tablet')+' · '+innerWidth+'×'+innerHeight,
-  M:{},c:{taps:0,empty:0,backs:0,scans:0},screens:{},clicks:[],sent:0,checks:[],saved:[],planned:[],profileText:'',swapUsed:false,scanStart:null,scanToResult:null,uncAt:null,recovery:null,left:false,app:null};}
+  M:{},c:{taps:0,empty:0,backs:0,scans:0,failed:0},screens:{},clicks:[],sent:0,checks:[],sentChecks:0,saved:[],planned:[],profileText:'',swapUsed:false,undoUsed:0,reports:0,fast:null,slow:null,failAt:null,recov:null,left:false,app:null};}
 function mark(k){if(S&&S.M[k]==null)S.M[k]=secs();}
 function persist(){if(!S)return;clearTimeout(saveT);saveT=setTimeout(saveNow,800);}
 function saveNow(){if(!S)return;clearTimeout(saveT);store.set('mp.visitor',S);}
 function labelOf(el){const l=el.getAttribute('aria-label')||el.innerText||el.dataset.act||'';return l.replace(/\s+/g,' ').trim().slice(0,70);}
 function logClick(type,label){if(!S)return;const a=A();const gap=Date.now()-S.lastAct;if(gap>300000)S.away=(S.away||0)+gap;S.lastAct=Date.now();S.left=false;S.clicks.push({t:secs(),screen:a?(SCREEN_NAMES[a.screen]||a.screen)+(a.sheet?' · '+a.sheet+' panel':''):'Sign-up',type,label:String(label||'').slice(0,90)});if(S.clicks.length>3000){S.clicks.splice(0,500);S.sent=Math.max(0,S.sent-500);}}
-function logCheck(){const a=A();const pid=a.cur==='missing'?'crackers':a.cur;if(!TRUTH[pid])return;const P=prof();const keys=Object.keys(P.allergens||{});if(!keys.length)return;
- const truth=keys.some(k=>TRUTH[pid].includes(k))?'bad':'safe';const shown=resultEval().status;
- S.checks.push({t:secs(),product:PRODUCTS[pid].name,shown,truth,falseSafe:shown==='safe'&&truth==='bad'});}
+
 
 /* ============ Google Sheet saving ============ */
 /* PASTE your Google Apps Script web-app link between the quotes (it ends with /exec): */
 const SHEET_URL='https://script.google.com/macros/s/AKfycbw7Lp5hIRFJJjrMOD-lb2yegoJ28I4xyoWEsNTfytQChQrvFtdKGKWzGic_6wI-if6S/exec';
 const sheetReady=()=>/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec/.test(SHEET_URL);
 function rowFor(){const M=S.M,a=A(),d=new Date(S.startedAt);const mn=s=>s==null||s===''?'':+(s/60).toFixed(2);const span=(x,y)=>M[x]!=null&&M[y]!=null&&M[y]>=M[x]?mn(M[y]-M[x]):'';
+ const core=(M.profileSaved!=null?1:0)+(S.checks.length?1:0)+(S.planned.length?1:0);
  return {'Date':d.toLocaleDateString('en-GB'),'Start time':d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),'Session ID':S.id,'Name':S.name,'Problem':GROUPS[S.group]||S.group,'Device':S.device,
   'Status':S.left?'Left the website':'Using the website',
   'Total minutes in website':mn((S.lastAct-S.t0-(S.away||0))/1000),
   'Sign-up (min)':mn(S.signupS),
-  'Create profile (min)':M.profileSaved!=null?mn(M.profileSaved):'',
+  'Create profile (min) – Goal 1':M.profileSaved!=null?mn(M.profileSaved):'',
   'Profile saved':S.profileText,
-  'Check a product (min)':span('scanOpen','pantrySaved'),
-  'Scanner opened → result (sec)':S.scanToResult??'',
-  'Uncertain → Safe (sec)':S.recovery??'',
+  'Products checked':S.checks.length,
+  'Fastest scan → result (sec) – Goal 2':S.fast??'','Slowest scan → result (sec)':S.slow??'',
+  'False Safe results – Goal 3':S.checks.filter(c=>c.falseSafe).length,
+  'Failed scans':S.c.failed||0,'Slowest recovery (sec) – Goal 4':S.recov??'','Undo used':S.undoUsed||0,
   'Saved to Pantry':S.saved.join(', '),
-  'Plan a meal (min)':span('recipesOpen','planAdded'),
-  'Sugar swap used':S.swapUsed?'Yes':'No',
-  'Meals planned':S.planned.join('; '),
-  'Products scanned':S.c.scans,'Results shown':S.checks.length,'False Safe (Goal 3)':S.checks.filter(c=>c.falseSafe).length,
+  'Plan a meal (min)':span('recipesOpen','planAdded'),'Sugar swap used':S.swapUsed?'Yes':'No','Meals planned':S.planned.join('; '),
+  'Core features completed (of 3) – Goal 5':core,
+  'Issues reported':S.reports||0,
   'Total taps':S.c.taps,'Empty-area taps':S.c.empty,'Back presses':S.c.backs,'Screens visited':Object.keys(S.screens).length,
   'Last screen':a?(SCREEN_NAMES[a.screen]||a.screen):'','Last update':new Date().toLocaleString('en-GB')};}
-function sendToSheet(kind){if(!S||!sheetReady())return;const n=S.clicks.length;
- const clicks=S.clicks.slice(S.sent).map(c=>({time:Math.floor(c.t/60)+':'+String(Math.floor(c.t%60)).padStart(2,'0'),screen:c.screen,type:c.type,label:c.label}));
- S.sent=n;S.lastSent=Date.now();saveNow();const body=JSON.stringify({kind,row:rowFor(),clicks});
+const mmss2=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+function sendToSheet(kind){if(!S||!sheetReady())return;const n=S.clicks.length,nc=S.checks.length;
+ const clicks=S.clicks.slice(S.sent).map(c=>({time:mmss2(c.t),screen:c.screen,type:c.type,label:c.label}));
+ const scans=S.checks.slice(S.sentChecks||0).map(c=>({time:mmss2(c.t),profile:c.profile,product:c.product,barcode:c.barcode,source:c.source,ings:c.ings,shown:c.shown,why:c.why,ref:c.ref,auto:c.auto,sec:c.sec??''}));
+ S.sent=n;S.sentChecks=nc;S.lastSent=Date.now();saveNow();const body=JSON.stringify({kind,row:rowFor(),clicks,scans});
  try{if(kind==='leave'&&navigator.sendBeacon&&navigator.sendBeacon(SHEET_URL,new Blob([body],{type:'text/plain;charset=utf-8'})))return;
   fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body,keepalive:body.length<60000}).catch(()=>{});}catch(e){}}
 setInterval(()=>{if(S&&S.lastAct>S.lastSent)sendToSheet('update');},60000);
@@ -341,7 +446,7 @@ document.addEventListener('visibilitychange',()=>{if(!S)return;if(document.visib
 addEventListener('pagehide',()=>{if(S&&!S.left){S.left=true;sendToSheet('leave');}});
 
 function newApp(name,group){
-  const base={stack:[],screen:'home',sheet:null,toast:null,pantry:[],draft:null,undo:null,camMode:'label',flash:false,cur:null,pick:'granola',retake:false,recipeQ:'',filters:{limit:true,breakfast:false,under30:false},recipe:null,swaps:{},swapChoice:'stevia',planDay:2,planMeal:'Breakfast',viewDay:new Date().getDay()===0?6:(new Date().getDay()+6)%7,shop:{},shared:false,typed:{name:'',text:''},report:{},histFilter:'all',lastResult:null};
+  const base={stack:[],screen:'home',sheet:null,toast:null,pantry:[],draft:null,undo:null,camMode:'barcode',flash:false,cur:null,bc:'',scanT0:null,retake:false,recipeQ:'',filters:{limit:true,breakfast:false,under30:false},recipe:null,swaps:{},swapChoice:'stevia',planDay:2,planMeal:'Breakfast',viewDay:new Date().getDay()===0?6:(new Date().getDay()+6)%7,shop:{},shared:false,typed:{name:'',text:'',sugar:'',source:'typed',note:''},live:{},report:{},histFilter:'all',lastResult:null};
   const a=Object.assign(base,{persona:name,profiles:[{id:'me',name,you:true,allergens:{},sugar:null}],active:'me',recents:[],plan:{},setup:true});
   a.draft={who:group==='allergy'?['allergy']:group==='diabetes'?['diabetes']:group==='parent'?['child']:[],name:group==='parent'?'':name,allergens:{},sugarOn:group==='diabetes',sugar:10};
   a.screen='p1';return a;}
@@ -352,16 +457,14 @@ function back(){const a=A();S.c.backs++;if(a.sheet){a.sheet=null;renderApp();ret
 function tab(screen){const a=A();a.toast=null;a.stack=[];a.screen=screen;a.sheet=null;onEnter(screen);renderApp(true);}
 function toast(text,undo){A().toast={text,undo,id:Date.now()};const id=A().toast.id;setTimeout(()=>{if(A()&&A().toast&&A().toast.id===id){A().toast=null;renderApp();}},4500);}
 function onEnter(sc){const a=A();S.screens[sc]=1;
- if(sc==='scan'){mark('scanOpen');if(S.scanStart==null)S.scanStart=Date.now();}
+ if(sc==='scan'){mark('scanOpen');a.scanT0=Date.now();}
+ if(sc==='typed'&&a.scanT0==null)a.scanT0=Date.now();
  if(sc==='recipes')mark('recipesOpen');
  if(sc==='checking'){clearTimeout(checkingTimer);a.chk=0;const step=()=>{a.chk++;if(A()!==a)return;if(a.chk<4){renderApp();checkingTimer=setTimeout(step,450);}else{try{navigator.vibrate&&navigator.vibrate(60);}catch(e){}a.stack.pop();a.screen='result';a.lastResult=null;onEnter('result');renderApp(true);}};checkingTimer=setTimeout(step,450);}
- if(sc==='result'){logCheck();const ev=resultEval();
-   if(a.viaScan&&S.scanToResult==null&&S.scanStart!=null)S.scanToResult=+((Date.now()-S.scanStart)/1000).toFixed(1);
-   if(ev.status==='unc'&&a.cur==='crackers'&&S.uncAt==null)S.uncAt=Date.now();
-   if(ev.status==='safe'&&(a.cur==='crackers'||a.cur==='missing')&&S.uncAt!=null&&S.recovery==null)S.recovery=+((Date.now()-S.uncAt)/1000).toFixed(1);}
+ if(sc==='result')afterResult();
 }
-function curProduct(){const a=A();if(a.cur==='typed'){return{name:a.typed.name.trim()||'Typed ingredients',size:'typed by you',ings:a.typed.text.split(/[,\n;]+/).map(s=>s.trim()).filter(Boolean),may:[],sugar:0,typed:true};}if(a.cur==='missing'){const c=PRODUCTS.crackers;const typed=(a.missing||'').split(/[,\n;]+/).map(x=>x.trim()).filter(Boolean);return Object.assign({},c,{ings:c.ings.filter((_,i)=>![2,3,4].includes(i)).concat(typed)});}return PRODUCTS[a.cur]||PRODUCTS.granola;}
-function resultEval(){const a=A();const p=curProduct();let unread=null;if(a.cur==='crackers'&&a.glareThis)unread=[2,3,4];if(a.cur==='choc')unread=PRODUCTS.choc.unread;return evaluate(p,prof(),unread);}
+function curProduct(){const a=A();return PRODUCTS[a.cur]||PRODUCTS.granola;}
+function resultEval(){const p=curProduct();return evaluate(p,prof(),p.unread);}
 
 function statusTop(dark,bg){return `<div class="a-top ${dark?'dark':''}" style="height:16px;${bg?'background:'+bg:''}" aria-hidden="true"></div>`;}
 function nav(active){const it=[['home','Home','home'],['recipes','Recipes','book'],['scan','Scan','scan'],['plan','Plan','cal'],['profiles','Profiles','user']];
@@ -377,7 +480,8 @@ function renderApp(scrollTop){const el=$('#app');if(!el||!A())return;const a=A()
  const toastHTML=(a.toast&&!o.sheet)?`<div class="a-toast ${o.nav?'':(o.foot?'withfoot':'nonav')}" role="status">${ic('check',20,'#86EFAC',2.6)}<span style="flex:1;font-weight:600">${esc(a.toast.text)}</span>${a.toast.undo?`<button data-act="undo">Undo</button>`:''}</div>`:'';
  el.className='app'+(o.cls?' '+o.cls:'');
  el.innerHTML=`${statusTop(o.dark,o.topBg)}<div class="a-scroll">${o.body}</div>${o.foot?`<div class="a-foot">${o.foot}</div>`:''}${o.nav?nav(o.nav):''}${o.sheet?`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span>${o.sheet}</div></div>`:''}${toastHTML}`;
- const sc=el.querySelector('.a-scroll');if(sc)sc.scrollTop=st;persist();}
+ if(a.busy)el.insertAdjacentHTML('beforeend',`<div class="busy" role="status" aria-live="polite"><div><span class="spin"></span><span id="busyTxt">${esc(a.busy)}</span></div></div>`);
+ const sc=el.querySelector('.a-scroll');if(sc)sc.scrollTop=st;persist();setTimeout(syncCam,0);}
 
 const SCREENS={
  home(){const a=A(),p=prof();const others=a.profiles.filter(x=>!x.you);
@@ -416,49 +520,52 @@ const SCREENS={
    ${al.length?`<div><div class="a-small">ALSO CHECKS OTHER NAMES</div><div class="a-cap">${al.map(([k])=>ALLERGENS[k].names.slice(0,5).join(', ')).join('; ')}…</div></div>`:''}
    <div class="a-row"><div class="grow"><div class="a-small">SUGAR</div><div class="a-strong">${d.sugarOn?'≤ '+d.sugar+' g per serving':'Not tracked'}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div></div>
   <div class="a-card"><span class="a-strong">How results will look</span>${[['bad','Contains something to avoid'],['unc','Part of the label couldn’t be checked'],['safe','No conflict found in everything checked']].map(([k,t])=>`<div class="a-row">${badge(k)}<span class="a-cap">${t}</span></div>`).join('')}</div></div>`};},
- scan(){const a=A();const pid=a.pick||'granola';const p=PRODUCTS[pid];const plabel=p.label||p.ings.join(', ')+'.';const glare=pid==='crackers'&&!a.crackersClear;const P=prof();
+ scan(){const a=A();const P=prof();const lab=a.camMode==='label';const al=Object.keys(P.allergens||{});
   return{cls:'cam',dark:true,body:`<div class="a-body">
-  <div class="a-row"><button class="cam-round" style="width:44px;height:44px" data-act="back" aria-label="Close scanner">${ic('x',22,'#fff')}</button><button class="cam-pill" data-act="tab" data-arg="profiles" style="border:0;color:#fff;cursor:pointer">Checking for ${esc(P.name)}${P.allergens&&Object.keys(P.allergens).length?' · '+esc(Object.keys(P.allergens).map(k=>ALLERGENS[k].label).join(', ')):''}</button></div>
-  <div class="cam-seg" role="tablist"><button class="${a.camMode==='label'?'on':''}" data-act="camMode" data-arg="label" role="tab" aria-selected="${a.camMode==='label'}">Ingredient label</button><button class="${a.camMode==='barcode'?'on':''}" data-act="camMode" data-arg="barcode" role="tab" aria-selected="${a.camMode==='barcode'}">Barcode</button></div>
-  <div class="pick" role="group" aria-label="Product in front of the camera"><span>Product in front of the camera</span><div>${Object.keys(PRODUCTS).map(k=>`<button class="${pid===k?'on':''}" data-act="pick" data-arg="${k}" aria-pressed="${pid===k}">${esc(PRODUCTS[k].name)}</button>`).join('')}</div></div>
-  <div class="vf" role="img" aria-label="Camera view of the ${esc(p.name)} ${a.camMode==='label'?'ingredient label':'barcode'}">
-   ${a.camMode==='label'?`<div class="paper"><b>INGREDIENTS</b><div>${esc(glare?plabel.replace(/sesame oil, soy sauce \(soy, wheat\), sugar/,'██████ ███, ███ █████ ████████, █████'):plabel)}</div><div style="margin-top:6px;font-weight:600">${esc(p.mayText||'')}</div></div>${glare?'<div class="glare"></div>':''}`:`<div class="barcode"><svg width="170" height="70" viewBox="0 0 170 70">${Array.from({length:34},(_,i)=>`<rect x="${i*5}" y="0" width="${[1,2,3][(i*7)%3]}" height="60" fill="#111"/>`).join('')}<text x="85" y="69" text-anchor="middle" font-size="9" fill="#111">6 291041 50${pid==='granola'?'3218':'7745'}</text></svg></div>`}
-   <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-   <div class="hint">${glare?'Hold steady — avoid glare':a.camMode==='label'?'Fit the whole ingredient list inside the frame':'Line the barcode up inside the frame'}</div></div>
-  <div class="cam-ctr"><button class="cam-round ${a.flash?'on':''}" data-act="flash" aria-pressed="${a.flash}" aria-label="Flash">${ic('flash',22,a.flash?'#111827':'#fff')}</button><button class="shutter" data-act="shutter" aria-label="Take photo"><span></span></button><button class="cam-round" data-act="shutter" aria-label="Choose a photo from your gallery">${ic('image',22,'#fff')}</button></div>
-  <button class="cam-link" data-act="go" data-arg="typed">${ic('kb',20,'#fff')}Can’t scan? Type the ingredients</button></div>`};},
+  <div class="a-row"><button class="cam-round" style="width:44px;height:44px" data-act="back" aria-label="Close scanner">${ic('x',22,'#fff')}</button><button class="cam-pill" data-act="tab" data-arg="profiles" style="border:0;color:#fff;cursor:pointer">Checking for ${esc(P.name)}${al.length?' · '+esc(al.map(k=>ALLERGENS[k].label).join(', ')):P.sugar?' · sugar ≤ '+P.sugar+' g':''}</button></div>
+  <div class="cam-seg" role="tablist"><button class="${!lab?'on':''}" data-act="camMode" data-arg="barcode" role="tab" aria-selected="${!lab}">Barcode</button><button class="${lab?'on':''}" data-act="camMode" data-arg="label" role="tab" aria-selected="${lab}">Ingredient label</button></div>
+  ${!lab?`<div class="vf live"><div id="reader"></div><div class="cam-msg" id="camMsg">${esc(a.camErr||'Starting the camera… allow camera access if your browser asks.')}</div><div class="hint">Point the camera at the barcode</div></div>
+   <form class="bc-row" onsubmit="return false"><input class="a-input bc-in" id="aBarcode" inputmode="numeric" autocomplete="off" placeholder="Or type the barcode number" value="${esc(a.bc||'')}" aria-label="Barcode number"><button class="a-btn p" data-act="lookupTyped" type="submit">Check</button></form>`
+  :`<div class="vf label-vf"><div class="label-tip">${ic('cam',40,'#fff',1.6)}<b>Photograph the ingredient list</b><span>Fill the photo with the list, hold steady and avoid glare.</span></div></div>
+   <button class="a-btn p" data-act="photoLabel">${ic('cam',20,'#fff')}Take or choose a photo</button>`}
+  <button class="cam-link" data-act="go" data-arg="typed">${ic('kb',20,'#fff')}Can’t scan? Type the ingredients</button>
+  <details class="samples"><summary>No product with you? Try a sample product</summary><div class="pick-row">${Object.keys(PRODUCTS).filter(k=>PRODUCTS[k].source==='sample').map(k=>`<button data-act="pickSample" data-arg="${k}">${esc(PRODUCTS[k].name)}</button>`).join('')}</div></details>
+  </div>`};},
  checking(){const a=A();const P=prof();const steps=['Read the ingredients','Checked other names for '+(Object.keys(P.allergens).length?Object.keys(P.allergens).map(k=>ALLERGENS[k].label.toLowerCase()).join(', '):'allergens'),'Checked “may contain” warnings'];
-  return{cls:'cam',dark:true,body:`<div class="a-body"><div class="vf" style="height:420px;opacity:.55"></div></div>`,sheet:`<div class="a-row"><span style="width:40px;height:40px;border-radius:20px;background:#DCFCE7;display:flex;align-items:center;justify-content:center">${ic('check',22,'#15803D',2.8)}</span><div class="grow"><div class="a-h">Label captured</div><div class="a-cap">Hold still — checking against ${esc(P.name)}’s profile</div></div></div>
+  return{cls:'cam',dark:true,body:`<div class="a-body"><div class="vf" style="height:420px;opacity:.55"></div></div>`,sheet:`<div class="a-row"><span style="width:40px;height:40px;border-radius:20px;background:#DCFCE7;display:flex;align-items:center;justify-content:center">${ic('check',22,'#15803D',2.8)}</span><div class="grow"><div class="a-h">${curProduct().source==='barcode'?'Product found':curProduct().source==='sample'?'Label captured':'Ingredients received'}</div><div class="a-cap">Hold still — checking against ${esc(P.name)}’s profile</div></div></div>
    <div class="a-bar" style="margin:4px 0"><i style="width:${Math.min(100,25+a.chk*25)}%;background:#1D4ED8;transition:width .4s"></i></div>
    ${steps.map((s,i)=>`<div class="a-row">${i<a.chk?ic('check',20,'#15803D',2.6):ic('loader',20,'#1D4ED8',2.4)}<span style="color:${i<a.chk?'#111827':'#1E40AF'}">${esc(s)}${i<a.chk?'':'…'}</span></div>`).join('')}
    <div class="a-cap">Your phone vibrates when the result is ready.</div>`};},
- result(){const a=A();const p=curProduct();const ev=resultEval();const P=prof();const k=ev.status;
-  const pal={bad:{bg:'#B91C1C',fg:'#fff',eb:'NOT SAFE',t:'Not safe for '+P.name},unc:{bg:'#FEF3C7',fg:'#92400E',eb:ev.over&&!ev.unr.length&&!ev.mayHit.length?'OVER LIMIT':'UNCERTAIN — NOT MARKED SAFE',t:ev.over&&!ev.unr.length?'Over '+P.name+'’s sugar limit':'Can’t confirm yet'},safe:{bg:'#DCFCE7',fg:'#166534',eb:'SAFE',t:'Safe for '+P.name}}[k];
-  let sub=k==='bad'?'Contains '+[...new Set(ev.probs.map(x=>ALLERGENS[x.allergen].label.toLowerCase()))].join(', ')+' ('+ev.probs.map(x=>x.n.replace(/\s*\(.*\)/,'').toLowerCase()).join(', ')+')':k==='unc'?(ev.unr.length?ev.unr.length+' of '+p.ings.length+' ingredients couldn’t be read':ev.mayHit.length?'May contain '+ev.mayHit.map(x=>ALLERGENS[x].label.toLowerCase()).join(', '):p.sugar+' g sugar per serving — limit is '+P.sugar+' g'):(Object.keys(P.allergens).length?'No '+Object.keys(P.allergens).map(x=>ALLERGENS[x].label.toLowerCase()).join(', ')+' found':'No conflicts with '+P.name+'’s profile');
-  const reasons=[];
-  ev.probs.forEach(x=>reasons.push(`<div class="a-reason bad"><div class="a-row" style="gap:8px">${sic('bad',22)}<span class="a-strong">Contains: ${esc(x.n.replace(/\s*\(.*\)/,''))}</span></div><span class="a-cap">${/\(/.test(x.n)?'Listed as “'+esc(x.n.match(/\((.*)\)/)[1])+'” — ':''}${'this is '+(x.allergen==='tree'?'a tree nut':ALLERGENS[x.allergen].label.toLowerCase())+'. '+esc(P.name)+'’s severity: '+P.allergens[x.allergen]+' of 5.'}</span></div>`));
-  (p.may||[]).forEach(m=>{const hit=P.allergens&&P.allergens[m];reasons.push(`<div class="a-reason ${hit?'unc':'info'}"><div class="a-row" style="gap:8px">${sic('unc',22)}<span class="a-strong">May contain: ${ALLERGENS[m].label.toLowerCase()}s</span></div><span class="a-cap">Warning printed on the pack.${hit?'':' Not in '+esc(P.name)+'’s profile.'}</span></div>`);});
-  if(k==='safe')reasons.push(`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">${Object.keys(P.allergens).length?'No '+Object.keys(P.allergens).map(x=>ALLERGENS[x].label.toLowerCase()).join(', ')+' found':'Nothing to avoid'}</span></div><span class="a-cap">All ${p.ings.length} ingredients read — including other names${P.allergens.tree?' for nuts like “Prunus dulcis”':''}.</span></div>`);
+ result(){const a=A();const p=curProduct();const ev=resultEval();const P=prof();const k=ev.status;const onlyOver=k==='unc'&&ev.why.length===1&&ev.why[0]==='over';
+  const pal={bad:{bg:'#B91C1C',fg:'#fff',eb:'NOT SAFE',t:'Not safe for '+P.name},unc:{bg:'#FEF3C7',fg:'#92400E',eb:onlyOver?'OVER LIMIT':'UNCERTAIN — NOT MARKED SAFE',t:onlyOver?'Over '+P.name+'’s sugar limit':'Can’t confirm yet'},safe:{bg:'#DCFCE7',fg:'#166534',eb:'SAFE',t:'Safe for '+P.name}}[k];
+  const sub=resultSub(p,ev,P);const keys=Object.keys(P.allergens||{});const reasons=[];
+  ev.probs.forEach(x=>reasons.push(`<div class="a-reason bad"><div class="a-row" style="gap:8px">${sic('bad',22)}<span class="a-strong">Contains: ${esc(x.n.replace(/\s*\(.*\)/,''))}</span></div><span class="a-cap">${/\(/.test(x.n)&&x.n.match(/\((.*)\)/)?'Listed as “'+esc(x.n.match(/\((.*)\)/)[1])+'” — ':''}${'this is '+(x.allergen==='tree'?'a tree nut':ALLERGENS[x.allergen].label.toLowerCase())+'. '+esc(P.name)+'’s severity: '+(P.allergens[x.allergen]||'?')+' of 5.'}</span></div>`));
+  ev.why.filter(w=>w!=='may').forEach(w=>reasons.push(uncCard(w,p,ev,P)));
+  (p.may||[]).forEach(m=>{const hit=keys.includes(m);reasons.push(`<div class="a-reason ${hit?'unc':'info'}"><div class="a-row" style="gap:8px">${sic('unc',22)}<span class="a-strong">May contain: ${esc(ALLERGENS[m].label.toLowerCase())}</span></div><span class="a-cap">Warning printed on the pack.${hit?'':' Not in '+esc(P.name)+'’s profile.'}</span></div>`);});
+  if(k==='safe')reasons.push(`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">${keys.length?'No '+esc(lc(keys))+' found':'Nothing to avoid'}</span></div><span class="a-cap">All ${(p.ings||[]).length} ingredients read — including other names${P.allergens&&P.allergens.tree!=null?' for nuts like “Prunus dulcis”':''}.</span></div>`);
   if(k==='safe'&&!(p.may||[]).length)reasons.push(`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">No “may contain” warnings</span></div></div>`);
-  const unreadBlock=ev.unr.length?`<div class="a-card" style="gap:8px"><div style="position:relative;height:64px;border-radius:8px;background:#F5F0E3;overflow:hidden">${[0,1,2,3].map(i=>`<i style="position:absolute;left:12px;top:${10+i*13}px;height:6px;width:${[88,72,82,60][i]}%;border-radius:3px;background:#736B60;opacity:${i===1||i===2?.25:.8}"></i>`).join('')}<i style="position:absolute;left:8px;top:18px;width:74%;height:28px;border:2px dashed #B45309;border-radius:6px"></i></div><span class="a-cap" style="color:#92400E">Unreadable: ingredients ${ev.unr.map(x=>x.n.match(/\d+/)[0]).join(', ')} (glare)</span></div>
-   ${B(ic('cam',20,'#fff')+'Retake photo','retake',null,'p')}<div class="a-row"><hr style="flex:1;border:0;border-top:1px solid #C9CED6"><span class="a-cap">or</span><hr style="flex:1;border:0;border-top:1px solid #C9CED6"></div>
-   <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Type the missing ingredients</span><input class="a-input" id="aMissing" value="${esc(a.missing||'')}" placeholder="e.g. sesame oil, soy sauce, sugar"></label><button class="a-btn s" id="missCheck" data-act="checkMissing" ${a.missing&&a.missing.trim()?'':'disabled'}>Check ingredients</button>
-   <div class="a-cap" style="text-align:center">We only show “Safe” when every ingredient is confirmed.</div>`:'';
-  const actions=k==='bad'?`${B('Scan another product','scanAnother',null,'p')}<div class="a-row"><button class="a-btn" disabled aria-describedby="nosave">Save to Pantry</button>${B('Report issue','go','report','s')}</div><div class="a-cap" id="nosave">You can’t save food that isn’t safe for ${esc(P.name)}.</div>`:k==='safe'?`${B('Save to Pantry','savePantry',null,'p')}<div class="a-row">${B('Another profile','tab','profiles','s')}${B('Report issue','go','report','s')}</div>`:(ev.unr.length?'':`${B('Scan another product','scanAnother',null,'p')}${B('Report issue','go','report','s')}`);
+  if(P.sugar&&p.sugar!=null&&!ev.over&&k!=='bad')reasons.push(`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">Sugar: ${p.sugar} g per serving</span></div><span class="a-cap">Within ${esc(P.name)}’s limit of ${P.sugar} g.</span></div>`);
+  const needFix=ev.why.includes('noings')||ev.why.includes('unread');
+  const fix=needFix?`${B(ic('cam',20,'#fff')+'Photograph the ingredients','photoLabel',null,'p')}${B(ic('kb',20,'#1E40AF')+'Type the ingredients','typeFor',null,'s')}<div class="a-cap" style="text-align:center">We only show “Safe” when every ingredient is confirmed.</div>`:'';
+  const actions=k==='bad'?`${B('Scan another product','scanAnother',null,'p')}<div class="a-row"><button class="a-btn" disabled aria-describedby="nosave">Save to Pantry</button>${B('Report issue','go','report','s')}</div><div class="a-cap" id="nosave">You can’t save food that isn’t safe for ${esc(P.name)}.</div>`:k==='safe'?`${B('Save to Pantry','savePantry',null,'p')}${B('Scan another product','scanAnother',null,'s')}<div class="a-row">${B('Another profile','tab','profiles','s')}${B('Report issue','go','report','s')}</div>`:`${fix}${B('Scan another product','scanAnother',null,needFix?'s':'p')}${needFix?'':B('Report issue','go','report','s')}`;
+  const src={barcode:'Open Food Facts product database'+(p.barcode?' · barcode '+p.barcode:''),photo:'text read from your label photo',typed:'ingredients you typed',sample:'sample product'}[p.source]||'product information';
   return{nav:'none',topBg:pal.bg,dark:k==='bad',body:`<div class="a-banner" style="background:${pal.bg};color:${pal.fg}">${sic(k,44,k==='bad')}<div style="flex:1"><div class="eb">${pal.eb}</div><div class="a-title" style="color:${k==='bad'?'#fff':'#111827'}">${esc(pal.t)}</div><div>${esc(sub)}</div></div></div>
-   <div class="a-body" style="padding-top:14px"><div class="a-row"><span class="a-tile">${ic('pkg',26,'#6B7280',1.8)}</span><div class="grow"><div class="a-h">${esc(p.name)}</div><div class="a-cap">${esc(p.size)} · ${p.typed?'checked just now':'scanned just now'}</div></div></div>
-   ${reasons.join('')}${unreadBlock}
-   ${!ev.unr.length?`<button class="a-item" data-act="go" data-arg="ingredients"><span class="grow a-strong">See all ${p.ings.length} ingredients</span>${ic('chevR',20,'#4B5563')}</button>`:''}
-   <div class="a-src">${ic('info',20,'#4B5563')}<div><div class="a-cap">Source: ${p.typed?'ingredients you typed':'your label photo + product database'} · checked ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</div><div class="a-small" style="color:#111827;font-size:15px;line-height:20px">${k==='safe'?'“Safe” = no conflict in the information checked. Always check the pack.':'Always check the pack — recipes can change.'}</div></div></div>
+   <div class="a-body" style="padding-top:14px"><div class="a-row"><span class="a-tile">${ic('pkg',26,'#6B7280',1.8)}</span><div class="grow"><div class="a-h">${esc(p.name)}</div><div class="a-cap">${esc(p.size||'')}${p.size?' · ':''}${p.source==='barcode'||p.source==='sample'?'scanned just now':'checked just now'}</div></div></div>
+   ${reasons.join('')}
+   ${!p.noIngs?`<button class="a-item" data-act="go" data-arg="ingredients"><span class="grow a-strong">See all ${(p.ings||[]).length} ingredients</span>${ic('chevR',20,'#4B5563')}</button>`:''}
+   <div class="a-src">${ic('info',20,'#4B5563')}<div><div class="a-cap">Source: ${esc(src)} · checked ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</div><div class="a-small" style="color:#111827;font-size:15px;line-height:20px">${k==='safe'?'“Safe” = no conflict in the information checked. Always check the pack.':'Always check the pack — recipes can change.'}</div></div></div>
    ${actions}</div>`};},
  ingredients(){const p=curProduct();const ev=resultEval();const list=[...ev.list].sort((x,y)=>({bad:0,unc:1,safe:2}[x.k]-{bad:0,unc:1,safe:2}[y.k]));const P=prof();
   return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">All ${p.ings.length} ingredients</div><div class="a-cap">${esc(p.name)} · checked for ${esc(P.name)}</div></div></div>
-  <div class="a-card" style="padding:2px 14px;gap:0">${list.map((x,i)=>`<div class="a-row" style="padding:10px 0;${i<list.length-1?'border-bottom:1px solid #E5E7EB':''}">${sic(x.k,18)}<div class="grow"><div class="${x.k==='safe'?'':'a-strong'}">${esc(x.n)}</div>${x.k==='bad'?`<div class="a-cap" style="color:#991B1B">${ALLERGENS[x.allergen].label} — ${esc(P.name)} must avoid</div>`:''}</div></div>`).join('')}${(p.may||[]).map(m=>`<div class="a-row" style="padding:10px 0;border-top:1px solid #E5E7EB">${sic('unc',18)}<div class="grow"><div class="a-strong">May contain: ${ALLERGENS[m].label.toLowerCase()}s</div><div class="a-cap" style="color:#92400E">Warning printed on the pack</div></div></div>`).join('')}</div></div>`};},
- typed(){const t=A().typed;const P=prof();return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">Type ingredients</div><div class="a-cap">Checking for ${esc(P.name)}</div></div></div>
+  <div class="a-card" style="padding:2px 14px;gap:0">${list.map((x,i)=>`<div class="a-row" style="padding:10px 0;${i<list.length-1?'border-bottom:1px solid #E5E7EB':''}">${sic(x.k,18)}<div class="grow"><div class="${x.k==='safe'?'':'a-strong'}">${esc(x.n)}</div>${x.k==='bad'?`<div class="a-cap" style="color:#991B1B">${ALLERGENS[x.allergen].label} — ${esc(P.name)} must avoid</div>`:''}</div></div>`).join('')}${(p.may||[]).map(m=>`<div class="a-row" style="padding:10px 0;border-top:1px solid #E5E7EB">${sic('unc',18)}<div class="grow"><div class="a-strong">May contain: ${ALLERGENS[m].label.toLowerCase()}</div><div class="a-cap" style="color:#92400E">Warning printed on the pack</div></div></div>`).join('')}</div></div>`};},
+ typed(){const t=A().typed;const P=prof();return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">${t.source==='photo'?'Check the label text':'Type ingredients'}</div><div class="a-cap">Checking for ${esc(P.name)}</div></div></div>
+  ${t.note?`<div class="a-src" style="background:#FEF3C7">${ic('info',20,'#92400E')}<span class="a-cap" style="color:#92400E">${esc(t.note)}</span></div>`:''}
   <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Product name (optional)</span><input class="a-input" id="aTypedName" value="${esc(t.name)}" placeholder="e.g. Granola Bar"></label>
-  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Ingredients</span><textarea class="a-input" id="aTypedText" placeholder="e.g. oats, honey, almonds, sunflower oil">${esc(t.text)}</textarea><span class="a-cap">Separate with commas. You can paste from a website.</span></label>
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Ingredients</span><textarea class="a-input" id="aTypedText" rows="5" placeholder="e.g. oats, honey, almonds, sunflower oil">${esc(t.text)}</textarea><span class="a-cap">Separate with commas. Include any “may contain” line from the pack.</span></label>
+  ${P.sugar?`<label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Sugar per serving, in grams (from the nutrition label)</span><input class="a-input" id="aTypedSugar" inputmode="decimal" value="${esc(t.sugar||'')}" placeholder="e.g. 6"></label>`:''}
   <button class="a-btn p" id="typedCheck" data-act="checkTyped" ${t.text.trim()?'':'disabled'}>Check ingredients</button>
-  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">We also check other names, like “Prunus dulcis” for almonds or “casein” for milk.</span></div></div>`};},
+  ${B(ic('cam',20,'#1E40AF')+'Photograph the label instead','photoLabel',null,'s')}
+  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">We also check other names, like “Prunus dulcis” for almonds or “casein” for milk — in English and Arabic.</span></div></div>`};},
  report(){const r=A().report;const opts=['An ingredient is missing','Wrong product','The label has changed','The result looks wrong'];
   return{body:`<div class="a-body"><div class="a-row">${backBtn('Close')}<div class="grow"><div class="a-h">Report a mismatch</div><div class="a-cap">Help keep results accurate</div></div></div>
   <div class="a-strong">What’s wrong?</div><div class="a-chips">${opts.map(o=>`<button class="a-chip ${r[o]?'on':''}" data-act="repChip" data-arg="${esc(o)}" aria-pressed="${!!r[o]}">${r[o]?ic('check',18,'#1D4ED8',2.6):''}${o}</button>`).join('')}</div>
@@ -517,14 +624,14 @@ function shopList(){const a=A();const set=new Set();let n=0;Object.values(a.plan
 /* ============ app events ============ */
 document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app||!S||!A())return;
  const el=e.target.closest('[data-act]');S.c.taps++;
- if(!el){if(!e.target.closest('input,textarea,label')){S.c.empty++;logClick('empty tap','Tapped an empty area');}else S.lastAct=Date.now();persist();return;}
+ if(!el){if(!e.target.closest('input,textarea,label,summary,details,select')){S.c.empty++;logClick('empty tap','Tapped an empty area');}else S.lastAct=Date.now();persist();return;}
  logClick(el.disabled?'tap (disabled)':'tap',labelOf(el));
  if(el.disabled)return;
  const act=el.dataset.act,arg=el.dataset.arg,a=A();
  const H={
   tab:()=>tab(arg),
   editProfile:()=>{const p=a.stack.pop();a.screen=p?p.screen:'p2';renderApp(true);},
-  go:()=>go(arg),
+  go:()=>{if(arg==='typed')a.typed={name:'',text:'',sugar:'',source:'typed',note:''};go(arg);},
   back:()=>back(),
   closeSheet:()=>{S.c.backs++;a.sheet=null;renderApp();},
   undo:()=>{S.undoUsed=(S.undoUsed||0)+1;const u=a.toast&&a.toast.undo;a.toast=null;if(u)UNDO[u]();renderApp();},
@@ -541,19 +648,21 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
     else{p={id:'p'+Date.now(),name:d.name.trim(),kind:d.who.includes('child')?'child':'adult',allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes')};a.profiles.push(p);}
     a.setup=false;a.active=p.id;a.stack=[];a.screen='home';a.draft=null;toast(p.name+'’s profile saved');renderApp(true);
     if(S.M.profileSaved==null){mark('profileSaved');S.profileText=`${p.name} (${p.kind==='child'?'child':'self'}): ${profSummary(p)}`;}else S.profileText+=` | ${p.name}: ${profSummary(p)}`;sendToSheet('profile');},
-  shutter:()=>{S.c.scans++;a.viaScan=true;a.cur=a.pick||'granola';a.glareThis=a.cur==='crackers'&&!a.crackersClear;if(a.cur==='crackers')a.crackersClear=true;go('checking');},
-  camMode:()=>{a.camMode=arg;renderApp();},
+  pickSample:()=>{S.c.scans++;if(a.scanT0==null)a.scanT0=Date.now();a.cur=arg;go('checking');},
+  lookupTyped:()=>{const v=($('#aBarcode')||{}).value||'';a.bc=v;lookupBarcode(v,'typed');},
+  photoLabel:()=>{const f=document.getElementById('photoIn');if(f){f.value='';f.click();}},
+  typeFor:()=>{const p=curProduct();a.typed={name:p.notFound?'':p.name,text:'',sugar:'',source:'typed',note:''};go('typed');},
+  camMode:()=>{a.camMode=arg;a.camErr=null;renderApp();},
   flash:()=>{a.flash=!a.flash;renderApp();},
   scanAnother:()=>{a.stack=[];a.screen='scan';onEnter('scan');renderApp(true);},
   retake:()=>{a.stack=[];a.screen='scan';renderApp(true);},
-  checkMissing:()=>{const txt=(a.missing||'').trim();if(!txt)return;S.c.scans++;a.viaScan=false;a.cur='missing';a.glareThis=false;a.crackersClear=true;go('checking');},
-  checkTyped:()=>{if(!a.typed.text.trim())return;S.c.scans++;a.viaScan=false;a.cur='typed';go('checking');},
-  savePantry:()=>{const p=curProduct();a.pantry.push(p.name);const rp=a.cur==='missing'?'crackers':a.cur;if(PRODUCTS[rp])a.recents.unshift({pid:rp,when:'just now'});a.savedRecent=!!PRODUCTS[rp];a.stack=[];a.screen='home';a.lastSaved=p.name;toast('Saved to Pantry','pantry');renderApp(true);
+  checkTyped:()=>{const t=a.typed;if(!t.text.trim())return;const text=t.text;const sg=String(t.sugar||'').replace(',','.').trim();const o={name:t.name.trim()||(t.source==='photo'?'Label photo':'Typed ingredients'),size:t.source==='photo'?'read from your photo':'typed by you',ings:splitIngs(stripMay(text)),may:mayFromText(text),ref:[],sugar:sg!==''&&!isNaN(+sg)?+sg:null,source:t.source||'typed',text:text.slice(0,400)};o.noIngs=!o.ings.length;S.c.scans++;a.cur=makeProduct(o);go('checking');},
+  savePantry:()=>{const p=curProduct();a.pantry.push(p.name);const rp=a.cur;if(PRODUCTS[rp])a.recents.unshift({pid:rp,when:'just now'});a.savedRecent=!!PRODUCTS[rp];a.stack=[];a.screen='home';a.lastSaved=p.name;toast('Saved to Pantry','pantry');renderApp(true);
     S.saved.push(p.name);mark('pantrySaved');sendToSheet('pantry');},
   pick:()=>{a.pick=arg;renderApp();},
-  openRecent:()=>{const r=a.recents[+arg];a.viaScan=false;a.cur=r.pid;a.glareThis=false;go('result');},
+  openRecent:()=>{const r=a.recents[+arg];a.cur=r.pid;go('result');},
   repChip:()=>{a.report[arg]=!a.report[arg];renderApp();},
-  sendReport:()=>{a.report={};back();S.c.backs--;toast('Report sent — thank you');renderApp();},
+  sendReport:()=>{S.reports=(S.reports||0)+1;a.report={};back();S.c.backs--;toast('Report sent — thank you');renderApp();},
   histFilter:()=>{a.histFilter=arg;renderApp();},
   clearSearch:()=>{a.recipeQ='';renderApp();},
   filter:()=>{a.filters[arg]=!a.filters[arg];renderApp();},
@@ -572,7 +681,7 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
   addFromPlan:()=>{a.planDay=a.viewDay;a.planMeal=arg;a.filters.breakfast=arg==='Breakfast';tab('recipes');},
   shopTick:()=>{a.shop[arg]=!a.shop[arg];renderApp();},
   share:()=>{a.shared=!a.shared;renderApp();},
-  logout:()=>{S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
+  logout:()=>{stopCam();S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
  };
  if(H[act])H[act]();if(S)persist();});
 const UNDO={allergen:()=>{const a=A();if(a.draft&&a.undo){a.draft.allergens[a.undo.k]=a.undo.v;}},pantry:()=>{const a=A();a.pantry.pop();if(a.savedRecent)a.recents.shift();},swap:()=>{const a=A();delete a.swaps[a.recipe];},plan:()=>{const a=A();if(a.prevPlan)a.plan=a.prevPlan;}};
@@ -586,7 +695,7 @@ function renderAppHidden(){const a=A();const P=prof();renderApp();const el=$('#a
 const root=$('#root');
 function render(){
  if(!S){root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="welcome">${welcomeHTML()}</div></div></div>`;return;}
- if(!$('#app'))root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="app" role="application" aria-label="Meal Planner and Ingredient Checker"></div></div></div>`;
+ if(!$('#app'))root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="app" role="application" aria-label="Meal Planner and Ingredient Checker"></div><input type="file" id="photoIn" accept="image/*" hidden></div></div>`;
  renderApp(true);}
 function welcomeHTML(){const ok=W.name.trim()&&W.group&&W.consent;
  return `${statusTop(false)}<div class="a-scroll"><div class="a-body" style="padding-top:28px">
@@ -614,11 +723,13 @@ document.addEventListener('input',e=>{const t=e.target;
  if(t.id==='aTypedName')A().typed.name=t.value; if(t.id==='aTypedText'){A().typed.text=t.value;const b=$('#typedCheck');if(b)b.disabled=!t.value.trim();}
  if(t.id==='aMissing'){A().missing=t.value;const b=$('#missCheck');if(b)b.disabled=!t.value.trim();}
  if(t.id==='aReport')A().report.text=t.value;
+ if(t.id==='aTypedSugar')A().typed.sugar=t.value;
+ if(t.id==='aBarcode')A().bc=t.value;
 });
-document.addEventListener('change',e=>{const t=e.target;if(t.closest('#app')&&S&&FIELD_NAMES[t.id]){logClick('typed',FIELD_NAMES[t.id]+': “'+t.value.slice(0,50)+'”');persist();}});
+document.addEventListener('change',e=>{const t=e.target;if(t.id==='photoIn'){if(t.files&&t.files[0])runOCR(t.files[0]);return;}if(t.closest('#app')&&S&&FIELD_NAMES[t.id]){logClick('typed',FIELD_NAMES[t.id]+': “'+t.value.slice(0,50)+'”');persist();}});
 
 /* ============ boot: returning visitors continue where they left off ============ */
-(function boot(){const saved=store.get('mp.visitor');if(saved&&saved.app&&saved.id){S=saved;S.left=false;const a=S.app;a.toast=null;a.sheet=null;if(a.screen==='checking')a.screen='scan';logClick('return','Came back to the website');}render();})();
+(function boot(){const saved=store.get('mp.visitor');if(saved&&saved.app&&saved.id){S=saved;Object.assign(PRODUCTS,S.app.live||{});S.checks=S.checks||[];S.sentChecks=S.sentChecks||0;S.left=false;const a=S.app;a.toast=null;a.sheet=null;if(a.screen==='checking')a.screen='scan';logClick('return','Came back to the website');}render();})();
 })();
 </script>
 </body>
