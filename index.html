@@ -288,7 +288,9 @@ function evalIngs(ings,prof,unread){
   return out;}
 function evaluate(p,prof,unread){
   const list=evalIngs(p.ings||[],prof,unread);const probs=list.filter(x=>x.k==='bad');const unr=list.filter(x=>x.unread);
-  const keys=Object.keys(prof.allergens||{});const may=(p.may||[]);const mayHit=may.filter(k=>keys.includes(k));
+  const keys=Object.keys(prof.allergens||{});
+  keys.forEach(k=>{if(probs.some(x=>x.allergen===k))return;const t=(p.tagIngs||[]).find(n=>matchAllergen(n,k));if(t){const it={n:t.charAt(0).toUpperCase()+t.slice(1)+' (product database ingredient list)',k:'bad',allergen:k};probs.push(it);list.push(it);}});
+  const may=(p.may||[]);const mayHit=may.filter(k=>keys.includes(k));
   const over=!!(prof.sugar&&p.sugar!=null&&p.sugar>prof.sugar);
   const refMiss=(p.ref||[]).filter(k=>keys.includes(k)&&!probs.some(x=>x.allergen===k));
   const why=[];
@@ -337,13 +339,13 @@ function splitIngs(text){const t=String(text||'').replace(/^\s*(ingredients|ingr
 function makeProduct(o){const id='L'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);PRODUCTS[id]=o;const a=A();a.live=a.live||{};a.live[id]=o;return id;}
 function fromOFF(p,code){const text=p.ingredients_text_en||p.ingredients_text||'';let ings=splitIngs(stripMay(text));
  const tagNames=(p.ingredients_tags||[]).filter(t=>/^en:/.test(t)).map(t=>t.slice(3).replace(/-/g,' '));
- if(!p.ingredients_text_en&&tagNames.length)ings=tagNames.map(x=>x.charAt(0).toUpperCase()+x.slice(1));
+ if((!p.ingredients_text_en||ings.length<3)&&tagNames.length>=3)ings=tagNames.map(x=>x.charAt(0).toUpperCase()+x.slice(1));
  const may=[...new Set([...(p.traces_tags||[]).map(t=>OFF_MAP[t]).filter(Boolean),...mayFromText(text)])];
  const ref=[...new Set((p.allergens_tags||[]).map(t=>OFF_MAP[t]).filter(Boolean))];
  const n=p.nutriments||{};let sugar=null,sugar100=n.sugars_100g!=null?+(+n.sugars_100g).toFixed(1):null;
  if(n.sugars_serving!=null)sugar=+(+n.sugars_serving).toFixed(1);else if(sugar100!=null&&+p.serving_quantity>0)sugar=+(sugar100*p.serving_quantity/100).toFixed(1);
  const nm=p.product_name_en||p.product_name||'';const br=(p.brands||'').split(',')[0].trim();
- return{name:[nm,br].filter(Boolean).join(' · ')||'Barcode '+code,size:[p.quantity,p.serving_size?'serving '+p.serving_size:''].filter(Boolean).join(' · ')||'Barcode '+code,ings,may,ref,refKnown:!!ings.length&&Array.isArray(p.allergens_tags),sugar,sugar100,noIngs:!ings.length,source:'barcode',barcode:code,text:text.slice(0,400)};}
+ return{name:[nm,br].filter(Boolean).join(' · ')||'Barcode '+code,size:[p.quantity,p.serving_size?'serving '+p.serving_size:''].filter(Boolean).join(' · ')||'Barcode '+code,ings,tagIngs:tagNames,may,ref,refKnown:!!ings.length&&Array.isArray(p.allergens_tags),sugar,sugar100,noIngs:!ings.length,source:'barcode',barcode:code,text:text.slice(0,400)};}
 async function lookupBarcode(code,how){const a=A();if(!a)return;code=String(code||'').replace(/\D/g,'');
  if(code.length<8||code.length>14){toast('Barcode numbers have 8 to 13 digits');renderApp();return;}
  logClick('scan','Barcode '+(how==='camera'?'scanned with camera':'typed')+': '+code);S.c.scans++;
