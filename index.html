@@ -250,7 +250,7 @@ textarea.a-input{min-height:120px;resize:none;line-height:24px}
 .searchbox>svg{flex:none;width:22px;height:22px}
 .textsize{align-self:flex-end;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:22px;border:2px solid #1D4ED8;background:#fff;color:#1D4ED8;font-weight:700;font-size:16px;cursor:pointer}
 .textsize[aria-pressed="true"]{background:#1D4ED8;color:#fff}
-.app.big .a-scroll,.app.big .a-foot{zoom:1.2}
+.app.big .a-scroll,.app.big .a-foot{zoom:1.3}
 .goal-tags{color:#166534;font-size:14px;font-weight:600}
 .app[dir=rtl]{font-family:"Noto Sans Arabic","Inter",system-ui,sans-serif}
 .app[dir=rtl] [data-act=back] svg,.app[dir=rtl] .a-item>svg:last-child{transform:scaleX(-1)}
@@ -566,7 +566,7 @@ const HGOALS={protein:{label:'More protein',tag:'High protein',test:r=>r.protein
 const SCREEN_NAMES={search:'Search products',home:'Home',profiles:'Profiles',p1:'Create profile · step 1',p2:'Create profile · step 2',p3:'Create profile · review',scan:'Camera',checking:'Checking ingredients',result:'Result',ingredients:'Ingredient list',typed:'Type ingredients',report:'Report issue',history:'Scan history',recipes:'Recipes',recipe:'Recipe',plan:'Meal plan'};
 const FIELD_NAMES={aQuery:'Product search typed',wAge:'Age',aBarcode:'Barcode typed',aTypedSugar:'Sugar per serving typed',aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
 const TRUTH={granola:['tree','soy'],crackers:['sesame','soy','gluten'],oat:['gluten','milk'],choc:['milk','soy','tree'],trail:['tree','peanut']};
-let BIG=!!store.get('mp.big');const ageOk=v=>/^\d{1,3}$/.test(String(v).trim())&&+v>=5&&+v<=120;let LANG=store.get('mp.lang')==='ar'?'ar':'en';
+let BIG=!!store.get('mp.big');if(!store.get('mp.visitor'))BIG=false;const ageOk=v=>/^\d{1,3}$/.test(String(v).trim())&&+v>=5&&+v<=120;let LANG=store.get('mp.lang')==='ar'?'ar':'en';
 let S=null, checkingTimer=null, saveT=null, W={name:'',age:'',group:'',consent:false,bigTouched:false,t0:Date.now()};
 const A=()=>S&&S.app;
 const prof=()=>A().profiles.find(p=>p.id===A().active);
@@ -877,7 +877,7 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
   bigText:()=>{BIG=!BIG;S.bigTouched=true;store.set('mp.big',BIG);renderApp();},
   lang:()=>{LANG=LANG==='ar'?'en':'ar';store.set('mp.lang',LANG);renderApp();},
   extLink:()=>{},
-  logout:()=>{stopCam();S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
+  logout:()=>{stopCam();BIG=false;store.set('mp.big',false);S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
  };
  if(H[act])H[act]();if(S)persist();});
 const UNDO={allergen:()=>{const a=A();if(a.draft&&a.undo){a.draft.allergens[a.undo.k]=a.undo.v;}},pantry:()=>{const a=A();a.pantry.pop();if(a.savedRecent)a.recents.shift();},swap:()=>{const a=A();delete a.swaps[a.recipe];},plan:()=>{const a=A();if(a.prevPlan)a.plan=a.prevPlan;}};
@@ -912,7 +912,7 @@ document.addEventListener('click',e=>{const w=e.target.closest('[data-w]');if(!w
  if(k==='consent')W.consent=!W.consent;
  if(k==='big'){BIG=!BIG;W.bigTouched=true;store.set('mp.big',BIG);render();return;}
  if(k==='lang'){LANG=LANG==='ar'?'en':'ar';store.set('mp.lang',LANG);render();return;}
- if(k==='start'){if(!(W.name.trim()&&ageOk(W.age)&&W.group&&W.consent))return;S=newSession(W.name,W.group,(Date.now()-W.t0)/1000);S.age=+W.age;S.autoBig=+W.age>45&&!W.bigTouched;logClick('sign-up','Get started (account created)');S.app=newApp(S.name,S.group);S.screens.p1=1;
+ if(k==='start'){if(!(W.name.trim()&&ageOk(W.age)&&W.group&&W.consent))return;S=newSession(W.name,W.group,(Date.now()-W.t0)/1000);S.age=+W.age;S.autoBig=+W.age>45&&!W.bigTouched;S.bigTouched=!!W.bigTouched;logClick('sign-up','Get started (account created)');S.app=newApp(S.name,S.group);S.screens.p1=1;
   W={name:'',age:'',group:'',consent:false,bigTouched:false,t0:Date.now()};saveNow();sendToSheet('start');render();return;}
  const el=$('#welcome');if(el){const sc=el.querySelector('.a-scroll').scrollTop;el.innerHTML=welcomeHTML();localize(el);el.querySelector('.a-scroll').scrollTop=sc;}});
 document.addEventListener('input',e=>{const t=e.target;
@@ -932,7 +932,8 @@ document.addEventListener('input',e=>{const t=e.target;
 document.addEventListener('change',e=>{const t=e.target;if(t.id==='photoIn'){if(t.files&&t.files[0])runOCR(t.files[0]);return;}if(t.closest('#app')&&S&&FIELD_NAMES[t.id]){logClick('typed',FIELD_NAMES[t.id]+': “'+t.value.slice(0,50)+'”');persist();}});
 
 /* ============ boot: returning visitors continue where they left off ============ */
-(function boot(){const saved=store.get('mp.visitor');if(saved&&saved.app&&saved.id){S=saved;Object.assign(PRODUCTS,S.app.live||{});S.checks=S.checks||[];S.sentChecks=S.sentChecks||0;S.left=false;const a=S.app;a.toast=null;a.sheet=null;if(a.screen==='checking')a.screen='scan';logClick('return','Came back to the website');}render();})();
+(function boot(){let saved=store.get('mp.visitor');if(saved&&saved.app&&saved.id&&!ageOk(saved.age)){try{localStorage.removeItem('mp.visitor');}catch(e){}saved=null;BIG=false;store.set('mp.big',false);}
+ if(saved&&saved.app&&saved.id){S=saved;if(!S.bigTouched){BIG=+S.age>45;store.set('mp.big',BIG);}Object.assign(PRODUCTS,S.app.live||{});S.checks=S.checks||[];S.sentChecks=S.sentChecks||0;S.left=false;const a=S.app;a.toast=null;a.sheet=null;if(a.screen==='checking')a.screen='scan';logClick('return','Came back to the website');}render();})();
 })();
 </script>
 </body>
