@@ -233,6 +233,25 @@ textarea.a-input{min-height:120px;resize:none;line-height:24px}
 .cam-link{background:none;border:0;color:#fff;font-weight:600;text-decoration:underline;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;width:100%}
 .food{border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---- Readability for older users: bigger, darker labels and fields, obvious focus and selection ---- */
+.app label>span.a-small,.app .a-body>.a-small,.app .a-label{font-size:18px!important;font-weight:700!important;color:#111827!important;line-height:24px!important}
+.app .a-input{font-size:19px;line-height:26px;border:2px solid #6B7280;background:#fff;min-height:58px;padding:14px 16px;color:#111827}
+.app .a-input::placeholder{color:#6B7280;opacity:1}
+.app .a-input:not(:placeholder-shown){border-color:#1D4ED8}
+.app .a-input:focus{outline:none;border:3px solid #1D4ED8;box-shadow:0 0 0 5px #FDE68A;background:#FFFDF2;padding:13px 15px}
+.app .a-chip{font-size:17px;border:2px solid #9CA3AF;min-height:48px;color:#111827}
+.app .a-chip.on{background:#1D4ED8;border-color:#1D4ED8;color:#fff;font-weight:700}
+.app .a-chip.on svg{stroke:#fff}
+.app .a-chip:focus-visible,.app .a-btn:focus-visible,.app .a-opt:focus-visible{outline:4px solid #F59E0B;outline-offset:2px}
+.searchbox{background:#fff;border:2px solid #6B7280;border-radius:12px;padding:0 14px;min-height:58px}
+.searchbox:focus-within{border:3px solid #1D4ED8;box-shadow:0 0 0 5px #FDE68A;background:#FFFDF2}
+.searchbox input{font-size:19px!important}
+.searchbox>svg{flex:none;width:22px;height:22px}
+.textsize{align-self:flex-end;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:22px;border:2px solid #1D4ED8;background:#fff;color:#1D4ED8;font-weight:700;font-size:16px;cursor:pointer}
+.textsize[aria-pressed="true"]{background:#1D4ED8;color:#fff}
+.app.big .a-scroll,.app.big .a-foot{zoom:1.2}
+.goal-tags{color:#166534;font-size:14px;font-weight:600}
 </style>
 </head>
 <body>
@@ -263,18 +282,22 @@ const PRODUCTS={
  trail:{name:'Trail Mix',size:'150 g',sugar:9,ings:['Cashews','Raisins','Sunflower seeds','Dark chocolate chips','Peanuts'],may:[]}
 };
 const RECIPES=[
- {id:'oat-pancakes',name:'Oat pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F3E8D8',sugar:5,carbs:30,ings:[['Rolled oats','150 g'],['Eggs','2'],['Milk','250 ml'],['Cinnamon','1 tsp']]},
- {id:'classic-pancakes',name:'Classic pancakes',meal:'Breakfast',mins:25,serv:4,color:'#FBE7DC',sugar:14,carbs:38,ings:[['White sugar','40 g',1],['Wholewheat flour','200 g'],['Eggs','2'],['Milk','300 ml']],swaps:{stevia:{name:'Stevia / erythritol blend',amt:'20 g',sugar:4,carbs:29,note:'0 g sugar · low GI · same sweetness'},banana:{name:'Mashed ripe banana',amt:'1',sugar:8,carbs:33,note:'Natural sugar · adds fibre'}}},
- {id:'banana-pancakes',name:'Banana egg pancakes',meal:'Breakfast',mins:15,serv:2,color:'#ECE9F7',sugar:8,carbs:27,ings:[['Ripe bananas','2'],['Eggs','2'],['Cinnamon','1 tsp']]},
- {id:'almond-pancakes',name:'Almond flour pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F1E6DA',sugar:4,carbs:9,ings:[['Almond flour','150 g'],['Eggs','3'],['Milk','150 ml']]},
- {id:'maple-pancakes',name:'Maple syrup pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F3E8D8',sugar:22,carbs:52,ings:[['Maple syrup','80 ml',1],['Wheat flour','200 g'],['Eggs','2'],['Milk','300 ml']],noSwap:'The syrup is the main ingredient, so there is no good swap.'},
- {id:'chocchip-pancakes',name:'Chocolate chip pancakes',meal:'Breakfast',mins:25,serv:4,color:'#EFE3DA',sugar:18,carbs:44,ings:[['Chocolate chips','80 g',1],['White sugar','30 g',1],['Wheat flour','200 g'],['Eggs','2']],noSwap:'It has 2 high-sugar ingredients.'},
- {id:'yogurt-bowl',name:'Greek yogurt berry bowl',meal:'Breakfast',mins:10,serv:2,color:'#ECE9F7',sugar:6,carbs:18,ings:[['Greek yogurt','200 g'],['Mixed berries','100 g'],['Chia seeds','1 tbsp']]},
- {id:'omelette',name:'Veggie omelette',meal:'Breakfast',mins:15,serv:1,color:'#FBE7DC',sugar:2,carbs:4,ings:[['Eggs','3'],['Spinach','1 cup'],['Feta cheese','30 g']]},
- {id:'overnight-oats',name:'Overnight oats',meal:'Breakfast',mins:5,serv:1,color:'#F3E8D8',sugar:9,carbs:40,ings:[['Rolled oats','50 g'],['Milk','150 ml'],['Chia seeds','1 tbsp']]},
- {id:'lentil-salad',name:'Lentil salad',meal:'Lunch',mins:25,serv:4,color:'#E6EEF7',sugar:3,carbs:28,ings:[['Green lentils','200 g'],['Cucumber','1'],['Olive oil','2 tbsp']]},
- {id:'stir-fry',name:'Chicken & veg stir-fry',meal:'Dinner',mins:30,serv:4,color:'#F1ECE4',sugar:7,carbs:20,ings:[['Chicken breast','400 g'],['Mixed vegetables','300 g'],['Soy sauce','2 tbsp']]},
- {id:'salmon',name:'Baked salmon & greens',meal:'Dinner',mins:25,serv:2,color:'#E6EEF7',sugar:3,carbs:10,ings:[['Salmon fillets','2'],['Green beans','200 g'],['Lemon','1']]}
+ {id:'oat-pancakes',protein:9,veg:true,name:'Oat pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F3E8D8',sugar:5,carbs:30,ings:[['Rolled oats','150 g'],['Eggs','2'],['Milk','250 ml'],['Cinnamon','1 tsp']]},
+ {id:'classic-pancakes',protein:8,veg:true,name:'Classic pancakes',meal:'Breakfast',mins:25,serv:4,color:'#FBE7DC',sugar:14,carbs:38,ings:[['White sugar','40 g',1],['Wholewheat flour','200 g'],['Eggs','2'],['Milk','300 ml']],swaps:{stevia:{name:'Stevia / erythritol blend',amt:'20 g',sugar:4,carbs:29,note:'0 g sugar · low GI · same sweetness'},banana:{name:'Mashed ripe banana',amt:'1',sugar:8,carbs:33,note:'Natural sugar · adds fibre'}}},
+ {id:'banana-pancakes',protein:10,veg:true,name:'Banana egg pancakes',meal:'Breakfast',mins:15,serv:2,color:'#ECE9F7',sugar:8,carbs:27,ings:[['Ripe bananas','2'],['Eggs','2'],['Cinnamon','1 tsp']]},
+ {id:'almond-pancakes',protein:12,veg:true,name:'Almond flour pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F1E6DA',sugar:4,carbs:9,ings:[['Almond flour','150 g'],['Eggs','3'],['Milk','150 ml']]},
+ {id:'maple-pancakes',protein:7,veg:true,name:'Maple syrup pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F3E8D8',sugar:22,carbs:52,ings:[['Maple syrup','80 ml',1],['Wheat flour','200 g'],['Eggs','2'],['Milk','300 ml']],noSwap:'The syrup is the main ingredient, so there is no good swap.'},
+ {id:'chocchip-pancakes',protein:7,veg:true,name:'Chocolate chip pancakes',meal:'Breakfast',mins:25,serv:4,color:'#EFE3DA',sugar:18,carbs:44,ings:[['Chocolate chips','80 g',1],['White sugar','30 g',1],['Wheat flour','200 g'],['Eggs','2']],noSwap:'It has 2 high-sugar ingredients.'},
+ {id:'yogurt-bowl',protein:15,veg:true,name:'Greek yogurt berry bowl',meal:'Breakfast',mins:10,serv:2,color:'#ECE9F7',sugar:6,carbs:18,ings:[['Greek yogurt','200 g'],['Mixed berries','100 g'],['Chia seeds','1 tbsp']]},
+ {id:'omelette',protein:20,veg:true,name:'Veggie omelette',meal:'Breakfast',mins:15,serv:1,color:'#FBE7DC',sugar:2,carbs:4,ings:[['Eggs','3'],['Spinach','1 cup'],['Feta cheese','30 g']]},
+ {id:'overnight-oats',protein:12,veg:true,name:'Overnight oats',meal:'Breakfast',mins:5,serv:1,color:'#F3E8D8',sugar:9,carbs:40,ings:[['Rolled oats','50 g'],['Milk','150 ml'],['Chia seeds','1 tbsp']]},
+ {id:'lentil-salad',protein:14,veg:true,name:'Lentil salad',meal:'Lunch',mins:25,serv:4,color:'#E6EEF7',sugar:3,carbs:28,ings:[['Green lentils','200 g'],['Cucumber','1'],['Olive oil','2 tbsp']]},
+ {id:'stir-fry',protein:30,veg:false,name:'Chicken & veg stir-fry',meal:'Dinner',mins:30,serv:4,color:'#F1ECE4',sugar:7,carbs:20,ings:[['Chicken breast','400 g'],['Mixed vegetables','300 g'],['Soy sauce','2 tbsp']]},
+ {id:'chickpea-curry',protein:16,veg:true,name:'Chickpea & spinach curry',meal:'Dinner',mins:30,serv:4,color:'#F3E8D8',sugar:6,carbs:35,ings:[['Chickpeas','2 cans'],['Spinach','200 g'],['Chopped tomatoes','400 g'],['Onion','1'],['Curry spices','2 tbsp']]},
+ {id:'tofu-bowl',protein:20,veg:true,name:'Tofu & veggie rice bowl',meal:'Lunch',mins:20,serv:2,color:'#E6EEF7',sugar:5,carbs:25,ings:[['Firm tofu','200 g'],['Brown rice','150 g'],['Broccoli','1 head'],['Soy sauce','1 tbsp']]},
+ {id:'chicken-salad',protein:35,veg:false,name:'Grilled chicken salad',meal:'Lunch',mins:20,serv:2,color:'#ECE9F7',sugar:4,carbs:10,ings:[['Chicken breast','300 g'],['Mixed leaves','100 g'],['Cherry tomatoes','150 g'],['Olive oil','1 tbsp']]},
+ {id:'hummus-wrap',protein:13,veg:true,name:'Hummus & veggie wrap',meal:'Lunch',mins:10,serv:2,color:'#FBE7DC',sugar:5,carbs:40,ings:[['Wholewheat wraps','2'],['Hummus (tahini)','4 tbsp'],['Cucumber','1'],['Grated carrot','1']]},
+ {id:'salmon',protein:32,veg:false,name:'Baked salmon & greens',meal:'Dinner',mins:25,serv:2,color:'#E6EEF7',sugar:3,carbs:10,ings:[['Salmon fillets','2'],['Green beans','200 g'],['Lemon','1']]}
 ];
 Object.values(PRODUCTS).forEach(p=>{p.source='sample';if(!p.label)p.label=p.ings.join(', ')+'.';});
 const R=id=>RECIPES.find(r=>r.id===id);
@@ -398,10 +421,12 @@ function afterResult(){const a=A(),p=curProduct(),ev=resultEval(),P=prof();
  mark('firstResult');sendToSheet('scan');}
 
 /* ============ visitor tracking (sent to your Google Sheet) ============ */
-const GROUPS={allergy:'Has food allergies',diabetes:'Has diabetes',parent:'Parent of a child with allergies',other:'Just exploring'};
+const GROUPS={allergy:'Has food allergies',diabetes:'Has diabetes',parent:'Parent of a child with allergies',healthy:'Wants to eat healthier',other:'Just exploring'};
+const HGOALS={protein:{label:'More protein',tag:'High protein',test:r=>r.protein>=15},veg:{label:'Vegetarian',tag:'Vegetarian',test:r=>!!r.veg},lowcarb:{label:'Low carb',tag:'Low carb',test:r=>r.carbs<=20},quick:{label:'Quick meals (20 min or less)',tag:'Quick',test:r=>r.mins<=20}};
 const SCREEN_NAMES={home:'Home',profiles:'Profiles',p1:'Create profile · step 1',p2:'Create profile · step 2',p3:'Create profile · review',scan:'Camera',checking:'Checking ingredients',result:'Result',ingredients:'Ingredient list',typed:'Type ingredients',report:'Report issue',history:'Scan history',recipes:'Recipes',recipe:'Recipe',plan:'Meal plan'};
 const FIELD_NAMES={aBarcode:'Barcode typed',aTypedSugar:'Sugar per serving typed',aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
 const TRUTH={granola:['tree','soy'],crackers:['sesame','soy','gluten'],oat:['gluten','milk'],choc:['milk','soy','tree'],trail:['tree','peanut']};
+let BIG=!!store.get('mp.big');
 let S=null, checkingTimer=null, saveT=null, W={name:'',group:'',consent:false,t0:Date.now()};
 const A=()=>S&&S.app;
 const prof=()=>A().profiles.find(p=>p.id===A().active);
@@ -452,7 +477,7 @@ addEventListener('pagehide',()=>{if(S&&!S.left){S.left=true;sendToSheet('leave')
 function newApp(name,group){
   const base={stack:[],screen:'home',sheet:null,toast:null,pantry:[],draft:null,undo:null,camMode:'barcode',flash:false,cur:null,bc:'',scanT0:null,retake:false,recipeQ:'',filters:{limit:true,breakfast:false,under30:false},recipe:null,swaps:{},swapChoice:'stevia',planDay:2,planMeal:'Breakfast',viewDay:new Date().getDay()===0?6:(new Date().getDay()+6)%7,shop:{},shared:false,typed:{name:'',text:'',sugar:'',source:'typed',note:''},live:{},report:{},histFilter:'all',lastResult:null};
   const a=Object.assign(base,{persona:name,profiles:[{id:'me',name,you:true,allergens:{},sugar:null}],active:'me',recents:[],plan:{},setup:true});
-  a.draft={who:group==='allergy'?['allergy']:group==='diabetes'?['diabetes']:group==='parent'?['child']:[],name:group==='parent'?'':name,allergens:{},sugarOn:group==='diabetes',sugar:10};
+  a.draft={who:group==='allergy'?['allergy']:group==='diabetes'?['diabetes']:group==='parent'?['child']:group==='healthy'?['healthy']:[],name:group==='parent'?'':name,allergens:{},sugarOn:group==='diabetes',sugar:10,goals:[]};
   a.screen='p1';return a;}
 
 /* ============ the app ============ */
@@ -476,13 +501,13 @@ function nav(active){const it=[['home','Home','home'],['recipes','Recipes','book
 const B=(label,act,arg,cls='p',attrs='')=>`<button class="a-btn ${cls}" data-act="${act}" ${arg!=null?`data-arg="${esc(arg)}"`:''} ${attrs}>${label}</button>`;
 const backBtn=(label='Back')=>`<button class="a-iconbtn" data-act="back" aria-label="${label}">${ic(label==='Close'?'x':'chevL',22)}</button>`;
 const avatar=(p,size=44,on)=>`<span style="width:${size}px;height:${size}px;border-radius:${size/2}px;background:${on?'#1D4ED8':'#DBE6FE'};color:${on?'#fff':'#1E40AF'};display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none">${esc((p.name||'?')[0].toUpperCase())}</span>`;
-function profSummary(p){const al=Object.entries(p.allergens||{});const parts=al.map(([k,v])=>ALLERGENS[k].label.toLowerCase()+' ('+v+'/5)');if(p.sugar)parts.push('sugar ≤ '+p.sugar+' g / serving');return parts.length?parts.join(' · '):'No allergies or limits set';}
+function profSummary(p){const al=Object.entries(p.allergens||{});const parts=al.map(([k,v])=>ALLERGENS[k].label.toLowerCase()+' ('+v+'/5)');if(p.sugar)parts.push('sugar ≤ '+p.sugar+' g / serving');(p.goals||[]).forEach(k=>parts.push(HGOALS[k].tag.toLowerCase()));return parts.length?parts.join(' · '):'No allergies or limits set';}
 const foodTile=(c,s=76)=>`<span class="food" style="width:${s}px;height:${s}px;background:${c}">${ic('fork',Math.round(s*.4),'#6B7280',1.8)}</span>`;
 
 function renderApp(scrollTop){const el=$('#app');if(!el||!A())return;const a=A();const scr=SCREENS[a.screen]||SCREENS.home;const o=scr();
  const prevScroll=el.querySelector('.a-scroll');const st=scrollTop?0:(prevScroll?prevScroll.scrollTop:0);
  const toastHTML=(a.toast&&!o.sheet)?`<div class="a-toast ${o.nav?'':(o.foot?'withfoot':'nonav')}" role="status">${ic('check',20,'#86EFAC',2.6)}<span style="flex:1;font-weight:600">${esc(a.toast.text)}</span>${a.toast.undo?`<button data-act="undo">Undo</button>`:''}</div>`:'';
- el.className='app'+(o.cls?' '+o.cls:'');
+ el.className='app'+(o.cls?' '+o.cls:'')+(BIG?' big':'');
  el.innerHTML=`${statusTop(o.dark,o.topBg)}<div class="a-scroll">${o.body}</div>${o.foot?`<div class="a-foot">${o.foot}</div>`:''}${o.nav?nav(o.nav):''}${o.sheet?`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span>${o.sheet}</div></div>`:''}${toastHTML}`;
  if(a.busy)el.insertAdjacentHTML('beforeend',`<div class="busy" role="status" aria-live="polite"><div><span class="spin"></span><span id="busyTxt">${esc(a.busy)}</span></div></div>`);
  const sc=el.querySelector('.a-scroll');if(sc)sc.scrollTop=st;persist();setTimeout(syncCam,0);}
@@ -496,14 +521,15 @@ const SCREENS={
    <button class="a-item" data-act="tab" data-arg="profiles">${avatar(p,44)}<span class="grow"><span class="a-cap" style="display:block">Checking food for</span><span class="a-strong">${esc(p.name)}${p.you?' (you)':''}</span></span>${ic('chevD',22)}</button>
    ${needsProfile?`<div class="a-card" style="background:#EFF4FF;border-color:#DBE6FE"><span class="a-strong">Set up who you check food for</span><span class="a-cap">Add a profile with allergies or a sugar limit so results fit that person.</span>${B('Add a profile','startProfile',null,'p')}</div>`:''}
    <div class="a-card" style="background:#1D4ED8;border:0;padding:18px;gap:10px"><div><h2 class="a-h" style="color:#fff">Is this food safe for ${esc(p.name)}?</h2><div style="color:#EFF4FF;font-size:15px">Scan the ingredient label or barcode — results in seconds.</div></div>${B(ic('scan',22,'#111827')+'Scan a product','tab','scan','s')}<button class="a-btn t" style="color:#fff;text-decoration:underline" data-act="go" data-arg="typed">${ic('kb',20,'#fff')}Type ingredients instead</button></div>
+   <div class="a-card" style="gap:10px"><h2 class="a-h">${(p.goals||[]).length||p.healthy?'Plan a healthy week':'Plan your meals'}</h2><span class="a-cap">${(p.goals||[]).length?'Recipes that match '+esc(p.name)+'’s goals: '+esc((p.goals||[]).map(k=>HGOALS[k].tag).join(' · ')):'Recipes that fit '+esc(p.name)+'’s profile, added to a weekly plan and shopping list.'}</span><div class="a-row" style="gap:8px">${B('Find recipes','tab','recipes','p')}${B('My week','tab','plan','s')}</div></div>
    <div class="a-row"><h2 class="a-h grow">Recent scans</h2>${a.recents.length?`<button class="a-btn t" style="width:auto;padding:0 4px" data-act="go" data-arg="history">See all</button>`:''}</div>
    ${a.recents.length?`<div class="a-list">${rec}</div>`:`<div class="a-card" style="align-items:center;text-align:center"><span class="a-cap">No scans yet. Your checked products will appear here.</span></div>`}
   </div>`};},
  profiles(){const a=A();return{nav:'profiles',body:`<div class="a-body"><div><h1 class="a-title">Profiles</h1><div class="a-cap" style="font-size:17px">Choose who you’re checking food for.</div></div>
   <div class="a-list">${a.profiles.map(p=>{const on=p.id===a.active;return `<button class="a-item ${on?'sel':''}" data-act="setActive" data-arg="${p.id}" aria-pressed="${on}">${avatar(p,44,on)}<span class="grow"><span class="a-strong" style="display:block">${esc(p.name)}${p.you?' (you)':''}</span><span class="a-cap">${esc(profSummary(p))}</span></span>${on?`<span class="a-badge" style="background:#1D4ED8;color:#fff">${ic('check',14,'#fff',3)}Active</span>`:''}</button>`;}).join('')}</div>
   ${B(ic('plus',20,'#1E40AF')+'Add a profile','startProfile',null,'dash')}
-  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">The active profile is named on every scan and result, so you always know who you’re checking for.</span></div>${B('Log out','logout',null,'s')}</div>`};},
- p1(){const d=A().draft;const opts=[['allergy','shield','I have food allergies','Avoid allergens like nuts, milk or gluten'],['diabetes','drop','I have diabetes','Track sugar against my limit'],['child','users','My child has food allergies','Make a profile for your child']];
+  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">The active profile is named on every scan and result, so you always know who you’re checking for.</span></div><button class="textsize" style="align-self:stretch;justify-content:center" data-act="bigText" aria-pressed="${BIG}"><span style="font-size:13px">A</span><span style="font-size:19px">A</span> Larger text: ${BIG?'On':'Off'}</button>${B('Log out','logout',null,'s')}</div>`};},
+ p1(){const d=A().draft;const opts=[['allergy','shield','I have food allergies','Avoid allergens like nuts, milk or gluten'],['diabetes','drop','I have diabetes','Track sugar against my limit'],['child','users','My child has food allergies','Make a profile for your child'],['healthy','fork','I want to eat healthier','Plan balanced meals that fit my goals']];
   return{foot:B('Back','back',null,'s')+B('Next','p1next',null,'p',d.who.length?'':'disabled'),body:`<div class="a-body">${stepHead(1)}<div><h1 class="a-title">Who is this profile for?</h1><div class="a-cap" style="font-size:17px">Choose all that apply. We only ask about what you pick.</div></div>
   <div class="a-list">${opts.map(([k,i,t,s])=>{const on=d.who.includes(k);return `<button class="a-opt ${on?'on':''}" data-act="toggleWho" data-arg="${k}" aria-pressed="${on}"><span style="width:52px;height:52px;border-radius:26px;background:${on?'#fff':'#EFF4FF'};display:flex;align-items:center;justify-content:center;flex:none">${ic(i,28,'#1D4ED8')}</span><span class="grow" style="flex:1"><span class="a-strong" style="display:block">${t}</span><span class="a-cap">${s}</span></span><span class="a-check">${on?ic('check',18,'#fff',3):''}</span></button>`;}).join('')}</div>
   ${d.who.length?'':'<div class="a-cap">Choose at least one option to continue.</div>'}
@@ -514,7 +540,9 @@ const SCREENS={
   <div><h2 class="a-h" id="p2q">${al?'Which foods must '+esc(nm)+' avoid?':'Does '+esc(nm)+' have any food allergies too?'}</h2><div class="a-cap">${al?'Tap to select. Tap again to remove.':'Choose any that apply, or tap “No food allergies”.'}</div></div>
   <div class="a-chips">${ORDER.map(k=>{const on=d.allergens[k]!=null;return `<button class="a-chip ${on?'on':''}" data-act="toggleAllergen" data-arg="${k}" aria-pressed="${on}">${on?ic('check',18,'#1D4ED8',2.6):''}${ALLERGENS[k].label}</button>`;}).join('')}${al?'':`<button class="a-chip ${d.noAllergy?'on':''}" data-act="noAllergy" aria-pressed="${!!d.noAllergy}">${d.noAllergy?ic('check',18,'#1D4ED8',2.6):''}No food allergies</button>`}</div>
   ${Object.keys(d.allergens).map(k=>`<div class="a-card"><span class="a-strong">How severe is ${esc(nm==='they'?'the':nm+'’s')} ${ALLERGENS[k].label.toLowerCase()} allergy?</span><div class="a-sev" role="radiogroup" aria-label="${ALLERGENS[k].label} severity">${[1,2,3,4,5].map(n=>`<button class="${d.allergens[k]===n?'on':''}" role="radio" aria-checked="${d.allergens[k]===n}" data-act="sev" data-arg="${k}:${n}">${n}</button>`).join('')}</div><div class="a-row" style="justify-content:space-between"><span class="a-cap">1 · Mild</span><span class="a-cap">5 · Life-threatening</span></div>${d.allergens[k]?'':'<span class="a-cap" style="color:#92400E">Choose a severity from 1 to 5.</span>'}</div>`).join('')}
-  <div class="a-card" style="flex-direction:row;align-items:center;gap:12px"><div style="flex:1"><div class="a-strong">Track sugar per serving</div><div class="a-cap">For diabetes — set your own limit</div></div><button class="a-switch ${d.sugarOn?'on':''}" role="switch" aria-checked="${!!d.sugarOn}" aria-label="Track sugar" data-act="toggleSugar"></button></div>
+  ${d.who.includes('healthy')?`<div><h2 class="a-h">What are ${esc(nm==='they'?'your':nm+'’s')} healthy-eating goals?</h2><div class="a-cap">Choose any. We use them to suggest recipes and plan the week.</div></div>
+  <div class="a-chips"><button class="a-chip ${d.sugarOn?'on':''}" data-act="toggleSugar" aria-pressed="${!!d.sugarOn}">${d.sugarOn?ic('check',18,'#fff',2.6):''}Less sugar</button>${Object.entries(HGOALS).map(([k,g])=>{const on=(d.goals||[]).includes(k);return `<button class="a-chip ${on?'on':''}" data-act="toggleGoal" data-arg="${k}" aria-pressed="${on}">${on?ic('check',18,'#fff',2.6):''}${g.label}</button>`;}).join('')}</div>`:''}
+  <div class="a-card" style="flex-direction:row;align-items:center;gap:12px"><div style="flex:1"><div class="a-strong">Track sugar per serving</div><div class="a-cap">For diabetes or eating less sugar — set your own limit</div></div><button class="a-switch ${d.sugarOn?'on':''}" role="switch" aria-checked="${!!d.sugarOn}" aria-label="Track sugar" data-act="toggleSugar"></button></div>
   ${d.sugarOn?`<div class="a-card"><span class="a-strong">Sugar limit per serving</span><div class="a-row"><button class="a-iconbtn" data-act="sugarStep" data-arg="-1" aria-label="Lower">−</button><span class="a-title" style="flex:1;text-align:center">${d.sugar} g</span><button class="a-iconbtn" data-act="sugarStep" data-arg="1" aria-label="Higher">+</button></div></div>`:''}
   <div class="a-cap" id="p2hint" style="color:#92400E">${miss}</div></div>`};},
  p3(){const d=A().draft;const al=Object.entries(d.allergens);
@@ -522,7 +550,8 @@ const SCREENS={
   <div class="a-card" style="gap:14px"><div class="a-row">${avatar({name:d.name},48)}<div class="grow"><div class="a-h">${esc(d.name.trim())}</div><div class="a-cap">${d.who.includes('child')?'Child · managed by '+esc(A().persona):'Adult'}</div></div></div><hr style="border:0;border-top:1px solid #E5E7EB;margin:0;width:100%">
    <div class="a-row" style="align-items:flex-start"><div class="grow"><div class="a-small">AVOID</div>${al.length?al.map(([k,v])=>`<div class="a-strong">${ALLERGENS[k].label}</div><div class="a-cap">Severity ${v} of 5 — ${sevWord(v)}</div>`).join(''):`<div class="a-strong">No food allergies</div><div class="a-cap">${d.sugarOn?'Results check sugar only':'Nothing to avoid'}</div>`}</div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div>
    ${al.length?`<div><div class="a-small">ALSO CHECKS OTHER NAMES</div><div class="a-cap">${al.map(([k])=>ALLERGENS[k].names.slice(0,5).join(', ')).join('; ')}…</div></div>`:''}
-   <div class="a-row"><div class="grow"><div class="a-small">SUGAR</div><div class="a-strong">${d.sugarOn?'≤ '+d.sugar+' g per serving':'Not tracked'}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div></div>
+   <div class="a-row"><div class="grow"><div class="a-small">SUGAR</div><div class="a-strong">${d.sugarOn?'≤ '+d.sugar+' g per serving':'Not tracked'}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div>
+   ${d.who.includes('healthy')?`<div class="a-row"><div class="grow"><div class="a-small">HEALTHY GOALS</div><div class="a-strong">${esc([d.sugarOn?'Less sugar':'',...(d.goals||[]).map(k=>HGOALS[k].label)].filter(Boolean).join(' · ')||'None')}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div>`:''}</div>
   <div class="a-card"><span class="a-strong">How results will look</span>${[['bad','Contains something to avoid'],['unc','Part of the label couldn’t be checked'],['safe','No conflict found in everything checked']].map(([k,t])=>`<div class="a-row">${badge(k)}<span class="a-cap">${t}</span></div>`).join('')}</div></div>`};},
  scan(){const a=A();const P=prof();const lab=a.camMode==='label';const al=Object.keys(P.allergens||{});
   return{cls:'cam',dark:true,body:`<div class="a-body">
@@ -580,9 +609,9 @@ const SCREENS={
   <div class="a-chips">${[['all','All'],['bad','Not safe'],['unc','Uncertain'],['safe','Safe']].map(([k,l])=>`<button class="a-chip ${f===k?'on':''}" data-act="histFilter" data-arg="${k}" aria-pressed="${f===k}">${f===k?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
   <div class="a-list">${items.length?items.map(x=>`<button class="a-item" data-act="openRecent" data-arg="${x.i}"><span class="a-tile">${ic('pkg',24,'#6B7280',1.8)}</span><span class="grow"><span class="a-strong" style="display:block">${esc(PRODUCTS[x.r.pid].name)}</span><span class="a-cap">Scanned ${esc(x.r.when)}</span></span>${badge(x.ev.status)}</button>`).join(''):'<div class="a-cap">No scans with this result.</div>'}</div></div>`};},
  recipes(){const a=A();const P=prof();return{nav:'recipes',body:`<div class="a-body"><h1 class="a-title">Recipes</h1>
-  <button class="a-item" style="padding:6px 12px 6px 6px;border-radius:24px;width:auto;align-self:flex-start;background:#EFF4FF;border-color:#DBE6FE" data-act="tab" data-arg="profiles">${avatar(P,32,true)}<span class="a-strong" style="color:#1E40AF;font-size:15px">${esc(P.name)}${P.diabetes?' · Type 2 diabetes':''}</span>${ic('chevD',18,'#1D4ED8')}</button>
-  <label class="a-row" style="background:#fff;border:1.5px solid #C9CED6;border-radius:12px;padding:0 14px;min-height:52px">${ic('search',20,'#4B5563')}<input id="aSearch" style="border:0;outline:none;flex:1;font-size:17px;min-height:48px;background:none;color:#111827" placeholder="Search recipes, e.g. pancakes" value="${esc(a.recipeQ)}" aria-label="Search recipes">${a.recipeQ?`<button class="a-iconbtn" style="width:36px;height:36px;border:0" data-act="clearSearch" aria-label="Clear search">${ic('x',18,'#4B5563')}</button>`:''}</label>
-  <div class="a-chips">${limitChipLabel()?`<button class="a-chip ${a.filters.limit?'on':''}" data-act="filter" data-arg="limit" aria-pressed="${a.filters.limit}">${a.filters.limit?ic('check',18,'#1D4ED8',2.6):''}${esc(limitChipLabel())}</button>`:''}${[['breakfast','Breakfast'],['under30','Under 30 min']].map(([k,l])=>`<button class="a-chip ${a.filters[k]?'on':''}" data-act="filter" data-arg="${k}" aria-pressed="${a.filters[k]}">${a.filters[k]?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
+  <button class="a-item" style="padding:6px 12px 6px 6px;border-radius:24px;width:auto;align-self:flex-start;background:#EFF4FF;border-color:#DBE6FE" data-act="tab" data-arg="profiles">${avatar(P,32,true)}<span class="a-strong" style="color:#1E40AF;font-size:15px">${esc(P.name)}${P.diabetes?' · Type 2 diabetes':P.healthy?' · Healthy eating':''}</span>${ic('chevD',18,'#1D4ED8')}</button>
+  <label class="a-row searchbox">${ic('search',20,'#4B5563')}<input id="aSearch" style="border:0;outline:none;flex:1;font-size:17px;min-height:48px;background:none;color:#111827" placeholder="Search recipes, e.g. pancakes" value="${esc(a.recipeQ)}" aria-label="Search recipes">${a.recipeQ?`<button class="a-iconbtn" style="width:36px;height:36px;border:0" data-act="clearSearch" aria-label="Clear search">${ic('x',18,'#4B5563')}</button>`:''}</label>
+  <div class="a-chips">${limitChipLabel()?`<button class="a-chip ${a.filters.limit?'on':''}" data-act="filter" data-arg="limit" aria-pressed="${a.filters.limit}">${a.filters.limit?ic('check',18,'#1D4ED8',2.6):''}${esc(limitChipLabel())}</button>`:''}${(P.goals||[]).length?`<button class="a-chip ${a.filters.goals!==false?'on':''}" data-act="filter" data-arg="goals" aria-pressed="${a.filters.goals!==false}">${a.filters.goals!==false?ic('check',18,'#fff',2.6):''}Fits my goals</button>`:''}${[['breakfast','Breakfast'],['under30','Under 30 min']].map(([k,l])=>`<button class="a-chip ${a.filters[k]?'on':''}" data-act="filter" data-arg="${k}" aria-pressed="${a.filters[k]}">${a.filters[k]?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
   ${limitChipLabel()?`<div class="a-row" style="gap:6px">${ic('lock',16,'#4B5563')}<span class="a-cap">${P.sugar?'Sugar limit':'Allergy filter'} comes from ${esc(P.name)}’s profile</span></div>`:''}
   <div id="recList" class="a-list">${recipeListHTML()}</div></div>`};},
  recipe(){const a=A();const r=R(a.recipe);const P=prof();const sw=a.swaps[r.id];const st=recipeStatus(r,P,sw);const ings=effIngs(r,sw);const limit=P.sugar;const sugar=st.sugar;const carbs=sw?r.swaps[sw].carbs:r.carbs;
@@ -601,18 +630,26 @@ const SCREENS={
   <div class="a-days">${WEEK.map((w,i)=>`<button class="${i===d?'on':''} ${a.plan[i]&&Object.keys(a.plan[i]).length?'has':''}" data-act="viewDay" data-arg="${i}" aria-pressed="${i===d}" aria-label="${DAYFULL[i]} ${w.d}"><small>${w.n}</small>${w.d}</button>`).join('')}</div>
   <h2 class="a-h">${DAYFULL[d]}</h2>
   <div class="a-card" style="padding:4px 14px;gap:0">${['Breakfast','Lunch','Dinner'].map((m,i)=>{const e=day[m];const r=e&&R(e.rid);return `<div class="a-row" style="padding:10px 0;${i<2?'border-bottom:1px solid #E5E7EB':''}"><span class="a-small" style="width:70px;flex:none">${m}</span>${r?`<button class="a-row grow" style="background:none;border:0;padding:0;cursor:pointer;text-align:left;min-height:44px" data-act="openRecipe" data-arg="${r.id}"><span class="a-strong grow">${esc(r.name)}${e.swap?' (swapped)':''}</span>${sic('safe',20)}</button>`:`<button class="a-btn dash" style="min-height:44px;flex:1" data-act="addFromPlan" data-arg="${m}">${ic('plus',18,'#1E40AF')}Add recipe</button>`}</div>`;}).join('')}</div>
+  ${weekGlance()}
   <div class="a-row"><h2 class="a-h grow">Shopping list</h2><button class="a-btn t" style="width:auto;padding:0 6px;${a.shared?'color:#166534':''}" data-act="share">${a.shared?ic('check',18,'#15803D',2.6)+'Link copied':ic('share',18,'#1D4ED8')+'Share'}</button></div>
   <div class="a-card" style="gap:2px"><span class="a-cap">From ${shop.n} recipe${shop.n===1?'':'s'} · safe and swapped ingredients only</span>${shop.items.map(it=>`<button class="a-row" style="background:none;border:0;padding:8px 0;cursor:pointer;text-align:left;min-height:44px" data-act="shopTick" data-arg="${esc(it)}" aria-pressed="${!!a.shop[it]}"><span class="a-check ${a.shop[it]?'on':''}" style="width:22px;height:22px;border-radius:6px">${a.shop[it]?ic('check',16,'#fff',3):''}</span><span class="grow" style="${a.shop[it]?'text-decoration:line-through;color:#4B5563':''}">${esc(it)}</span></button>`).join('')||'<span class="a-cap">Add recipes to build your list.</span>'}</div></div>`};}
 };
+function weekGlance(){const a=A();const P=prof();const es=[];Object.values(a.plan).forEach(day=>Object.values(day).forEach(e=>{const r=R(e.rid);if(r)es.push({r,sugar:e.swap&&r.swaps?r.swaps[e.swap].sugar:r.sugar});}));
+ if(!es.length)return `<div class="a-card"><span class="a-strong">Week at a glance</span><span class="a-cap">Add meals to see this week’s sugar, protein and vegetarian meals.</span></div>`;
+ const avg=k=>Math.round(es.reduce((t,x)=>t+(k==='sugar'?x.sugar:x.r[k]),0)/es.length*10)/10;const G=P.goals||[];
+ const items=[['Meals planned',es.length],['Average sugar',avg('sugar')+' g'+(P.sugar?' (limit '+P.sugar+' g)':'')],['Average protein',avg('protein')+' g'],['Vegetarian meals',es.filter(x=>x.r.veg).length+' of '+es.length]];
+ G.filter(k=>k!=='veg').forEach(k=>items.push([HGOALS[k].tag+' meals',es.filter(x=>HGOALS[k].test(x.r)).length+' of '+es.length]));
+ return `<div class="a-card" style="gap:6px"><span class="a-strong">Week at a glance</span>${items.map(([l,v])=>`<div class="a-row" style="justify-content:space-between;min-height:28px"><span class="a-cap">${l}</span><span class="a-strong" style="font-size:16px">${v}</span></div>`).join('')}</div>`;}
 function stepHead(n){return `<div style="display:flex;flex-direction:column;gap:10px"><div class="a-row" style="justify-content:space-between"><span class="a-small" style="font-size:15px">New profile</span><span class="a-small" style="font-size:15px">Step ${n} of 3</span></div><div class="a-prog">${[1,2,3].map(i=>`<span class="${i<=n?'on':''}"></span>`).join('')}</div></div>`;}
-function p2Missing(){const d=A().draft;const al=d.who.includes('allergy')||d.who.includes('child');if(!d.name.trim())return'Add a profile name to continue.';if(al&&!Object.keys(d.allergens).length)return'Choose at least one food to avoid.';if(!al&&!d.noAllergy&&!Object.keys(d.allergens).length)return'Choose any food allergies, or tap “No food allergies”.';if(Object.values(d.allergens).some(v=>!v))return'Choose a severity for each allergy.';if(!al&&!d.sugarOn)return'Turn on sugar tracking or go back and choose allergies.';return'';}
+function p2Missing(){const d=A().draft;const al=d.who.includes('allergy')||d.who.includes('child');if(!d.name.trim())return'Add a profile name to continue.';if(al&&!Object.keys(d.allergens).length)return'Choose at least one food to avoid.';if(!al&&!d.noAllergy&&!Object.keys(d.allergens).length)return'Choose any food allergies, or tap “No food allergies”.';if(Object.values(d.allergens).some(v=>!v))return'Choose a severity for each allergy.';const hl=d.who.includes('healthy');if(hl&&!d.sugarOn&&!(d.goals||[]).length)return'Choose at least one healthy-eating goal.';if(!al&&!hl&&!d.sugarOn)return'Turn on sugar tracking or go back and choose allergies.';return'';}
 function limitChipLabel(){const P=prof();if(P.sugar)return'Sugar ≤ '+P.sugar+' g / serving';const k=Object.keys(P.allergens||{});return k.length?'No '+k.map(x=>ALLERGENS[x].label.toLowerCase()).join(', '):'';}
 function recipeListHTML(){const a=A();const P=prof();const q=a.recipeQ.trim().toLowerCase();
  let list=RECIPES.filter(r=>(!q||r.name.toLowerCase().includes(q.replace(/s$/,'')))&&(!a.filters.breakfast||r.meal==='Breakfast')&&(!a.filters.under30||r.mins<30));
- const withS=list.map(r=>({r,st:recipeStatus(r,P,a.swaps[r.id])}));const hidden=a.filters.limit&&limitChipLabel()?withS.filter(x=>x.st.k==='hidden'):[];const shown=withS.filter(x=>!hidden.includes(x));
+ const G=P.goals||[];const withS=list.map(r=>{const st=recipeStatus(r,P,a.swaps[r.id]);const miss=G.filter(k=>!HGOALS[k].test(r));if(st.k!=='hidden'&&miss.length&&a.filters.goals!==false)return{r,st:{k:'hidden',why:'Not '+miss.map(k=>HGOALS[k].tag.toLowerCase()).join(' or '),sugar:st.sugar,goal:true}};return{r,st};});
+ const hidden=withS.filter(x=>x.st.k==='hidden'&&(x.st.goal||(a.filters.limit&&limitChipLabel())));const shown=withS.filter(x=>!hidden.includes(x));
  const head=`<div class="a-row"><span class="a-strong grow">${shown.length} recipe${shown.length===1?'':'s'}</span>${hidden.length?`<button class="a-btn t" style="width:auto;padding:0 4px;font-size:15px" data-act="whyHidden">${hidden.length} hidden — why?</button>`:''}</div>`;
  a._hidden=hidden.map(x=>({id:x.r.id,why:x.st.why,sugar:x.st.sugar}));
- return head+(shown.length?shown.map(({r,st})=>`<button class="a-item ${st.k==='swap'?'sel':''}" style="${st.k==='swap'?'background:#fff':''}" data-act="openRecipe" data-arg="${r.id}">${foodTile(r.color,72)}<span class="grow" style="display:flex;flex-direction:column;gap:4px"><span class="a-strong">${esc(r.name)}${a.swaps[r.id]?' (swapped)':''}</span><span class="a-cap">${r.mins} min · ${st.sugar} g sugar / serving</span>${st.k==='swap'?badge('unc','1 swap needed'):st.k==='hidden'?badge(st.allergenHit?'bad':'unc',st.allergenHit?'Not safe':'Over limit'):badge('safe','Fits your profile')}</span></button>`).join(''):`<div class="a-card"><span class="a-cap">No recipes match. Try another word or turn off a filter.</span></div>`);}
+ return head+(shown.length?shown.map(({r,st})=>`<button class="a-item ${st.k==='swap'?'sel':''}" style="${st.k==='swap'?'background:#fff':''}" data-act="openRecipe" data-arg="${r.id}">${foodTile(r.color,72)}<span class="grow" style="display:flex;flex-direction:column;gap:4px"><span class="a-strong">${esc(r.name)}${a.swaps[r.id]?' (swapped)':''}</span><span class="a-cap">${r.mins} min · ${st.sugar} g sugar · ${r.protein} g protein</span>${G.length&&G.some(k=>HGOALS[k].test(r))?`<span class="goal-tags">✓ ${G.filter(k=>HGOALS[k].test(r)).map(k=>HGOALS[k].tag).join(' · ')}</span>`:''}${st.k==='swap'?badge('unc','1 swap needed'):st.k==='hidden'?badge(st.allergenHit?'bad':'unc',st.allergenHit?'Not safe':'Over limit'):badge('safe','Fits your profile')}</span></button>`).join(''):`<div class="a-card"><span class="a-cap">No recipes match. Try another word or turn off a filter.</span></div>`);}
 function swapSheet(r){const a=A();const P=prof();const c=a.swapChoice;const s=r.swaps[c];const max=Math.max(16,P.sugar*1.6);const ok=s.sugar<=P.sugar;
  return `<div><h2 class="a-h">Swap white sugar (40 g) for:</h2><div class="a-cap">Real-world swaps that keep the recipe working</div></div>
  <div class="a-list" role="radiogroup">${Object.entries(r.swaps).map(([k,o])=>`<button class="a-opt ${c===k?'on':''}" role="radio" aria-checked="${c===k}" data-act="swapChoice" data-arg="${k}"><span class="a-radio"></span><span style="flex:1"><span class="a-strong" style="display:block">${esc(o.name)} · ${esc(o.amt)}</span><span class="a-cap">${esc(o.note)}</span></span></button>`).join('')}</div>
@@ -640,17 +677,18 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
   closeSheet:()=>{S.c.backs++;a.sheet=null;renderApp();},
   undo:()=>{S.undoUsed=(S.undoUsed||0)+1;const u=a.toast&&a.toast.undo;a.toast=null;if(u)UNDO[u]();renderApp();},
   setActive:()=>{a.active=arg;toast('Now checking food for '+prof().name);tab('home');},
-  startProfile:()=>{a.draft={who:[],name:'',allergens:{},sugarOn:false,sugar:10};go('p1');},
+  startProfile:()=>{a.draft={who:[],name:'',allergens:{},sugarOn:false,sugar:10,goals:[]};go('p1');},
   toggleWho:()=>{const w=a.draft.who;const i=w.indexOf(arg);if(i>=0)w.splice(i,1);else w.push(arg);if(arg==='diabetes')a.draft.sugarOn=w.includes('diabetes');renderApp();},
   p1next:()=>{if(!a.draft.who.length)return;go('p2');},
+  toggleGoal:()=>{const g=a.draft.goals=a.draft.goals||[];const i=g.indexOf(arg);if(i>=0)g.splice(i,1);else g.push(arg);renderApp();},
   noAllergy:()=>{const d=a.draft;d.noAllergy=!d.noAllergy;if(d.noAllergy)d.allergens={};renderApp();},
   toggleAllergen:()=>{const d=a.draft;d.noAllergy=false;if(d.allergens[arg]!=null){const prev=d.allergens[arg];delete d.allergens[arg];a.undo={k:arg,v:prev};toast(ALLERGENS[arg].label+' removed','allergen');}else{d.allergens[arg]=0;}renderApp();},
   sev:()=>{const [k,n]=arg.split(':');a.draft.allergens[k]=+n;renderApp();},
   toggleSugar:()=>{a.draft.sugarOn=!a.draft.sugarOn;renderApp();},
   sugarStep:()=>{a.draft.sugar=Math.max(1,Math.min(50,a.draft.sugar+ +arg));renderApp();},
   p2next:()=>{if(p2Missing())return;go('p3');},
-  saveProfile:()=>{const d=a.draft;let p;if(a.setup&&!d.who.includes('child')){p=a.profiles.find(x=>x.id==='me');Object.assign(p,{name:d.name.trim(),allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes')});a.persona=p.name;}
-    else{p={id:'p'+Date.now(),name:d.name.trim(),kind:d.who.includes('child')?'child':'adult',allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes')};a.profiles.push(p);}
+  saveProfile:()=>{const d=a.draft;let p;if(a.setup&&!d.who.includes('child')){p=a.profiles.find(x=>x.id==='me');Object.assign(p,{name:d.name.trim(),allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes'),goals:[...(d.goals||[])],healthy:d.who.includes('healthy')});a.persona=p.name;}
+    else{p={id:'p'+Date.now(),name:d.name.trim(),kind:d.who.includes('child')?'child':'adult',allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes'),goals:[...(d.goals||[])],healthy:d.who.includes('healthy')};a.profiles.push(p);}
     a.setup=false;a.active=p.id;a.stack=[];a.screen='home';a.draft=null;toast(p.name+'’s profile saved');renderApp(true);
     if(S.M.profileSaved==null){mark('profileSaved');S.profileText=`${p.name} (${p.kind==='child'?'child':'self'}): ${profSummary(p)}`;}else S.profileText+=` | ${p.name}: ${profSummary(p)}`;sendToSheet('profile');},
   pickSample:()=>{S.c.scans++;if(a.scanT0==null)a.scanT0=Date.now();a.cur=arg;go('checking');},
@@ -670,7 +708,7 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
   sendReport:()=>{S.reports=(S.reports||0)+1;a.report={};back();S.c.backs--;toast('Report sent — thank you');renderApp();},
   histFilter:()=>{a.histFilter=arg;renderApp();},
   clearSearch:()=>{a.recipeQ='';renderApp();},
-  filter:()=>{a.filters[arg]=!a.filters[arg];renderApp();},
+  filter:()=>{a.filters[arg]=arg==='goals'?a.filters.goals===false:!a.filters[arg];renderApp();},
   whyHidden:()=>{a.sheet='hidden';renderAppHidden();},
   openRecipe:()=>{a.recipe=arg;go('recipe');},
   openSwap:()=>{a.swapChoice=a.swapChoice||'stevia';a.sheet='swap';renderApp();},
@@ -686,12 +724,13 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
   addFromPlan:()=>{a.planDay=a.viewDay;a.planMeal=arg;a.filters.breakfast=arg==='Breakfast';tab('recipes');},
   shopTick:()=>{a.shop[arg]=!a.shop[arg];renderApp();},
   share:()=>{a.shared=!a.shared;renderApp();},
+  bigText:()=>{BIG=!BIG;store.set('mp.big',BIG);renderApp();},
   logout:()=>{stopCam();S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
  };
  if(H[act])H[act]();if(S)persist();});
 const UNDO={allergen:()=>{const a=A();if(a.draft&&a.undo){a.draft.allergens[a.undo.k]=a.undo.v;}},pantry:()=>{const a=A();a.pantry.pop();if(a.savedRecent)a.recents.shift();},swap:()=>{const a=A();delete a.swaps[a.recipe];},plan:()=>{const a=A();if(a.prevPlan)a.plan=a.prevPlan;}};
 function renderAppHidden(){const a=A();const P=prof();renderApp();const el=$('#app');const list=a._hidden||[];
- const html=`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span><h2 class="a-h">${list.length} recipe${list.length===1?'':'s'} hidden</h2><div class="a-cap">These can’t be made to fit ${esc(P.name)}’s profile, even with a swap, so we keep them out of the results.</div>${list.map(x=>{const r=R(x.id);return `<div class="a-reason unc"><div class="a-row" style="gap:8px">${sic('unc',20)}<span class="a-strong">${esc(r.name)}</span></div><span class="a-cap">${P.sugar?x.sugar+' g sugar per serving — ':''}${esc(x.why)}</span></div>`;}).join('')}${B('Back to results','closeSheet',null,'s')}</div></div>`;
+ const html=`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span><h2 class="a-h">${list.length} recipe${list.length===1?'':'s'} hidden</h2><div class="a-cap">These don’t fit ${esc(P.name)}’s profile or goals, so we keep them out of the results. Turn off “Fits my goals” to see them.</div>${list.map(x=>{const r=R(x.id);return `<div class="a-reason unc"><div class="a-row" style="gap:8px">${sic('unc',20)}<span class="a-strong">${esc(r.name)}</span></div><span class="a-cap">${P.sugar?x.sugar+' g sugar per serving — ':''}${esc(x.why)}</span></div>`;}).join('')}${B('Back to results','closeSheet',null,'s')}</div></div>`;
  el.insertAdjacentHTML('beforeend',html);}
 
 
@@ -699,11 +738,12 @@ function renderAppHidden(){const a=A();const P=prof();renderApp();const el=$('#a
 /* ============ sign-up + page shell ============ */
 const root=$('#root');
 function render(){
- if(!S){root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="welcome">${welcomeHTML()}</div></div></div>`;return;}
+ if(!S){root.innerHTML=`<div class="site"><div class="shell"><div class="app${BIG?' big':''}" id="welcome">${welcomeHTML()}</div></div></div>`;return;}
  if(!$('#app'))root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="app" role="application" aria-label="Meal Planner and Ingredient Checker"></div><input type="file" id="photoIn" accept="image/*" hidden></div></div>`;
  renderApp(true);}
 function welcomeHTML(){const ok=W.name.trim()&&W.group&&W.consent;
- return `${statusTop(false)}<div class="a-scroll"><div class="a-body" style="padding-top:28px">
+ return `${statusTop(false)}<div class="a-scroll"><div class="a-body" style="padding-top:20px">
+  <button class="textsize" data-w="big" aria-pressed="${BIG}"><span style="font-size:13px">A</span><span style="font-size:19px">A</span> Larger text</button>
   <div class="a-row" style="gap:10px"><span style="width:44px;height:44px;border-radius:14px;background:#1D4ED8;display:flex;align-items:center;justify-content:center">${ic('shield',24,'#fff')}</span><span style="font-size:15px;font-weight:700;line-height:1.25;color:#1E40AF">Meal Planner &amp;<br>Ingredient Checker</span></div>
   <div><h1 class="a-title">Eat safely, plan easily</h1><div class="a-cap" style="font-size:17px;line-height:24px;margin-top:6px">Check if packaged food is safe for you or your child, and plan meals that fit your allergies or sugar limit.</div></div>
   <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Your first name</span><input class="a-input" id="wName" value="${esc(W.name)}" placeholder="e.g. Sara" autocomplete="given-name"></label>
@@ -717,6 +757,7 @@ function welcomeHTML(){const ok=W.name.trim()&&W.group&&W.consent;
 document.addEventListener('click',e=>{const w=e.target.closest('[data-w]');if(!w)return;const k=w.dataset.w;
  if(k==='group')W.group=w.dataset.arg;
  if(k==='consent')W.consent=!W.consent;
+ if(k==='big'){BIG=!BIG;store.set('mp.big',BIG);render();return;}
  if(k==='start'){if(!(W.name.trim()&&W.group&&W.consent))return;S=newSession(W.name,W.group,(Date.now()-W.t0)/1000);logClick('sign-up','Get started (account created)');S.app=newApp(S.name,S.group);S.screens.p1=1;
   W={name:'',group:'',consent:false,t0:Date.now()};saveNow();sendToSheet('start');render();return;}
  const el=$('#welcome');if(el){const sc=el.querySelector('.a-scroll').scrollTop;el.innerHTML=welcomeHTML();el.querySelector('.a-scroll').scrollTop=sc;}});
