@@ -335,7 +335,9 @@ function splitIngs(text){const t=String(text||'').replace(/^\s*(ingredients|ingr
  for(const ch of t){if('([{'.includes(ch))depth++;if(')]}'.includes(ch))depth=Math.max(0,depth-1);if(depth===0&&/[,;،\n]/.test(ch)){out.push(cur);cur='';}else cur+=ch;}
  out.push(cur);return out.map(s=>s.replace(/\s+/g,' ').replace(/[.:]\s*$/,'').trim()).filter(s=>s.length>1);}
 function makeProduct(o){const id='L'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);PRODUCTS[id]=o;const a=A();a.live=a.live||{};a.live[id]=o;return id;}
-function fromOFF(p,code){const text=p.ingredients_text_en||p.ingredients_text||'';const ings=splitIngs(stripMay(text));
+function fromOFF(p,code){const text=p.ingredients_text_en||p.ingredients_text||'';let ings=splitIngs(stripMay(text));
+ const tagNames=(p.ingredients_tags||[]).filter(t=>/^en:/.test(t)).map(t=>t.slice(3).replace(/-/g,' '));
+ if(!p.ingredients_text_en&&tagNames.length)ings=tagNames.map(x=>x.charAt(0).toUpperCase()+x.slice(1));
  const may=[...new Set([...(p.traces_tags||[]).map(t=>OFF_MAP[t]).filter(Boolean),...mayFromText(text)])];
  const ref=[...new Set((p.allergens_tags||[]).map(t=>OFF_MAP[t]).filter(Boolean))];
  const n=p.nutriments||{};let sugar=null,sugar100=n.sugars_100g!=null?+(+n.sugars_100g).toFixed(1):null;
@@ -347,7 +349,7 @@ async function lookupBarcode(code,how){const a=A();if(!a)return;code=String(code
  logClick('scan','Barcode '+(how==='camera'?'scanned with camera':'typed')+': '+code);S.c.scans++;
  a.busy='Looking up the product…';renderApp();let prod=null,err=null;
  try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),10000);
-  const r=await fetch('https://world.openfoodfacts.org/api/v2/product/'+code+'.json?fields=product_name,product_name_en,brands,quantity,serving_size,serving_quantity,ingredients_text,ingredients_text_en,allergens_tags,traces_tags,nutriments',{signal:ctl.signal});
+  const r=await fetch('https://world.openfoodfacts.org/api/v2/product/'+code+'.json?fields=product_name,product_name_en,brands,quantity,serving_size,serving_quantity,ingredients_text,ingredients_text_en,ingredients_tags,allergens_tags,traces_tags,nutriments',{signal:ctl.signal});
   clearTimeout(tm);const j=await r.json();if(j&&j.status===1&&j.product)prod=j.product;}catch(e){err=e;}
  if(A()!==a)return;a.busy=null;
  const o=prod?fromOFF(prod,code):{name:err?'Couldn’t reach the product database':'Product not found',size:'Barcode '+code,ings:[],may:[],ref:[],sugar:null,noIngs:true,notFound:true,offline:!!err,source:'barcode',barcode:code,text:''};
