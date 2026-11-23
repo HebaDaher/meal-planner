@@ -10,7 +10,7 @@
  *  - "Usability goals": all 7 goals with the task, how it is measured, the target and the live result.
  */
 const VISITORS_TAB = 'Visitors', SCANS_TAB = 'Scans', CLICKS_TAB = 'Clicks', GOALS_TAB = 'Usability goals';
-const VERSION = 'v3';
+const VERSION = 'v3.1';
 const HEADERS = [
   'Date', 'Start time', 'Session ID', 'Name', 'Problem', 'Device', 'Status',
   'Total minutes in website', 'Sign-up (min)',
@@ -86,6 +86,8 @@ function col_(n) { let s = ''; while (n > 0) { const m = (n - 1) % 26; s = Strin
 function goals_(ss) {
   let g = ss.getSheetByName(GOALS_TAB);
   if (g && String(g.getRange('H1').getValue()) === VERSION) return;
+  // make sure the tabs the formulas point to exist first (otherwise Google shows #REF!)
+  tab_(ss, VISITORS_TAB, HEADERS, MANUAL); tab_(ss, SCANS_TAB, SCAN_HEADERS, SCAN_MANUAL);
   if (!g) g = ss.insertSheet(GOALS_TAB);
   g.clear();
   g.setRightToLeft(false);
@@ -157,5 +159,5 @@ function goals_(ss) {
 
 // Open the web-app link in a browser to check it works.
 function doGet() {
-  return ContentService.createTextOutput('Connected (v3): your website can now send visits to this sheet.');
+  return ContentService.createTextOutput('Connected (v3.1): your website can now send visits to this sheet.');
 }
