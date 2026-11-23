@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meal Planner &amp; Ingredient Checker</title>
+<meta name="description" content="Check if packaged food is safe for your allergies or sugar limit, and plan meals that fit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+html,body{margin:0}
+[hidden]{display:none!important}
+/* Layout: a mobile-first web app. On phones it fills the screen; on wider screens the app sits in a centred column. */
+.site{height:100%;display:flex;justify-content:center;background:var(--bg)}
+.shell{width:100%;max-width:440px;height:100%;position:relative}
+.shell .app{border-radius:0}
+@media (min-width:641px){.shell{box-shadow:0 0 0 1px var(--line),0 24px 60px -24px rgba(15,23,42,.30)}}
+.pick{display:flex;flex-direction:column;gap:6px}
+.pick>span{font-size:13px;color:#C9D3E6}
+.pick>div{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.pick button{flex:none;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;cursor:pointer;min-height:36px}
+.pick button.on{background:#fff;color:#111827;border-color:#fff}
+:root{
+  --bg:#EEF1F6; --surface:#FFFFFF; --ink:#111827; --muted:#4B5563; --line:#D9DEE7; --soft:#F5F7FA;
+  --accent:#1D4ED8; --accent-ink:#FFFFFF; --accent-soft:#E6EDFF; --good:#15803D; --good-soft:#DCFCE7; --warn:#B45309; --warn-soft:#FEF3C7; --bad:#B91C1C; --bad-soft:#FEE2E2;
+  --font-head:"Space Grotesk","Inter",system-ui,sans-serif; --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0D1220;--surface:#161D2E;--ink:#EEF2F8;--muted:#AEB8C9;--line:#2B3550;--soft:#1B2338;--accent:#8AA8FF;--accent-ink:#0D1220;--accent-soft:#1E2A4A;--good:#4ADE80;--good-soft:#123222;--warn:#FBBF24;--warn-soft:#3A2C0C;--bad:#F87171;--bad-soft:#3B1515;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1220;--surface:#161D2E;--ink:#EEF2F8;--muted:#AEB8C9;--line:#2B3550;--soft:#1B2338;--accent:#8AA8FF;--accent-ink:#0D1220;--accent-soft:#1E2A4A;--good:#4ADE80;--good-soft:#123222;--warn:#FBBF24;--warn-soft:#3A2C0C;--bad:#F87171;--bad-soft:#3B1515;color-scheme:dark}
+html,body{height:100%}
+html{height:100dvh}
+#root{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5}
+*{box-sizing:border-box}
+button,input,textarea,select{font:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+h1,h2,h3{font-family:var(--font-head);margin:0;text-wrap:balance}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1.5px solid transparent;font-weight:600;cursor:pointer;font-size:15px;background:none;color:var(--ink)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-ghost{border-color:var(--line);background:var(--surface)}
+.btn-danger{border-color:var(--bad);color:var(--bad);background:var(--surface)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.wait{background:var(--soft);color:var(--muted);border:1px dashed var(--line)}
+
+/* ---------- participant ---------- */
+.ptest{height:100%;display:flex;flex-direction:column;align-items:center;gap:14px;padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.strip{width:100%;max-width:560px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.strip .txt{flex:1;min-width:220px}
+.strip .txt p{margin:2px 0 0;font-size:15px;line-height:1.4}
+.strip .acts{display:flex;gap:8px;flex-wrap:wrap}
+.stage{flex:1;display:flex;align-items:flex-start;justify-content:center;min-height:0;width:100%}
+.phone-wrap{width:410px;height:864px;flex:none;transform-origin:top center;position:relative}
+.phone{width:410px;height:864px;border-radius:52px;background:#0B0F19;padding:10px;box-shadow:0 30px 60px -20px rgba(15,23,42,.45);position:relative}
+.lock{position:absolute;inset:10px;border-radius:42px;background:rgba(15,20,33,.55);display:flex;align-items:center;justify-content:center;z-index:40;padding:28px;text-align:center}
+.lock div{background:#fff;color:#111827;border-radius:18px;padding:18px 20px;font-size:16px;line-height:1.45;max-width:300px}
+@media (max-width:640px){
+  .ptest{padding:0;gap:0}
+  .strip{border-radius:0;border-width:0 0 1px;max-width:none;padding:10px max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px))}
+  .stage{align-items:stretch}
+  .phone-wrap{width:100%;height:100%;transform:none!important;margin:0!important}
+  .phone{width:100%;height:100%;border-radius:0;padding:0;box-shadow:none}
+  .phone .app{border-radius:0}
+  .lock{inset:0;border-radius:0}
+}
+
+/* ---------- owner dashboard ---------- */
+.owner{max-width:1200px;margin:0 auto;padding-block:28px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+.ohead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.ohead h1{font-size:clamp(26px,4vw,34px)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi b{display:block;font-family:var(--font-head);font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sec>h2{font-size:21px}
+.goals{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.goal{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.goal.focus{border:2px solid var(--accent)}
+.goal .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.goal h3{font-size:16px;line-height:1.3}
+.goal dl{display:grid;grid-template-columns:86px minmax(0,1fr);gap:6px 10px;margin:0;font-size:14px}
+.goal dt{color:var(--muted);font-weight:600}
+.goal dd{margin:0}
+.goal .res{display:flex;align-items:baseline;gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.goal .res b{font-family:var(--font-head);font-size:22px;font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:13px;white-space:nowrap;background:var(--soft)}
+tr:last-child td{border-bottom:0}
+tr.sel td{background:var(--accent-soft)}
+tr.clickable{cursor:pointer}
+tr.clickable:hover td{background:var(--soft)}
+.detail{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:18px}
+.dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.dgrid{grid-template-columns:1fr}}
+.tcard{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;font-size:14px;min-width:0}
+.tcard .big{font-family:var(--font-head);font-size:24px;font-variant-numeric:tabular-nums}
+.kv{display:flex;justify-content:space-between;gap:8px}
+.kv span:first-child{color:var(--muted)}
+.qform{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.qform{grid-template-columns:1fr}}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:600;font-size:14px;margin-bottom:6px;padding:0}
+.rate{display:flex;gap:6px}
+.rate label{flex:1;display:flex;align-items:center;justify-content:center;min-height:40px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;font-weight:600;position:relative;background:var(--surface)}
+.rate input{position:absolute;opacity:0;pointer-events:none}
+.rate label:has(input:checked){background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.rate label:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+.chk{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;min-height:36px}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+textarea.o{width:100%;min-height:72px;border:1.5px solid var(--line);border-radius:10px;padding:10px;background:var(--surface);color:var(--ink);resize:vertical}
+.log{max-height:420px;overflow:auto}
+.log td:first-child{white-space:nowrap;color:var(--muted)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:16px;padding:28px;text-align:center;color:var(--muted)}
+.note{background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:14px}
+.plan td:first-child{font-weight:600;white-space:nowrap}
+.status{font-size:13px;color:var(--muted)}
+
+/* ---------- the app (fixed light look, as designed in Figma) ---------- */
+.app{--b6:#1D4ED8;--b7:#1E40AF;--b1:#DBE6FE;--b0:#EFF4FF;--i9:#111827;--i6:#4B5563;--i5:#6B7280;--ln:#E5E7EB;--ls:#C9CED6;--cv:#F5F7FA;--mu:#EEF1F5;--d7:#B91C1C;--d8:#991B1B;--d1:#FEE2E2;--d0:#FEF2F2;--w8:#92400E;--w7:#B45309;--w1:#FEF3C7;--w0:#FFFBEB;--s8:#166534;--s7:#15803D;--s1:#DCFCE7;--s0:#F0FDF4;
+  position:relative;width:100%;height:100%;background:var(--cv);color:var(--i9);border-radius:42px;overflow:hidden;display:flex;flex-direction:column;font-family:var(--font-body);font-size:17px;line-height:24px;color-scheme:light}
+.app button{font:inherit;color:inherit}
+.a-top{flex:none;display:flex;justify-content:space-between;align-items:center;height:44px;padding:0 26px 0 30px;font-weight:600;font-size:15px}
+.a-top.dark{color:#fff}
+.a-scroll{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;-webkit-overflow-scrolling:touch}
+.a-body{display:flex;flex-direction:column;gap:14px;padding:8px 20px 24px}
+.a-title{font-size:28px;line-height:34px;font-weight:700;margin:0}
+.a-h{font-size:20px;line-height:26px;font-weight:600;margin:0}
+.a-cap{font-size:15px;line-height:20px;color:var(--i6)}
+.a-small{font-size:13px;line-height:16px;font-weight:500;color:var(--i6)}
+.a-strong{font-weight:600}
+.a-card{background:#fff;border:1px solid var(--ln);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.a-row{display:flex;align-items:center;gap:12px}
+.a-row>.grow{flex:1;min-width:0}
+.a-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:14px;border:1.5px solid transparent;font-weight:600;cursor:pointer;padding:0 18px;width:100%;text-align:center;transition:transform .08s}
+.a-btn:active{transform:scale(.98)}
+.a-btn.p{background:var(--b6);color:#fff}
+.a-btn.s{background:#fff;color:var(--i9);border-color:var(--ls)}
+.a-btn.t{background:none;color:var(--b6);min-height:44px}
+.a-btn[disabled]{background:var(--mu);color:var(--i5);border-color:transparent;cursor:not-allowed}
+.a-btn.dash{border-style:dashed;border-color:var(--ls);background:transparent;color:var(--b7)}
+.a-iconbtn{width:44px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--ln);cursor:pointer;flex:none}
+.a-chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px 0 14px;border-radius:22px;border:1.5px solid var(--ls);background:#fff;font-size:15px;font-weight:500;cursor:pointer}
+.a-chip.on{background:var(--b0);border-color:var(--b6);color:var(--b7)}
+.a-chips{display:flex;flex-wrap:wrap;gap:8px}
+.a-badge{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px 0 8px;border-radius:15px;font-size:13px;font-weight:600;white-space:nowrap}
+.a-badge.safe{background:var(--s1);color:var(--s8)} .a-badge.unc{background:var(--w1);color:var(--w8)} .a-badge.bad{background:var(--d1);color:var(--d8)}
+.a-tile{width:48px;height:48px;border-radius:12px;background:var(--mu);display:flex;align-items:center;justify-content:center;flex:none}
+.a-list{display:flex;flex-direction:column;gap:10px}
+.a-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--ln);border-radius:16px;padding:12px;cursor:pointer;text-align:left;width:100%}
+.a-item.sel{border:2px solid var(--b6);background:var(--b0)}
+.a-nav{flex:none;height:84px;background:#fff;border-top:1px solid var(--ln);display:grid;grid-template-columns:repeat(5,1fr);align-items:start;padding-top:8px;position:relative}
+.a-nav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:500;color:var(--i6);cursor:pointer;min-height:48px;padding:2px}
+.a-nav button.on{color:var(--b7);font-weight:700}
+.a-nav .scanbtn{margin-top:-30px}
+.a-nav .scanbtn span.c{width:62px;height:62px;border-radius:31px;background:var(--b6);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 6px 14px rgba(29,78,216,.35)}
+.a-foot{flex:none;background:#fff;border-top:1px solid var(--ln);padding:12px 20px 26px;display:flex;gap:12px}
+.a-prog{display:flex;gap:6px}.a-prog span{flex:1;height:6px;border-radius:3px;background:var(--ln)}.a-prog span.on{background:var(--b6)}
+.a-input{width:100%;border:1.5px solid var(--ls);border-radius:12px;padding:12px 14px;font-size:17px;background:#fff;color:var(--i9);min-height:52px}
+.a-input:focus{outline:none;border-color:var(--b6);box-shadow:0 0 0 3px var(--b1)}
+textarea.a-input{min-height:120px;resize:none;line-height:24px}
+.a-opt{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid var(--ls);background:#fff;cursor:pointer;text-align:left;width:100%}
+.a-opt.on{border:2px solid var(--b6);background:var(--b0)}
+.a-check{width:26px;height:26px;border-radius:7px;border:2px solid var(--ls);background:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.a-opt.on .a-check,.a-check.on{background:var(--b6);border-color:var(--b6)}
+.a-radio{width:24px;height:24px;border-radius:12px;border:2px solid var(--ls);display:flex;align-items:center;justify-content:center;flex:none;background:#fff}
+.a-opt.on .a-radio{border-color:var(--b6)} .a-opt.on .a-radio::after{content:"";width:12px;height:12px;border-radius:6px;background:var(--b6)}
+.a-sev{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.a-sev button{min-height:48px;border-radius:12px;border:1.5px solid var(--ls);background:#fff;font-weight:600;cursor:pointer}
+.a-sev button.on{background:var(--b6);border-color:var(--b6);color:#fff}
+.a-switch{width:52px;height:32px;border-radius:16px;background:var(--ls);border:0;position:relative;cursor:pointer;flex:none}
+.a-switch::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:13px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .15s}
+.a-switch.on{background:var(--b6)} .a-switch.on::after{left:23px}
+.a-banner{display:flex;gap:14px;align-items:flex-start;padding:6px 20px 18px}
+.a-banner .eb{font-size:13px;font-weight:600;letter-spacing:.06em}
+.a-reason{border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.a-reason.bad{background:var(--d0);border:1.5px solid var(--d7)} .a-reason.unc{background:var(--w0);border:1px solid var(--w1)} .a-reason.safe{background:var(--s0);border:1px solid var(--s1)} .a-reason.info{background:var(--mu)}
+.a-src{background:var(--mu);border-radius:14px;padding:12px;display:flex;gap:10px;align-items:flex-start}
+.a-toast{position:absolute;left:16px;right:16px;bottom:96px;background:var(--i9);color:#fff;border-radius:14px;padding:8px 8px 8px 16px;display:flex;align-items:center;gap:12px;z-index:30;animation:tin .2s ease-out}
+.a-toast.nonav{bottom:24px}
+.a-toast.withfoot{bottom:112px}
+.a-toast button{background:none;border:0;color:#BFD0FF;font-weight:700;min-height:44px;padding:0 12px;cursor:pointer}
+@keyframes tin{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+.a-sheetwrap{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;justify-content:flex-end}
+.a-dim{position:absolute;inset:0;background:rgba(17,24,39,.5);border:0;cursor:pointer}
+.a-sheet{position:relative;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px 30px;display:flex;flex-direction:column;gap:12px;max-height:88%;overflow:auto;animation:sup .22s ease-out}
+.a-sheet .handle{width:44px;height:5px;border-radius:3px;background:var(--ls);align-self:center}
+@keyframes sup{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
+.a-bar{position:relative;height:10px;border-radius:5px;background:var(--ln);margin:6px 0}
+.a-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+.a-bar b{position:absolute;top:-5px;width:3px;height:20px;border-radius:2px;background:var(--i9)}
+.a-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.a-days button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:58px;border-radius:12px;border:1px solid var(--ls);background:#fff;cursor:pointer;font-weight:600;padding:0}
+.a-days button small{font-size:12px;font-weight:500;color:var(--i6)}
+.a-days button.on{background:var(--b6);border-color:var(--b6);color:#fff}.a-days button.on small{color:#fff}
+.a-days button.has::after{content:"";width:5px;height:5px;border-radius:3px;background:currentColor;opacity:.6;margin-top:2px}
+/* camera */
+.cam{background:#0F1421;color:#fff}
+.cam .a-body{gap:14px}
+.cam-pill{display:inline-flex;align-items:center;height:44px;padding:0 16px;border-radius:22px;background:rgba(255,255,255,.16);font-size:15px;font-weight:500}
+.cam-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.12)}
+.cam-seg button{min-height:40px;border-radius:10px;border:0;background:none;color:#fff;font-size:15px;font-weight:500;cursor:pointer}
+.cam-seg button.on{background:#fff;color:var(--i9)}
+.vf{position:relative;height:360px;border-radius:22px;background:#2E333D;overflow:hidden}
+.vf .paper{position:absolute;left:44px;right:44px;top:52px;background:#F5F0E3;color:#1b1b1b;border-radius:6px;padding:16px;transform:rotate(-2deg);font-size:13px;line-height:18px}
+.vf .paper b{font-size:12px;letter-spacing:.06em}
+.vf .glare{position:absolute;left:70px;top:100px;width:220px;height:80px;border-radius:50%;background:rgba(255,255,255,.88);filter:blur(16px)}
+.vf .cn{position:absolute;width:42px;height:42px;border:5px solid #fff}.vf .tl{left:24px;top:24px;border-right:0;border-bottom:0;border-top-left-radius:14px}.vf .tr{right:24px;top:24px;border-left:0;border-bottom:0;border-top-right-radius:14px}.vf .bl{left:24px;bottom:64px;border-right:0;border-top:0;border-bottom-left-radius:14px}.vf .br{right:24px;bottom:64px;border-left:0;border-top:0;border-bottom-right-radius:14px}
+.vf .hint{position:absolute;left:50%;transform:translateX(-50%);bottom:14px;background:rgba(0,0,0,.55);border-radius:18px;padding:7px 14px;font-size:14px;white-space:nowrap}
+.vf .barcode{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#F5F0E3;border-radius:8px;padding:16px 22px}
+.cam-ctr{display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.cam-round{width:52px;height:52px;border-radius:26px;background:rgba(255,255,255,.16);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff}
+.cam-round.on{background:#fff;color:var(--i9)}
+.shutter{width:78px;height:78px;border-radius:39px;border:4px solid #fff;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.shutter span{width:62px;height:62px;border-radius:31px;background:#fff}
+.holding{font-size:13px;color:#C9D3E6;border:1px dashed rgba(255,255,255,.35);border-radius:10px;padding:6px 10px;text-align:center}
+.cam-link{background:none;border:0;color:#fff;font-weight:600;text-decoration:underline;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;width:100%}
+.food{border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(function(){
+"use strict";
+/* ============ helpers ============ */
+const $=(s,el=document)=>el.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const now=()=>performance.now();
+const store={get(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+const IC={home:'<path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',book:'<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M10.5 8v8M14 8v8M17 8v8"/>',chevL:'<path d="M15 6l-6 6 6 6"/>',chevR:'<path d="M9 6l6 6-6 6"/>',chevD:'<path d="M6 9l6 6 6-6"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',check:'<path d="M5 12.5l4.5 4.5L19 7"/>',plus:'<path d="M12 5v14M5 12h14"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/>',flash:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',image:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>',kb:'<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',settings:'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',pkg:'<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',fork:'<path d="M7 3v8M5 3v4a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 0-3 2-3 5s1 4 3 4v9"/>',undo:'<path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',share:'<path d="M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',cam:'<path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/>',shield:'<path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M12 8v5M12 16v.5"/>',drop:'<path d="M12 3C9 8 6 11.5 6 15a6 6 0 0 0 12 0c0-3.5-3-7-6-12z"/><path d="M9.5 15h5M12 12.5v5"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.3-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17.5" cy="10" r="2.5"/><path d="M16 14.6c2.6-.3 4.8 1.2 5.5 4.4"/>',loader:'<path d="M12 3a9 9 0 1 0 9 9"/>'};
+const ic=(n,s=24,c='currentColor',w=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+const sic=(k,s=20,inv=false)=>{const r='#B91C1C',a='#B45309',g='#15803D',w='#FFFFFF';const m={bad:`<polygon points="8,2 16,2 22,8 22,16 16,22 8,22 2,16 2,8" fill="${inv?w:r}"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="${inv?r:w}" stroke-width="2.6" stroke-linecap="round"/>`,unc:`<path d="M12 2.5L22.5 21h-21z" fill="${a}" stroke="${a}" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 9.5v5M12 17.6v.4" stroke="${w}" stroke-width="2.6" stroke-linecap="round"/>`,safe:`<circle cx="12" cy="12" r="10.5" fill="${g}"/><path d="M7 12.5l3.3 3.2L17 9" fill="none" stroke="${w}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`}[k];return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true">${m}</svg>`;};
+const WORD={bad:'Not safe',unc:'Uncertain',safe:'Safe'};
+const badge=(k,l)=>`<span class="a-badge ${k}">${sic(k,18)}${esc(l||WORD[k])}</span>`;
+
+/* ============ domain data ============ */
+const ALLERGENS={milk:{label:'Milk',names:['milk','casein','whey','butter','cream','lactose','cheese','yogurt','yoghurt']},egg:{label:'Egg',names:['egg','albumin','mayonnaise']},gluten:{label:'Gluten',names:['wheat','barley','rye','gluten','spelt','semolina']},peanut:{label:'Peanut',names:['peanut','arachis','groundnut']},tree:{label:'Tree nuts',names:['almond','prunus dulcis','cashew','walnut','hazelnut','pecan','pistachio','brazil nut','macadamia']},soy:{label:'Soy',names:['soy','soya','tofu','edamame']},fish:{label:'Fish',names:['fish','anchovy','salmon','tuna','cod']},shellfish:{label:'Shellfish',names:['shrimp','prawn','crab','lobster','shellfish']},sesame:{label:'Sesame',names:['sesame','tahini']}};
+const ORDER=['milk','egg','gluten','peanut','tree','soy','fish','shellfish','sesame'];
+const sevWord=n=>['','mild','mild to moderate','moderate','severe','life-threatening'][n]||'';
+const PRODUCTS={
+ granola:{name:'Granola Bar',size:'45 g',sugar:12,ings:['Whole grain rolled oats','Honey','Brown rice syrup','Almonds (Prunus dulcis)','Sunflower oil','Dried cranberries','Sugar','Sea salt','Natural flavour','Rice crisps','Glucose syrup','Soy lecithin','Cinnamon','Vitamin E'],may:['peanut'],label:'Whole grain rolled oats, honey, brown rice syrup, almonds (Prunus dulcis), sunflower oil, dried cranberries, sugar, sea salt, natural flavour, rice crisps, glucose syrup, soy lecithin, cinnamon, vitamin E.',mayText:'MAY CONTAIN: PEANUTS.'},
+ crackers:{name:'Rice Crackers',size:'100 g',sugar:2,ings:['Rice flour','Brown rice','Sesame oil','Soy sauce (soy, wheat)','Sugar','Sea salt','Rosemary extract','Sunflower lecithin','Rice bran'],may:[],label:'Rice flour, brown rice, sesame oil, soy sauce (soy, wheat), sugar, sea salt, rosemary extract, sunflower lecithin, rice bran.',mayText:'Store in a cool, dry place.'},
+ oat:{name:'Oat Biscuits',size:'200 g',sugar:7,ings:['Rolled oats','Wholewheat flour','Butter','Brown sugar','Golden syrup','Baking soda','Salt'],may:[]},
+ choc:{name:'Chocolate Spread',size:'350 g',sugar:17,ings:['Sugar','Palm oil','Cocoa powder','Skimmed milk powder','Whey powder','Soy lecithin','Hazelnut paste','Vanillin','Salt','Rapeseed oil','Natural flavour'],may:[],unread:[6,7]},
+ trail:{name:'Trail Mix',size:'150 g',sugar:9,ings:['Cashews','Raisins','Sunflower seeds','Dark chocolate chips','Peanuts'],may:[]}
+};
+const RECIPES=[
+ {id:'oat-pancakes',name:'Oat pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F3E8D8',sugar:5,carbs:30,ings:[['Rolled oats','150 g'],['Eggs','2'],['Milk','250 ml'],['Cinnamon','1 tsp']]},
+ {id:'classic-pancakes',name:'Classic pancakes',meal:'Breakfast',mins:25,serv:4,color:'#FBE7DC',sugar:14,carbs:38,ings:[['White sugar','40 g',1],['Wholewheat flour','200 g'],['Eggs','2'],['Milk','300 ml']],swaps:{stevia:{name:'Stevia / erythritol blend',amt:'20 g',sugar:4,carbs:29,note:'0 g sugar · low GI · same sweetness'},banana:{name:'Mashed ripe banana',amt:'1',sugar:8,carbs:33,note:'Natural sugar · adds fibre'}}},
+ {id:'banana-pancakes',name:'Banana egg pancakes',meal:'Breakfast',mins:15,serv:2,color:'#ECE9F7',sugar:8,carbs:27,ings:[['Ripe bananas','2'],['Eggs','2'],['Cinnamon','1 tsp']]},
+ {id:'almond-pancakes',name:'Almond flour pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F1E6DA',sugar:4,carbs:9,ings:[['Almond flour','150 g'],['Eggs','3'],['Milk','150 ml']]},
+ {id:'maple-pancakes',name:'Maple syrup pancakes',meal:'Breakfast',mins:20,serv:4,color:'#F3E8D8',sugar:22,carbs:52,ings:[['Maple syrup','80 ml',1],['Wheat flour','200 g'],['Eggs','2'],['Milk','300 ml']],noSwap:'The syrup is the main ingredient, so there is no good swap.'},
+ {id:'chocchip-pancakes',name:'Chocolate chip pancakes',meal:'Breakfast',mins:25,serv:4,color:'#EFE3DA',sugar:18,carbs:44,ings:[['Chocolate chips','80 g',1],['White sugar','30 g',1],['Wheat flour','200 g'],['Eggs','2']],noSwap:'It has 2 high-sugar ingredients.'},
+ {id:'yogurt-bowl',name:'Greek yogurt berry bowl',meal:'Breakfast',mins:10,serv:2,color:'#ECE9F7',sugar:6,carbs:18,ings:[['Greek yogurt','200 g'],['Mixed berries','100 g'],['Chia seeds','1 tbsp']]},
+ {id:'omelette',name:'Veggie omelette',meal:'Breakfast',mins:15,serv:1,color:'#FBE7DC',sugar:2,carbs:4,ings:[['Eggs','3'],['Spinach','1 cup'],['Feta cheese','30 g']]},
+ {id:'overnight-oats',name:'Overnight oats',meal:'Breakfast',mins:5,serv:1,color:'#F3E8D8',sugar:9,carbs:40,ings:[['Rolled oats','50 g'],['Milk','150 ml'],['Chia seeds','1 tbsp']]},
+ {id:'lentil-salad',name:'Lentil salad',meal:'Lunch',mins:25,serv:4,color:'#E6EEF7',sugar:3,carbs:28,ings:[['Green lentils','200 g'],['Cucumber','1'],['Olive oil','2 tbsp']]},
+ {id:'stir-fry',name:'Chicken & veg stir-fry',meal:'Dinner',mins:30,serv:4,color:'#F1ECE4',sugar:7,carbs:20,ings:[['Chicken breast','400 g'],['Mixed vegetables','300 g'],['Soy sauce','2 tbsp']]},
+ {id:'salmon',name:'Baked salmon & greens',meal:'Dinner',mins:25,serv:2,color:'#E6EEF7',sugar:3,carbs:10,ings:[['Salmon fillets','2'],['Green beans','200 g'],['Lemon','1']]}
+];
+const R=id=>RECIPES.find(r=>r.id===id);
+const MEALS=['Breakfast','Lunch','Dinner','Snack'];
+const WEEK=(()=>{const d=new Date();const day=(d.getDay()+6)%7;const mon=new Date(d.getFullYear(),d.getMonth(),d.getDate()-day);return ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((n,i)=>{const x=new Date(mon.getFullYear(),mon.getMonth(),mon.getDate()+i);return {n,d:x.getDate(),m:x.toLocaleString('en',{month:'short'})};});})();
+const DAYFULL=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+function matchAllergen(ing,key){const s=ing.toLowerCase();return ALLERGENS[key].names.some(n=>s.includes(n));}
+function evalIngs(ings,prof,unread){
+  const keys=Object.keys(prof.allergens||{});const out=ings.map((n,i)=>{if(unread&&unread.includes(i))return{n:'Ingredient '+(i+1)+': unreadable',k:'unc',unread:true};const hit=keys.find(k=>matchAllergen(n,k));return hit?{n,k:'bad',allergen:hit}:{n,k:'safe'};});
+  return out;}
+function evaluate(p,prof,unread){
+  const list=evalIngs(p.ings,prof,unread);const probs=list.filter(x=>x.k==='bad');const unr=list.filter(x=>x.unread);
+  const may=(p.may||[]);const mayHit=may.filter(k=>prof.allergens&&prof.allergens[k]);
+  const over=prof.sugar&&p.sugar>prof.sugar;
+  let status=probs.length?'bad':(unr.length||mayHit.length)?'unc':over?'unc':'safe';
+  return {status,list,probs,unr,may,mayHit,over};}
+function recipeStatus(r,prof,swap){
+  const ings=effIngs(r,swap);const keys=Object.keys(prof.allergens||{});const allergenHit=keys.find(k=>ings.some(([n])=>matchAllergen(n,k)));
+  const sugar=swap&&r.swaps?r.swaps[swap].sugar:r.sugar;const limit=prof.sugar||null;
+  if(allergenHit)return{k:'hidden',why:'Contains '+ALLERGENS[allergenHit].label.toLowerCase(),sugar,allergenHit};
+  if(limit&&sugar>limit)return r.swaps&&!swap?{k:'swap',sugar}:{k:'hidden',why:r.noSwap||('Over the '+limit+' g limit'),sugar};
+  return{k:'fits',sugar};}
+function effIngs(r,swap){if(!swap||!r.swaps)return r.ings;const s=r.swaps[swap];return r.ings.map(x=>x[2]?[s.name,s.amt,0,1]:x);}
+
+/* ============ visitor tracking (sent to your Google Sheet) ============ */
+const GROUPS={allergy:'Has food allergies',diabetes:'Has diabetes',parent:'Parent of a child with allergies',other:'Just exploring'};
+const SCREEN_NAMES={home:'Home',profiles:'Profiles',p1:'Create profile · step 1',p2:'Create profile · step 2',p3:'Create profile · review',scan:'Camera',checking:'Checking ingredients',result:'Result',ingredients:'Ingredient list',typed:'Type ingredients',report:'Report issue',history:'Scan history',recipes:'Recipes',recipe:'Recipe',plan:'Meal plan'};
+const FIELD_NAMES={aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
+const TRUTH={granola:['tree','soy'],crackers:['sesame','soy','gluten'],oat:['gluten','milk'],choc:['milk','soy','tree'],trail:['tree','peanut']};
+let S=null, checkingTimer=null, saveT=null, W={name:'',group:'',consent:false,t0:Date.now()};
+const A=()=>S&&S.app;
+const prof=()=>A().profiles.find(p=>p.id===A().active);
+const secs=()=>+((Date.now()-S.t0)/1000).toFixed(1);
+function newSession(name,group,signupS){const id='v'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+ return {id,name:name.trim(),group,startedAt:new Date().toISOString(),t0:Date.now(),lastAct:Date.now(),lastSent:0,signupS,device:(innerWidth<=640?'Phone':'Laptop / tablet')+' · '+innerWidth+'×'+innerHeight,
+  M:{},c:{taps:0,empty:0,backs:0,scans:0},screens:{},clicks:[],sent:0,checks:[],saved:[],planned:[],profileText:'',swapUsed:false,scanStart:null,scanToResult:null,uncAt:null,recovery:null,left:false,app:null};}
+function mark(k){if(S&&S.M[k]==null)S.M[k]=secs();}
+function persist(){if(!S)return;clearTimeout(saveT);saveT=setTimeout(saveNow,800);}
+function saveNow(){if(!S)return;clearTimeout(saveT);store.set('mp.visitor',S);}
+function labelOf(el){const l=el.getAttribute('aria-label')||el.innerText||el.dataset.act||'';return l.replace(/\s+/g,' ').trim().slice(0,70);}
+function logClick(type,label){if(!S)return;const a=A();const gap=Date.now()-S.lastAct;if(gap>300000)S.away=(S.away||0)+gap;S.lastAct=Date.now();S.left=false;S.clicks.push({t:secs(),screen:a?(SCREEN_NAMES[a.screen]||a.screen)+(a.sheet?' · '+a.sheet+' panel':''):'Sign-up',type,label:String(label||'').slice(0,90)});if(S.clicks.length>3000){S.clicks.splice(0,500);S.sent=Math.max(0,S.sent-500);}}
+function logCheck(){const a=A();const pid=a.cur==='missing'?'crackers':a.cur;if(!TRUTH[pid])return;const P=prof();const keys=Object.keys(P.allergens||{});if(!keys.length)return;
+ const truth=keys.some(k=>TRUTH[pid].includes(k))?'bad':'safe';const shown=resultEval().status;
+ S.checks.push({t:secs(),product:PRODUCTS[pid].name,shown,truth,falseSafe:shown==='safe'&&truth==='bad'});}
+
+/* ============ Google Sheet saving ============ */
+/* PASTE your Google Apps Script web-app link between the quotes (it ends with /exec): */
+const SHEET_URL='https://script.google.com/macros/s/AKfycbw7Lp5hIRFJJjrMOD-lb2yegoJ28I4xyoWEsNTfytQChQrvFtdKGKWzGic_6wI-if6S/exec';
+const sheetReady=()=>/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec/.test(SHEET_URL);
+function rowFor(){const M=S.M,a=A(),d=new Date(S.startedAt);const mn=s=>s==null||s===''?'':+(s/60).toFixed(2);const span=(x,y)=>M[x]!=null&&M[y]!=null&&M[y]>=M[x]?mn(M[y]-M[x]):'';
+ return {'Date':d.toLocaleDateString('en-GB'),'Start time':d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),'Session ID':S.id,'Name':S.name,'Problem':GROUPS[S.group]||S.group,'Device':S.device,
+  'Status':S.left?'Left the website':'Using the website',
+  'Total minutes in website':mn((S.lastAct-S.t0-(S.away||0))/1000),
+  'Sign-up (min)':mn(S.signupS),
+  'Create profile (min)':M.profileSaved!=null?mn(M.profileSaved):'',
+  'Profile saved':S.profileText,
+  'Check a product (min)':span('scanOpen','pantrySaved'),
+  'Scanner opened → result (sec)':S.scanToResult??'',
+  'Uncertain → Safe (sec)':S.recovery??'',
+  'Saved to Pantry':S.saved.join(', '),
+  'Plan a meal (min)':span('recipesOpen','planAdded'),
+  'Sugar swap used':S.swapUsed?'Yes':'No',
+  'Meals planned':S.planned.join('; '),
+  'Products scanned':S.c.scans,'Results shown':S.checks.length,'False Safe (Goal 3)':S.checks.filter(c=>c.falseSafe).length,
+  'Total taps':S.c.taps,'Empty-area taps':S.c.empty,'Back presses':S.c.backs,'Screens visited':Object.keys(S.screens).length,
+  'Last screen':a?(SCREEN_NAMES[a.screen]||a.screen):'','Last update':new Date().toLocaleString('en-GB')};}
+function sendToSheet(kind){if(!S||!sheetReady())return;const n=S.clicks.length;
+ const clicks=S.clicks.slice(S.sent).map(c=>({time:Math.floor(c.t/60)+':'+String(Math.floor(c.t%60)).padStart(2,'0'),screen:c.screen,type:c.type,label:c.label}));
+ S.sent=n;S.lastSent=Date.now();saveNow();const body=JSON.stringify({kind,row:rowFor(),clicks});
+ try{if(kind==='leave'&&navigator.sendBeacon&&navigator.sendBeacon(SHEET_URL,new Blob([body],{type:'text/plain;charset=utf-8'})))return;
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body,keepalive:body.length<60000}).catch(()=>{});}catch(e){}}
+setInterval(()=>{if(S&&S.lastAct>S.lastSent)sendToSheet('update');},60000);
+document.addEventListener('visibilitychange',()=>{if(!S)return;if(document.visibilityState==='hidden'){S.left=true;sendToSheet('leave');}});
+addEventListener('pagehide',()=>{if(S&&!S.left){S.left=true;sendToSheet('leave');}});
+
+function newApp(name,group){
+  const base={stack:[],screen:'home',sheet:null,toast:null,pantry:[],draft:null,undo:null,camMode:'label',flash:false,cur:null,pick:'granola',retake:false,recipeQ:'',filters:{limit:true,breakfast:false,under30:false},recipe:null,swaps:{},swapChoice:'stevia',planDay:2,planMeal:'Breakfast',viewDay:new Date().getDay()===0?6:(new Date().getDay()+6)%7,shop:{},shared:false,typed:{name:'',text:''},report:{},histFilter:'all',lastResult:null};
+  const a=Object.assign(base,{persona:name,profiles:[{id:'me',name,you:true,allergens:{},sugar:null}],active:'me',recents:[],plan:{},setup:true});
+  a.draft={who:group==='allergy'?['allergy']:group==='diabetes'?['diabetes']:group==='parent'?['child']:[],name:group==='parent'?'':name,allergens:{},sugarOn:group==='diabetes',sugar:10};
+  a.screen='p1';return a;}
+
+/* ============ the app ============ */
+function go(screen,opts={}){const a=A();a.toast=null;a.stack.push({screen:a.screen,sheet:null});a.screen=screen;a.sheet=null;Object.assign(a,opts);onEnter(screen);renderApp(true);}
+function back(){const a=A();S.c.backs++;if(a.sheet){a.sheet=null;renderApp();return;}const p=a.stack.pop();if(p){a.screen=p.screen;}else a.screen='home';clearTimeout(checkingTimer);renderApp(true);}
+function tab(screen){const a=A();a.toast=null;a.stack=[];a.screen=screen;a.sheet=null;onEnter(screen);renderApp(true);}
+function toast(text,undo){A().toast={text,undo,id:Date.now()};const id=A().toast.id;setTimeout(()=>{if(A()&&A().toast&&A().toast.id===id){A().toast=null;renderApp();}},4500);}
+function onEnter(sc){const a=A();S.screens[sc]=1;
+ if(sc==='scan'){mark('scanOpen');if(S.scanStart==null)S.scanStart=Date.now();}
+ if(sc==='recipes')mark('recipesOpen');
+ if(sc==='checking'){clearTimeout(checkingTimer);a.chk=0;const step=()=>{a.chk++;if(A()!==a)return;if(a.chk<4){renderApp();checkingTimer=setTimeout(step,450);}else{try{navigator.vibrate&&navigator.vibrate(60);}catch(e){}a.stack.pop();a.screen='result';a.lastResult=null;onEnter('result');renderApp(true);}};checkingTimer=setTimeout(step,450);}
+ if(sc==='result'){logCheck();const ev=resultEval();
+   if(a.viaScan&&S.scanToResult==null&&S.scanStart!=null)S.scanToResult=+((Date.now()-S.scanStart)/1000).toFixed(1);
+   if(ev.status==='unc'&&a.cur==='crackers'&&S.uncAt==null)S.uncAt=Date.now();
+   if(ev.status==='safe'&&(a.cur==='crackers'||a.cur==='missing')&&S.uncAt!=null&&S.recovery==null)S.recovery=+((Date.now()-S.uncAt)/1000).toFixed(1);}
+}
+function curProduct(){const a=A();if(a.cur==='typed'){return{name:a.typed.name.trim()||'Typed ingredients',size:'typed by you',ings:a.typed.text.split(/[,\n;]+/).map(s=>s.trim()).filter(Boolean),may:[],sugar:0,typed:true};}if(a.cur==='missing'){const c=PRODUCTS.crackers;const typed=(a.missing||'').split(/[,\n;]+/).map(x=>x.trim()).filter(Boolean);return Object.assign({},c,{ings:c.ings.filter((_,i)=>![2,3,4].includes(i)).concat(typed)});}return PRODUCTS[a.cur]||PRODUCTS.granola;}
+function resultEval(){const a=A();const p=curProduct();let unread=null;if(a.cur==='crackers'&&a.glareThis)unread=[2,3,4];if(a.cur==='choc')unread=PRODUCTS.choc.unread;return evaluate(p,prof(),unread);}
+
+function statusTop(dark,bg){return `<div class="a-top ${dark?'dark':''}" style="height:16px;${bg?'background:'+bg:''}" aria-hidden="true"></div>`;}
+function nav(active){const it=[['home','Home','home'],['recipes','Recipes','book'],['scan','Scan','scan'],['plan','Plan','cal'],['profiles','Profiles','user']];
+ return `<nav class="a-nav" aria-label="App navigation">${it.map(([k,l,i])=>k==='scan'?`<button class="scanbtn" data-act="tab" data-arg="scan" aria-label="Scan a product"><span class="c">${ic('scan',28,'#fff')}</span><span style="color:#1E40AF">Scan</span></button>`:`<button class="${active===k?'on':''}" data-act="tab" data-arg="${k}" ${active===k?'aria-current="page"':''}>${ic(i,24,active===k?'#1D4ED8':'#4B5563',active===k?2.4:2)}<span>${l}</span></button>`).join('')}</nav>`;}
+const B=(label,act,arg,cls='p',attrs='')=>`<button class="a-btn ${cls}" data-act="${act}" ${arg!=null?`data-arg="${esc(arg)}"`:''} ${attrs}>${label}</button>`;
+const backBtn=(label='Back')=>`<button class="a-iconbtn" data-act="back" aria-label="${label}">${ic(label==='Close'?'x':'chevL',22)}</button>`;
+const avatar=(p,size=44,on)=>`<span style="width:${size}px;height:${size}px;border-radius:${size/2}px;background:${on?'#1D4ED8':'#DBE6FE'};color:${on?'#fff':'#1E40AF'};display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none">${esc((p.name||'?')[0].toUpperCase())}</span>`;
+function profSummary(p){const al=Object.entries(p.allergens||{});const parts=al.map(([k,v])=>ALLERGENS[k].label.toLowerCase()+' ('+v+'/5)');if(p.sugar)parts.push('sugar ≤ '+p.sugar+' g / serving');return parts.length?parts.join(' · '):'No allergies or limits set';}
+const foodTile=(c,s=76)=>`<span class="food" style="width:${s}px;height:${s}px;background:${c}">${ic('fork',Math.round(s*.4),'#6B7280',1.8)}</span>`;
+
+function renderApp(scrollTop){const el=$('#app');if(!el||!A())return;const a=A();const scr=SCREENS[a.screen]||SCREENS.home;const o=scr();
+ const prevScroll=el.querySelector('.a-scroll');const st=scrollTop?0:(prevScroll?prevScroll.scrollTop:0);
+ const toastHTML=(a.toast&&!o.sheet)?`<div class="a-toast ${o.nav?'':(o.foot?'withfoot':'nonav')}" role="status">${ic('check',20,'#86EFAC',2.6)}<span style="flex:1;font-weight:600">${esc(a.toast.text)}</span>${a.toast.undo?`<button data-act="undo">Undo</button>`:''}</div>`:'';
+ el.className='app'+(o.cls?' '+o.cls:'');
+ el.innerHTML=`${statusTop(o.dark,o.topBg)}<div class="a-scroll">${o.body}</div>${o.foot?`<div class="a-foot">${o.foot}</div>`:''}${o.nav?nav(o.nav):''}${o.sheet?`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span>${o.sheet}</div></div>`:''}${toastHTML}`;
+ const sc=el.querySelector('.a-scroll');if(sc)sc.scrollTop=st;persist();}
+
+const SCREENS={
+ home(){const a=A(),p=prof();const others=a.profiles.filter(x=>!x.you);
+  const rec=a.recents.map((r,i)=>{const pr=PRODUCTS[r.pid];const ev=evaluate(pr,p,pr.unread);return `<button class="a-item" data-act="openRecent" data-arg="${i}">${'<span class="a-tile">'+ic('pkg',24,'#6B7280',1.8)+'</span>'}<span class="grow"><span class="a-strong" style="display:block">${esc(pr.name)}</span><span class="a-cap">Scanned ${esc(r.when)}</span></span>${badge(ev.status)}</button>`;}).join('');
+  const needsProfile=!others.length&&!Object.keys(p.allergens).length&&!p.sugar;
+  return{nav:'home',body:`<div class="a-body">
+   <div class="a-row"><div class="grow"><div class="a-cap" style="font-size:17px">Good morning,</div><h1 class="a-title">${esc(a.persona)}</h1></div><button class="a-iconbtn" data-act="tab" data-arg="profiles" aria-label="Profiles and settings">${ic('settings',22)}</button></div>
+   <button class="a-item" data-act="tab" data-arg="profiles">${avatar(p,44)}<span class="grow"><span class="a-cap" style="display:block">Checking food for</span><span class="a-strong">${esc(p.name)}${p.you?' (you)':''}</span></span>${ic('chevD',22)}</button>
+   ${needsProfile?`<div class="a-card" style="background:#EFF4FF;border-color:#DBE6FE"><span class="a-strong">Set up who you check food for</span><span class="a-cap">Add a profile with allergies or a sugar limit so results fit that person.</span>${B('Add a profile','startProfile',null,'p')}</div>`:''}
+   <div class="a-card" style="background:#1D4ED8;border:0;padding:18px;gap:10px"><div><h2 class="a-h" style="color:#fff">Is this food safe for ${esc(p.name)}?</h2><div style="color:#EFF4FF;font-size:15px">Scan the ingredient label or barcode — results in seconds.</div></div>${B(ic('scan',22,'#111827')+'Scan a product','tab','scan','s')}<button class="a-btn t" style="color:#fff;text-decoration:underline" data-act="go" data-arg="typed">${ic('kb',20,'#fff')}Type ingredients instead</button></div>
+   <div class="a-row"><h2 class="a-h grow">Recent scans</h2>${a.recents.length?`<button class="a-btn t" style="width:auto;padding:0 4px" data-act="go" data-arg="history">See all</button>`:''}</div>
+   ${a.recents.length?`<div class="a-list">${rec}</div>`:`<div class="a-card" style="align-items:center;text-align:center"><span class="a-cap">No scans yet. Your checked products will appear here.</span></div>`}
+  </div>`};},
+ profiles(){const a=A();return{nav:'profiles',body:`<div class="a-body"><div><h1 class="a-title">Profiles</h1><div class="a-cap" style="font-size:17px">Choose who you’re checking food for.</div></div>
+  <div class="a-list">${a.profiles.map(p=>{const on=p.id===a.active;return `<button class="a-item ${on?'sel':''}" data-act="setActive" data-arg="${p.id}" aria-pressed="${on}">${avatar(p,44,on)}<span class="grow"><span class="a-strong" style="display:block">${esc(p.name)}${p.you?' (you)':''}</span><span class="a-cap">${esc(profSummary(p))}</span></span>${on?`<span class="a-badge" style="background:#1D4ED8;color:#fff">${ic('check',14,'#fff',3)}Active</span>`:''}</button>`;}).join('')}</div>
+  ${B(ic('plus',20,'#1E40AF')+'Add a profile','startProfile',null,'dash')}
+  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">The active profile is named on every scan and result, so you always know who you’re checking for.</span></div>${B('Log out','logout',null,'s')}</div>`};},
+ p1(){const d=A().draft;const opts=[['allergy','shield','I have food allergies','Avoid allergens like nuts, milk or gluten'],['diabetes','drop','I have diabetes','Track sugar against my limit'],['child','users','My child has food allergies','Make a profile for your child']];
+  return{foot:B('Back','back',null,'s')+B('Next','p1next',null,'p',d.who.length?'':'disabled'),body:`<div class="a-body">${stepHead(1)}<div><h1 class="a-title">Who is this profile for?</h1><div class="a-cap" style="font-size:17px">Choose all that apply. We only ask about what you pick.</div></div>
+  <div class="a-list">${opts.map(([k,i,t,s])=>{const on=d.who.includes(k);return `<button class="a-opt ${on?'on':''}" data-act="toggleWho" data-arg="${k}" aria-pressed="${on}"><span style="width:52px;height:52px;border-radius:26px;background:${on?'#fff':'#EFF4FF'};display:flex;align-items:center;justify-content:center;flex:none">${ic(i,28,'#1D4ED8')}</span><span class="grow" style="flex:1"><span class="a-strong" style="display:block">${t}</span><span class="a-cap">${s}</span></span><span class="a-check">${on?ic('check',18,'#fff',3):''}</span></button>`;}).join('')}</div>
+  ${d.who.length?'':'<div class="a-cap">Choose at least one option to continue.</div>'}
+  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">You can add more profiles later for other family members.</span></div></div>`};},
+ p2(){const d=A().draft;const al=d.who.includes('allergy')||d.who.includes('child');const nm=d.name.trim()||'they';const miss=p2Missing();
+  return{foot:B('Back','back',null,'s')+`<button class="a-btn p" id="p2next" data-act="p2next" ${miss?'disabled':''}>Next</button>`,body:`<div class="a-body">${stepHead(2)}
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Profile name</span><input class="a-input" id="aName" value="${esc(d.name)}" placeholder="${d.who.includes('child')?'e.g. your child’s first name':'Your first name'}" autocomplete="off"></label>
+  ${al?`<div><h2 class="a-h" id="p2q">Which foods must ${esc(nm)} avoid?</h2><div class="a-cap">Tap to select. Tap again to remove.</div></div>
+  <div class="a-chips">${ORDER.map(k=>{const on=d.allergens[k]!=null;return `<button class="a-chip ${on?'on':''}" data-act="toggleAllergen" data-arg="${k}" aria-pressed="${on}">${on?ic('check',18,'#1D4ED8',2.6):''}${ALLERGENS[k].label}</button>`;}).join('')}</div>
+  ${Object.keys(d.allergens).map(k=>`<div class="a-card"><span class="a-strong">How severe is ${esc(nm==='they'?'the':nm+'’s')} ${ALLERGENS[k].label.toLowerCase()} allergy?</span><div class="a-sev" role="radiogroup" aria-label="${ALLERGENS[k].label} severity">${[1,2,3,4,5].map(n=>`<button class="${d.allergens[k]===n?'on':''}" role="radio" aria-checked="${d.allergens[k]===n}" data-act="sev" data-arg="${k}:${n}">${n}</button>`).join('')}</div><div class="a-row" style="justify-content:space-between"><span class="a-cap">1 · Mild</span><span class="a-cap">5 · Life-threatening</span></div>${d.allergens[k]?'':'<span class="a-cap" style="color:#92400E">Choose a severity from 1 to 5.</span>'}</div>`).join('')}`:''}
+  <div class="a-card" style="flex-direction:row;align-items:center;gap:12px"><div style="flex:1"><div class="a-strong">Track sugar per serving</div><div class="a-cap">For diabetes — set your own limit</div></div><button class="a-switch ${d.sugarOn?'on':''}" role="switch" aria-checked="${!!d.sugarOn}" aria-label="Track sugar" data-act="toggleSugar"></button></div>
+  ${d.sugarOn?`<div class="a-card"><span class="a-strong">Sugar limit per serving</span><div class="a-row"><button class="a-iconbtn" data-act="sugarStep" data-arg="-1" aria-label="Lower">−</button><span class="a-title" style="flex:1;text-align:center">${d.sugar} g</span><button class="a-iconbtn" data-act="sugarStep" data-arg="1" aria-label="Higher">+</button></div></div>`:''}
+  <div class="a-cap" id="p2hint" style="color:#92400E">${miss}</div></div>`};},
+ p3(){const d=A().draft;const al=Object.entries(d.allergens);
+  return{foot:B('Back','back',null,'s')+B('Save profile','saveProfile',null,'p'),body:`<div class="a-body">${stepHead(3)}<h1 class="a-title">Check ${esc(d.name.trim())}’s profile</h1>
+  <div class="a-card" style="gap:14px"><div class="a-row">${avatar({name:d.name},48)}<div class="grow"><div class="a-h">${esc(d.name.trim())}</div><div class="a-cap">${d.who.includes('child')?'Child · managed by '+esc(A().persona):'Adult'}</div></div></div><hr style="border:0;border-top:1px solid #E5E7EB;margin:0;width:100%">
+   <div class="a-row" style="align-items:flex-start"><div class="grow"><div class="a-small">AVOID</div>${al.length?al.map(([k,v])=>`<div class="a-strong">${ALLERGENS[k].label}</div><div class="a-cap">Severity ${v} of 5 — ${sevWord(v)}</div>`).join(''):'<div class="a-strong">Nothing</div>'}</div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div>
+   ${al.length?`<div><div class="a-small">ALSO CHECKS OTHER NAMES</div><div class="a-cap">${al.map(([k])=>ALLERGENS[k].names.slice(0,5).join(', ')).join('; ')}…</div></div>`:''}
+   <div class="a-row"><div class="grow"><div class="a-small">SUGAR</div><div class="a-strong">${d.sugarOn?'≤ '+d.sugar+' g per serving':'Not tracked'}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div></div>
+  <div class="a-card"><span class="a-strong">How results will look</span>${[['bad','Contains something to avoid'],['unc','Part of the label couldn’t be checked'],['safe','No conflict found in everything checked']].map(([k,t])=>`<div class="a-row">${badge(k)}<span class="a-cap">${t}</span></div>`).join('')}</div></div>`};},
+ scan(){const a=A();const pid=a.pick||'granola';const p=PRODUCTS[pid];const plabel=p.label||p.ings.join(', ')+'.';const glare=pid==='crackers'&&!a.crackersClear;const P=prof();
+  return{cls:'cam',dark:true,body:`<div class="a-body">
+  <div class="a-row"><button class="cam-round" style="width:44px;height:44px" data-act="back" aria-label="Close scanner">${ic('x',22,'#fff')}</button><button class="cam-pill" data-act="tab" data-arg="profiles" style="border:0;color:#fff;cursor:pointer">Checking for ${esc(P.name)}${P.allergens&&Object.keys(P.allergens).length?' · '+esc(Object.keys(P.allergens).map(k=>ALLERGENS[k].label).join(', ')):''}</button></div>
+  <div class="cam-seg" role="tablist"><button class="${a.camMode==='label'?'on':''}" data-act="camMode" data-arg="label" role="tab" aria-selected="${a.camMode==='label'}">Ingredient label</button><button class="${a.camMode==='barcode'?'on':''}" data-act="camMode" data-arg="barcode" role="tab" aria-selected="${a.camMode==='barcode'}">Barcode</button></div>
+  <div class="pick" role="group" aria-label="Product in front of the camera"><span>Product in front of the camera</span><div>${Object.keys(PRODUCTS).map(k=>`<button class="${pid===k?'on':''}" data-act="pick" data-arg="${k}" aria-pressed="${pid===k}">${esc(PRODUCTS[k].name)}</button>`).join('')}</div></div>
+  <div class="vf" role="img" aria-label="Camera view of the ${esc(p.name)} ${a.camMode==='label'?'ingredient label':'barcode'}">
+   ${a.camMode==='label'?`<div class="paper"><b>INGREDIENTS</b><div>${esc(glare?plabel.replace(/sesame oil, soy sauce \(soy, wheat\), sugar/,'██████ ███, ███ █████ ████████, █████'):plabel)}</div><div style="margin-top:6px;font-weight:600">${esc(p.mayText||'')}</div></div>${glare?'<div class="glare"></div>':''}`:`<div class="barcode"><svg width="170" height="70" viewBox="0 0 170 70">${Array.from({length:34},(_,i)=>`<rect x="${i*5}" y="0" width="${[1,2,3][(i*7)%3]}" height="60" fill="#111"/>`).join('')}<text x="85" y="69" text-anchor="middle" font-size="9" fill="#111">6 291041 50${pid==='granola'?'3218':'7745'}</text></svg></div>`}
+   <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+   <div class="hint">${glare?'Hold steady — avoid glare':a.camMode==='label'?'Fit the whole ingredient list inside the frame':'Line the barcode up inside the frame'}</div></div>
+  <div class="cam-ctr"><button class="cam-round ${a.flash?'on':''}" data-act="flash" aria-pressed="${a.flash}" aria-label="Flash">${ic('flash',22,a.flash?'#111827':'#fff')}</button><button class="shutter" data-act="shutter" aria-label="Take photo"><span></span></button><button class="cam-round" data-act="shutter" aria-label="Choose a photo from your gallery">${ic('image',22,'#fff')}</button></div>
+  <button class="cam-link" data-act="go" data-arg="typed">${ic('kb',20,'#fff')}Can’t scan? Type the ingredients</button></div>`};},
+ checking(){const a=A();const P=prof();const steps=['Read the ingredients','Checked other names for '+(Object.keys(P.allergens).length?Object.keys(P.allergens).map(k=>ALLERGENS[k].label.toLowerCase()).join(', '):'allergens'),'Checked “may contain” warnings'];
+  return{cls:'cam',dark:true,body:`<div class="a-body"><div class="vf" style="height:420px;opacity:.55"></div></div>`,sheet:`<div class="a-row"><span style="width:40px;height:40px;border-radius:20px;background:#DCFCE7;display:flex;align-items:center;justify-content:center">${ic('check',22,'#15803D',2.8)}</span><div class="grow"><div class="a-h">Label captured</div><div class="a-cap">Hold still — checking against ${esc(P.name)}’s profile</div></div></div>
+   <div class="a-bar" style="margin:4px 0"><i style="width:${Math.min(100,25+a.chk*25)}%;background:#1D4ED8;transition:width .4s"></i></div>
+   ${steps.map((s,i)=>`<div class="a-row">${i<a.chk?ic('check',20,'#15803D',2.6):ic('loader',20,'#1D4ED8',2.4)}<span style="color:${i<a.chk?'#111827':'#1E40AF'}">${esc(s)}${i<a.chk?'':'…'}</span></div>`).join('')}
+   <div class="a-cap">Your phone vibrates when the result is ready.</div>`};},
+ result(){const a=A();const p=curProduct();const ev=resultEval();const P=prof();const k=ev.status;
+  const pal={bad:{bg:'#B91C1C',fg:'#fff',eb:'NOT SAFE',t:'Not safe for '+P.name},unc:{bg:'#FEF3C7',fg:'#92400E',eb:ev.over&&!ev.unr.length&&!ev.mayHit.length?'OVER LIMIT':'UNCERTAIN — NOT MARKED SAFE',t:ev.over&&!ev.unr.length?'Over '+P.name+'’s sugar limit':'Can’t confirm yet'},safe:{bg:'#DCFCE7',fg:'#166534',eb:'SAFE',t:'Safe for '+P.name}}[k];
+  let sub=k==='bad'?'Contains '+[...new Set(ev.probs.map(x=>ALLERGENS[x.allergen].label.toLowerCase()))].join(', ')+' ('+ev.probs.map(x=>x.n.replace(/\s*\(.*\)/,'').toLowerCase()).join(', ')+')':k==='unc'?(ev.unr.length?ev.unr.length+' of '+p.ings.length+' ingredients couldn’t be read':ev.mayHit.length?'May contain '+ev.mayHit.map(x=>ALLERGENS[x].label.toLowerCase()).join(', '):p.sugar+' g sugar per serving — limit is '+P.sugar+' g'):(Object.keys(P.allergens).length?'No '+Object.keys(P.allergens).map(x=>ALLERGENS[x].label.toLowerCase()).join(', ')+' found':'No conflicts with '+P.name+'’s profile');
+  const reasons=[];
+  ev.probs.forEach(x=>reasons.push(`<div class="a-reason bad"><div class="a-row" style="gap:8px">${sic('bad',22)}<span class="a-strong">Contains: ${esc(x.n.replace(/\s*\(.*\)/,''))}</span></div><span class="a-cap">${/\(/.test(x.n)?'Listed as “'+esc(x.n.match(/\((.*)\)/)[1])+'” — ':''}${'this is '+(x.allergen==='tree'?'a tree nut':ALLERGENS[x.allergen].label.toLowerCase())+'. '+esc(P.name)+'’s severity: '+P.allergens[x.allergen]+' of 5.'}</span></div>`));
+  (p.may||[]).forEach(m=>{const hit=P.allergens&&P.allergens[m];reasons.push(`<div class="a-reason ${hit?'unc':'info'}"><div class="a-row" style="gap:8px">${sic('unc',22)}<span class="a-strong">May contain: ${ALLERGENS[m].label.toLowerCase()}s</span></div><span class="a-cap">Warning printed on the pack.${hit?'':' Not in '+esc(P.name)+'’s profile.'}</span></div>`);});
+  if(k==='safe')reasons.push(`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">${Object.keys(P.allergens).length?'No '+Object.keys(P.allergens).map(x=>ALLERGENS[x].label.toLowerCase()).join(', ')+' found':'Nothing to avoid'}</span></div><span class="a-cap">All ${p.ings.length} ingredients read — including other names${P.allergens.tree?' for nuts like “Prunus dulcis”':''}.</span></div>`);
+  if(k==='safe'&&!(p.may||[]).length)reasons.push(`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">No “may contain” warnings</span></div></div>`);
+  const unreadBlock=ev.unr.length?`<div class="a-card" style="gap:8px"><div style="position:relative;height:64px;border-radius:8px;background:#F5F0E3;overflow:hidden">${[0,1,2,3].map(i=>`<i style="position:absolute;left:12px;top:${10+i*13}px;height:6px;width:${[88,72,82,60][i]}%;border-radius:3px;background:#736B60;opacity:${i===1||i===2?.25:.8}"></i>`).join('')}<i style="position:absolute;left:8px;top:18px;width:74%;height:28px;border:2px dashed #B45309;border-radius:6px"></i></div><span class="a-cap" style="color:#92400E">Unreadable: ingredients ${ev.unr.map(x=>x.n.match(/\d+/)[0]).join(', ')} (glare)</span></div>
+   ${B(ic('cam',20,'#fff')+'Retake photo','retake',null,'p')}<div class="a-row"><hr style="flex:1;border:0;border-top:1px solid #C9CED6"><span class="a-cap">or</span><hr style="flex:1;border:0;border-top:1px solid #C9CED6"></div>
+   <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Type the missing ingredients</span><input class="a-input" id="aMissing" value="${esc(a.missing||'')}" placeholder="e.g. sesame oil, soy sauce, sugar"></label><button class="a-btn s" id="missCheck" data-act="checkMissing" ${a.missing&&a.missing.trim()?'':'disabled'}>Check ingredients</button>
+   <div class="a-cap" style="text-align:center">We only show “Safe” when every ingredient is confirmed.</div>`:'';
+  const actions=k==='bad'?`${B('Scan another product','scanAnother',null,'p')}<div class="a-row"><button class="a-btn" disabled aria-describedby="nosave">Save to Pantry</button>${B('Report issue','go','report','s')}</div><div class="a-cap" id="nosave">You can’t save food that isn’t safe for ${esc(P.name)}.</div>`:k==='safe'?`${B('Save to Pantry','savePantry',null,'p')}<div class="a-row">${B('Another profile','tab','profiles','s')}${B('Report issue','go','report','s')}</div>`:(ev.unr.length?'':`${B('Scan another product','scanAnother',null,'p')}${B('Report issue','go','report','s')}`);
+  return{nav:'none',topBg:pal.bg,dark:k==='bad',body:`<div class="a-banner" style="background:${pal.bg};color:${pal.fg}">${sic(k,44,k==='bad')}<div style="flex:1"><div class="eb">${pal.eb}</div><div class="a-title" style="color:${k==='bad'?'#fff':'#111827'}">${esc(pal.t)}</div><div>${esc(sub)}</div></div></div>
+   <div class="a-body" style="padding-top:14px"><div class="a-row"><span class="a-tile">${ic('pkg',26,'#6B7280',1.8)}</span><div class="grow"><div class="a-h">${esc(p.name)}</div><div class="a-cap">${esc(p.size)} · ${p.typed?'checked just now':'scanned just now'}</div></div></div>
+   ${reasons.join('')}${unreadBlock}
+   ${!ev.unr.length?`<button class="a-item" data-act="go" data-arg="ingredients"><span class="grow a-strong">See all ${p.ings.length} ingredients</span>${ic('chevR',20,'#4B5563')}</button>`:''}
+   <div class="a-src">${ic('info',20,'#4B5563')}<div><div class="a-cap">Source: ${p.typed?'ingredients you typed':'your label photo + product database'} · checked ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</div><div class="a-small" style="color:#111827;font-size:15px;line-height:20px">${k==='safe'?'“Safe” = no conflict in the information checked. Always check the pack.':'Always check the pack — recipes can change.'}</div></div></div>
+   ${actions}</div>`};},
+ ingredients(){const p=curProduct();const ev=resultEval();const list=[...ev.list].sort((x,y)=>({bad:0,unc:1,safe:2}[x.k]-{bad:0,unc:1,safe:2}[y.k]));const P=prof();
+  return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">All ${p.ings.length} ingredients</div><div class="a-cap">${esc(p.name)} · checked for ${esc(P.name)}</div></div></div>
+  <div class="a-card" style="padding:2px 14px;gap:0">${list.map((x,i)=>`<div class="a-row" style="padding:10px 0;${i<list.length-1?'border-bottom:1px solid #E5E7EB':''}">${sic(x.k,18)}<div class="grow"><div class="${x.k==='safe'?'':'a-strong'}">${esc(x.n)}</div>${x.k==='bad'?`<div class="a-cap" style="color:#991B1B">${ALLERGENS[x.allergen].label} — ${esc(P.name)} must avoid</div>`:''}</div></div>`).join('')}${(p.may||[]).map(m=>`<div class="a-row" style="padding:10px 0;border-top:1px solid #E5E7EB">${sic('unc',18)}<div class="grow"><div class="a-strong">May contain: ${ALLERGENS[m].label.toLowerCase()}s</div><div class="a-cap" style="color:#92400E">Warning printed on the pack</div></div></div>`).join('')}</div></div>`};},
+ typed(){const t=A().typed;const P=prof();return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">Type ingredients</div><div class="a-cap">Checking for ${esc(P.name)}</div></div></div>
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Product name (optional)</span><input class="a-input" id="aTypedName" value="${esc(t.name)}" placeholder="e.g. Granola Bar"></label>
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Ingredients</span><textarea class="a-input" id="aTypedText" placeholder="e.g. oats, honey, almonds, sunflower oil">${esc(t.text)}</textarea><span class="a-cap">Separate with commas. You can paste from a website.</span></label>
+  <button class="a-btn p" id="typedCheck" data-act="checkTyped" ${t.text.trim()?'':'disabled'}>Check ingredients</button>
+  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">We also check other names, like “Prunus dulcis” for almonds or “casein” for milk.</span></div></div>`};},
+ report(){const r=A().report;const opts=['An ingredient is missing','Wrong product','The label has changed','The result looks wrong'];
+  return{body:`<div class="a-body"><div class="a-row">${backBtn('Close')}<div class="grow"><div class="a-h">Report a mismatch</div><div class="a-cap">Help keep results accurate</div></div></div>
+  <div class="a-strong">What’s wrong?</div><div class="a-chips">${opts.map(o=>`<button class="a-chip ${r[o]?'on':''}" data-act="repChip" data-arg="${esc(o)}" aria-pressed="${!!r[o]}">${r[o]?ic('check',18,'#1D4ED8',2.6):''}${o}</button>`).join('')}</div>
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Details (optional)</span><textarea class="a-input" id="aReport" placeholder="e.g. the pack now says “may contain sesame”">${esc(r.text||'')}</textarea></label>
+  ${B('Send report','sendReport',null,'p',opts.some(o=>r[o])?'':'disabled')}<div class="a-cap">${opts.some(o=>r[o])?'Reports are checked before any product information changes.':'Choose what’s wrong to send a report.'}</div></div>`};},
+ history(){const a=A();const P=prof();const f=a.histFilter;const items=a.recents.map((r,i)=>({r,i,ev:evaluate(PRODUCTS[r.pid],P,PRODUCTS[r.pid].unread)})).filter(x=>f==='all'||x.ev.status===f);
+  return{nav:'home',body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">Scan history</div><div class="a-cap">For ${esc(P.name)} · newest first</div></div></div>
+  <div class="a-chips">${[['all','All'],['bad','Not safe'],['unc','Uncertain'],['safe','Safe']].map(([k,l])=>`<button class="a-chip ${f===k?'on':''}" data-act="histFilter" data-arg="${k}" aria-pressed="${f===k}">${f===k?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
+  <div class="a-list">${items.length?items.map(x=>`<button class="a-item" data-act="openRecent" data-arg="${x.i}"><span class="a-tile">${ic('pkg',24,'#6B7280',1.8)}</span><span class="grow"><span class="a-strong" style="display:block">${esc(PRODUCTS[x.r.pid].name)}</span><span class="a-cap">Scanned ${esc(x.r.when)}</span></span>${badge(x.ev.status)}</button>`).join(''):'<div class="a-cap">No scans with this result.</div>'}</div></div>`};},
+ recipes(){const a=A();const P=prof();return{nav:'recipes',body:`<div class="a-body"><h1 class="a-title">Recipes</h1>
+  <button class="a-item" style="padding:6px 12px 6px 6px;border-radius:24px;width:auto;align-self:flex-start;background:#EFF4FF;border-color:#DBE6FE" data-act="tab" data-arg="profiles">${avatar(P,32,true)}<span class="a-strong" style="color:#1E40AF;font-size:15px">${esc(P.name)}${P.diabetes?' · Type 2 diabetes':''}</span>${ic('chevD',18,'#1D4ED8')}</button>
+  <label class="a-row" style="background:#fff;border:1.5px solid #C9CED6;border-radius:12px;padding:0 14px;min-height:52px">${ic('search',20,'#4B5563')}<input id="aSearch" style="border:0;outline:none;flex:1;font-size:17px;min-height:48px;background:none;color:#111827" placeholder="Search recipes, e.g. pancakes" value="${esc(a.recipeQ)}" aria-label="Search recipes">${a.recipeQ?`<button class="a-iconbtn" style="width:36px;height:36px;border:0" data-act="clearSearch" aria-label="Clear search">${ic('x',18,'#4B5563')}</button>`:''}</label>
+  <div class="a-chips">${limitChipLabel()?`<button class="a-chip ${a.filters.limit?'on':''}" data-act="filter" data-arg="limit" aria-pressed="${a.filters.limit}">${a.filters.limit?ic('check',18,'#1D4ED8',2.6):''}${esc(limitChipLabel())}</button>`:''}${[['breakfast','Breakfast'],['under30','Under 30 min']].map(([k,l])=>`<button class="a-chip ${a.filters[k]?'on':''}" data-act="filter" data-arg="${k}" aria-pressed="${a.filters[k]}">${a.filters[k]?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
+  ${limitChipLabel()?`<div class="a-row" style="gap:6px">${ic('lock',16,'#4B5563')}<span class="a-cap">${P.sugar?'Sugar limit':'Allergy filter'} comes from ${esc(P.name)}’s profile</span></div>`:''}
+  <div id="recList" class="a-list">${recipeListHTML()}</div></div>`};},
+ recipe(){const a=A();const r=R(a.recipe);const P=prof();const sw=a.swaps[r.id];const st=recipeStatus(r,P,sw);const ings=effIngs(r,sw);const limit=P.sugar;const sugar=st.sugar;const carbs=sw?r.swaps[sw].carbs:r.carbs;
+  const over=limit&&sugar>limit;const max=Math.max(16,(limit||10)*1.6,sugar+2);
+  const statusCard=st.k==='hidden'?`<div class="a-reason ${st.allergenHit?'bad':'unc'}"><div class="a-row" style="gap:8px">${sic(st.allergenHit?'bad':'unc',22)}<span class="a-strong">${st.allergenHit?'Not safe for '+esc(P.name):'Over '+esc(P.name)+'’s sugar limit'}</span></div><span class="a-cap">${esc(st.why)}</span></div>`:st.k==='swap'?`<div class="a-reason unc"><div class="a-row" style="gap:8px">${sic('unc',22)}<span class="a-strong">Over ${esc(P.name)}’s sugar limit</span></div><span class="a-cap">${sugar} g sugar per serving — limit is ${limit} g. 1 ingredient can be swapped.</span></div>`:`<div class="a-reason safe"><div class="a-row" style="gap:8px">${sic('safe',22)}<span class="a-strong">Fits ${esc(P.name)}’s profile</span></div><span class="a-cap">${limit?sugar+' g sugar per serving — limit is '+limit+' g.':'No ingredients '+esc(P.name)+' must avoid.'}</span></div>`;
+  const cta=st.k==='swap'?B('Swap '+r.ings.find(x=>x[2])[0].toLowerCase(),'openSwap',null,'p'):st.k==='fits'?B('Add to weekly meal plan','openPlan',null,'p'):`<button class="a-btn" disabled>Can’t be added for ${esc(P.name)}</button>`;
+  return{foot:cta,body:`<div style="position:relative">${`<div style="height:150px;background:${r.color};display:flex;align-items:center;justify-content:center">${ic('fork',58,'#6B7280',1.8)}</div>`}<div style="position:absolute;left:16px;top:10px">${backBtn()}</div></div>
+  <div class="a-body" style="padding-top:14px"><div><h1 class="a-title">${esc(r.name)}</h1><div class="a-cap">${r.mins} min · ${r.serv} serving${r.serv>1?'s':''} · ${r.meal} · for ${esc(P.name)}</div></div>${statusCard}
+  <h2 class="a-h">Ingredient safety summary</h2>
+  <div class="a-card" style="padding:4px 14px;gap:0">${ings.map((x,i)=>{const keys=Object.keys(P.allergens||{});const hit=keys.find(k=>matchAllergen(x[0],k));const high=x[2]&&limit&&!sw;const swapped=x[3];const k=hit?'bad':high?'unc':'safe';
+   return `<div class="a-row" style="padding:10px 0;${i<ings.length-1?'border-bottom:1px solid #E5E7EB':''}">${sic(k,20)}<div class="grow"><div class="a-strong">${esc(x[0])}</div><div class="a-cap" style="${swapped?'color:#166534':''}">${esc(x[1])}${hit?' · contains '+ALLERGENS[hit].label.toLowerCase():high?' · high sugar':''}${swapped?' · swapped from '+esc(r.ings.find(y=>y[2])[0].toLowerCase()):''}</div></div>${high&&r.swaps?`<button class="a-chip on" style="min-height:40px" data-act="openSwap">Swap</button>`:''}${swapped?`<button class="a-btn t" style="width:auto;padding:0 6px" data-act="undoSwap">${ic('undo',16,'#1D4ED8')}Undo</button>`:''}</div>`;}).join('')}</div>
+  ${limit?`<div class="a-card"><div class="a-row" style="justify-content:space-between"><span class="a-strong">Sugar per serving</span><span class="a-strong" style="color:${over?'#92400E':'#166534'}">${sugar} g of ${limit} g</span></div><div class="a-bar" role="img" aria-label="${sugar} grams of a ${limit} gram limit"><i style="width:${Math.min(100,sugar/max*100)}%;background:${over?'#B45309':'#15803D'}"></i><b style="left:${limit/max*100}%"></b></div><div class="a-row" style="justify-content:space-between"><span class="a-cap">Carbs ${carbs} g</span><span class="a-cap">▏= ${esc(P.name)}’s limit</span></div></div>`:''}
+  </div>`,sheet:a.sheet==='swap'?swapSheet(r):a.sheet==='plan'?planSheet(r):null};},
+ plan(){const a=A();const d=a.viewDay;const day=a.plan[d]||{};const P=prof();const shop=shopList();
+  return{nav:'plan',body:`<div class="a-body"><div><h1 class="a-title">This week</h1><div class="a-cap">${WEEK[0].d} ${WEEK[0].m} – ${WEEK[6].d} ${WEEK[6].m} · ${esc(P.name)}</div></div>
+  <div class="a-days">${WEEK.map((w,i)=>`<button class="${i===d?'on':''} ${a.plan[i]&&Object.keys(a.plan[i]).length?'has':''}" data-act="viewDay" data-arg="${i}" aria-pressed="${i===d}" aria-label="${DAYFULL[i]} ${w.d}"><small>${w.n}</small>${w.d}</button>`).join('')}</div>
+  <h2 class="a-h">${DAYFULL[d]}</h2>
+  <div class="a-card" style="padding:4px 14px;gap:0">${['Breakfast','Lunch','Dinner'].map((m,i)=>{const e=day[m];const r=e&&R(e.rid);return `<div class="a-row" style="padding:10px 0;${i<2?'border-bottom:1px solid #E5E7EB':''}"><span class="a-small" style="width:70px;flex:none">${m}</span>${r?`<button class="a-row grow" style="background:none;border:0;padding:0;cursor:pointer;text-align:left;min-height:44px" data-act="openRecipe" data-arg="${r.id}"><span class="a-strong grow">${esc(r.name)}${e.swap?' (swapped)':''}</span>${sic('safe',20)}</button>`:`<button class="a-btn dash" style="min-height:44px;flex:1" data-act="addFromPlan" data-arg="${m}">${ic('plus',18,'#1E40AF')}Add recipe</button>`}</div>`;}).join('')}</div>
+  <div class="a-row"><h2 class="a-h grow">Shopping list</h2><button class="a-btn t" style="width:auto;padding:0 6px;${a.shared?'color:#166534':''}" data-act="share">${a.shared?ic('check',18,'#15803D',2.6)+'Link copied':ic('share',18,'#1D4ED8')+'Share'}</button></div>
+  <div class="a-card" style="gap:2px"><span class="a-cap">From ${shop.n} recipe${shop.n===1?'':'s'} · safe and swapped ingredients only</span>${shop.items.map(it=>`<button class="a-row" style="background:none;border:0;padding:8px 0;cursor:pointer;text-align:left;min-height:44px" data-act="shopTick" data-arg="${esc(it)}" aria-pressed="${!!a.shop[it]}"><span class="a-check ${a.shop[it]?'on':''}" style="width:22px;height:22px;border-radius:6px">${a.shop[it]?ic('check',16,'#fff',3):''}</span><span class="grow" style="${a.shop[it]?'text-decoration:line-through;color:#4B5563':''}">${esc(it)}</span></button>`).join('')||'<span class="a-cap">Add recipes to build your list.</span>'}</div></div>`};}
+};
+function stepHead(n){return `<div style="display:flex;flex-direction:column;gap:10px"><div class="a-row" style="justify-content:space-between"><span class="a-small" style="font-size:15px">New profile</span><span class="a-small" style="font-size:15px">Step ${n} of 3</span></div><div class="a-prog">${[1,2,3].map(i=>`<span class="${i<=n?'on':''}"></span>`).join('')}</div></div>`;}
+function p2Missing(){const d=A().draft;const al=d.who.includes('allergy')||d.who.includes('child');if(!d.name.trim())return'Add a profile name to continue.';if(al&&!Object.keys(d.allergens).length)return'Choose at least one food to avoid.';if(Object.values(d.allergens).some(v=>!v))return'Choose a severity for each allergy.';if(!al&&!d.sugarOn)return'Turn on sugar tracking or go back and choose allergies.';return'';}
+function limitChipLabel(){const P=prof();if(P.sugar)return'Sugar ≤ '+P.sugar+' g / serving';const k=Object.keys(P.allergens||{});return k.length?'No '+k.map(x=>ALLERGENS[x].label.toLowerCase()).join(', '):'';}
+function recipeListHTML(){const a=A();const P=prof();const q=a.recipeQ.trim().toLowerCase();
+ let list=RECIPES.filter(r=>(!q||r.name.toLowerCase().includes(q.replace(/s$/,'')))&&(!a.filters.breakfast||r.meal==='Breakfast')&&(!a.filters.under30||r.mins<30));
+ const withS=list.map(r=>({r,st:recipeStatus(r,P,a.swaps[r.id])}));const hidden=a.filters.limit&&limitChipLabel()?withS.filter(x=>x.st.k==='hidden'):[];const shown=withS.filter(x=>!hidden.includes(x));
+ const head=`<div class="a-row"><span class="a-strong grow">${shown.length} recipe${shown.length===1?'':'s'}</span>${hidden.length?`<button class="a-btn t" style="width:auto;padding:0 4px;font-size:15px" data-act="whyHidden">${hidden.length} hidden — why?</button>`:''}</div>`;
+ a._hidden=hidden.map(x=>({id:x.r.id,why:x.st.why,sugar:x.st.sugar}));
+ return head+(shown.length?shown.map(({r,st})=>`<button class="a-item ${st.k==='swap'?'sel':''}" style="${st.k==='swap'?'background:#fff':''}" data-act="openRecipe" data-arg="${r.id}">${foodTile(r.color,72)}<span class="grow" style="display:flex;flex-direction:column;gap:4px"><span class="a-strong">${esc(r.name)}${a.swaps[r.id]?' (swapped)':''}</span><span class="a-cap">${r.mins} min · ${st.sugar} g sugar / serving</span>${st.k==='swap'?badge('unc','1 swap needed'):st.k==='hidden'?badge(st.allergenHit?'bad':'unc',st.allergenHit?'Not safe':'Over limit'):badge('safe','Fits your profile')}</span></button>`).join(''):`<div class="a-card"><span class="a-cap">No recipes match. Try another word or turn off a filter.</span></div>`);}
+function swapSheet(r){const a=A();const P=prof();const c=a.swapChoice;const s=r.swaps[c];const max=Math.max(16,P.sugar*1.6);const ok=s.sugar<=P.sugar;
+ return `<div><h2 class="a-h">Swap white sugar (40 g) for:</h2><div class="a-cap">Real-world swaps that keep the recipe working</div></div>
+ <div class="a-list" role="radiogroup">${Object.entries(r.swaps).map(([k,o])=>`<button class="a-opt ${c===k?'on':''}" role="radio" aria-checked="${c===k}" data-act="swapChoice" data-arg="${k}"><span class="a-radio"></span><span style="flex:1"><span class="a-strong" style="display:block">${esc(o.name)} · ${esc(o.amt)}</span><span class="a-cap">${esc(o.note)}</span></span></button>`).join('')}</div>
+ <div class="a-reason ${ok?'safe':'unc'}"><div class="a-row" style="justify-content:space-between"><span class="a-strong">Sugar per serving</span><span class="a-strong" style="color:${ok?'#166534':'#92400E'}">${r.sugar} g → ${s.sugar} g</span></div><div class="a-bar"><i style="width:${s.sugar/max*100}%;background:${ok?'#15803D':'#B45309'}"></i><b style="left:${P.sugar/max*100}%"></b></div><span class="a-cap" style="color:${ok?'#166534':'#92400E'}">${ok?'Now within':'Still over'} ${esc(P.name)}’s ${P.sugar} g limit · carbs ${r.carbs} g → ${s.carbs} g</span></div>
+ ${B('Apply swap','applySwap',null,'p')}${B('Cancel','closeSheet',null,'t')}`;}
+function planSheet(r){const a=A();return `<h2 class="a-h">Add to weekly meal plan</h2><div class="a-small" style="font-size:15px">Day · ${WEEK[0].d}–${WEEK[6].d} ${WEEK[6].m}</div>
+ <div class="a-days" role="radiogroup" aria-label="Day">${WEEK.map((w,i)=>`<button class="${a.planDay===i?'on':''}" role="radio" aria-checked="${a.planDay===i}" data-act="planDay" data-arg="${i}" aria-label="${DAYFULL[i]} ${w.d}"><small>${w.n}</small>${w.d}</button>`).join('')}</div>
+ <div class="a-small" style="font-size:15px">Meal</div><div class="a-chips" role="radiogroup" aria-label="Meal">${MEALS.map(m=>`<button class="a-chip ${a.planMeal===m?'on':''}" role="radio" aria-checked="${a.planMeal===m}" data-act="planMeal" data-arg="${m}">${a.planMeal===m?ic('check',18,'#1D4ED8',2.6):''}${m}</button>`).join('')}</div>
+ ${(a.plan[a.planDay]||{})[a.planMeal]?`<div class="a-cap" style="color:#92400E">This replaces ${esc(R(a.plan[a.planDay][a.planMeal].rid).name)} on ${DAYFULL[a.planDay]}.</div>`:'<div class="a-cap">The ingredients go straight to this week’s shopping list.</div>'}
+ ${B('Add to '+DAYFULL[a.planDay]+' '+a.planMeal.toLowerCase(),'addToPlan',null,'p')}${B('Cancel','closeSheet',null,'t')}`;}
+function shopList(){const a=A();const set=new Set();let n=0;Object.values(a.plan).forEach(day=>Object.values(day).forEach(e=>{const r=R(e.rid);if(!r)return;n++;effIngs(r,e.swap).forEach(x=>set.add(x[0]));}));return{n,items:[...set].slice(0,12)};}
+
+/* ============ app events ============ */
+document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app||!S||!A())return;
+ const el=e.target.closest('[data-act]');S.c.taps++;
+ if(!el){if(!e.target.closest('input,textarea,label')){S.c.empty++;logClick('empty tap','Tapped an empty area');}else S.lastAct=Date.now();persist();return;}
+ logClick(el.disabled?'tap (disabled)':'tap',labelOf(el));
+ if(el.disabled)return;
+ const act=el.dataset.act,arg=el.dataset.arg,a=A();
+ const H={
+  tab:()=>tab(arg),
+  editProfile:()=>{const p=a.stack.pop();a.screen=p?p.screen:'p2';renderApp(true);},
+  go:()=>go(arg),
+  back:()=>back(),
+  closeSheet:()=>{S.c.backs++;a.sheet=null;renderApp();},
+  undo:()=>{S.undoUsed=(S.undoUsed||0)+1;const u=a.toast&&a.toast.undo;a.toast=null;if(u)UNDO[u]();renderApp();},
+  setActive:()=>{a.active=arg;toast('Now checking food for '+prof().name);tab('home');},
+  startProfile:()=>{a.draft={who:[],name:'',allergens:{},sugarOn:false,sugar:10};go('p1');},
+  toggleWho:()=>{const w=a.draft.who;const i=w.indexOf(arg);if(i>=0)w.splice(i,1);else w.push(arg);if(arg==='diabetes')a.draft.sugarOn=w.includes('diabetes');renderApp();},
+  p1next:()=>{if(!a.draft.who.length)return;go('p2');},
+  toggleAllergen:()=>{const d=a.draft;if(d.allergens[arg]!=null){const prev=d.allergens[arg];delete d.allergens[arg];a.undo={k:arg,v:prev};toast(ALLERGENS[arg].label+' removed','allergen');}else{d.allergens[arg]=0;}renderApp();},
+  sev:()=>{const [k,n]=arg.split(':');a.draft.allergens[k]=+n;renderApp();},
+  toggleSugar:()=>{a.draft.sugarOn=!a.draft.sugarOn;renderApp();},
+  sugarStep:()=>{a.draft.sugar=Math.max(1,Math.min(50,a.draft.sugar+ +arg));renderApp();},
+  p2next:()=>{if(p2Missing())return;go('p3');},
+  saveProfile:()=>{const d=a.draft;let p;if(a.setup&&!d.who.includes('child')){p=a.profiles.find(x=>x.id==='me');Object.assign(p,{name:d.name.trim(),allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes')});a.persona=p.name;}
+    else{p={id:'p'+Date.now(),name:d.name.trim(),kind:d.who.includes('child')?'child':'adult',allergens:Object.assign({},d.allergens),sugar:d.sugarOn?d.sugar:null,diabetes:d.who.includes('diabetes')};a.profiles.push(p);}
+    a.setup=false;a.active=p.id;a.stack=[];a.screen='home';a.draft=null;toast(p.name+'’s profile saved');renderApp(true);
+    if(S.M.profileSaved==null){mark('profileSaved');S.profileText=`${p.name} (${p.kind==='child'?'child':'self'}): ${profSummary(p)}`;}else S.profileText+=` | ${p.name}: ${profSummary(p)}`;sendToSheet('profile');},
+  shutter:()=>{S.c.scans++;a.viaScan=true;a.cur=a.pick||'granola';a.glareThis=a.cur==='crackers'&&!a.crackersClear;if(a.cur==='crackers')a.crackersClear=true;go('checking');},
+  camMode:()=>{a.camMode=arg;renderApp();},
+  flash:()=>{a.flash=!a.flash;renderApp();},
+  scanAnother:()=>{a.stack=[];a.screen='scan';onEnter('scan');renderApp(true);},
+  retake:()=>{a.stack=[];a.screen='scan';renderApp(true);},
+  checkMissing:()=>{const txt=(a.missing||'').trim();if(!txt)return;S.c.scans++;a.viaScan=false;a.cur='missing';a.glareThis=false;a.crackersClear=true;go('checking');},
+  checkTyped:()=>{if(!a.typed.text.trim())return;S.c.scans++;a.viaScan=false;a.cur='typed';go('checking');},
+  savePantry:()=>{const p=curProduct();a.pantry.push(p.name);const rp=a.cur==='missing'?'crackers':a.cur;if(PRODUCTS[rp])a.recents.unshift({pid:rp,when:'just now'});a.savedRecent=!!PRODUCTS[rp];a.stack=[];a.screen='home';a.lastSaved=p.name;toast('Saved to Pantry','pantry');renderApp(true);
+    S.saved.push(p.name);mark('pantrySaved');sendToSheet('pantry');},
+  pick:()=>{a.pick=arg;renderApp();},
+  openRecent:()=>{const r=a.recents[+arg];a.viaScan=false;a.cur=r.pid;a.glareThis=false;go('result');},
+  repChip:()=>{a.report[arg]=!a.report[arg];renderApp();},
+  sendReport:()=>{a.report={};back();S.c.backs--;toast('Report sent — thank you');renderApp();},
+  histFilter:()=>{a.histFilter=arg;renderApp();},
+  clearSearch:()=>{a.recipeQ='';renderApp();},
+  filter:()=>{a.filters[arg]=!a.filters[arg];renderApp();},
+  whyHidden:()=>{a.sheet='hidden';renderAppHidden();},
+  openRecipe:()=>{a.recipe=arg;go('recipe');},
+  openSwap:()=>{a.swapChoice=a.swapChoice||'stevia';a.sheet='swap';renderApp();},
+  swapChoice:()=>{a.swapChoice=arg;renderApp();},
+  applySwap:()=>{a.swaps[a.recipe]=a.swapChoice;a.sheet=null;S.swapUsed=true;mark('swap');toast('Swap applied','swap');renderApp();},
+  undoSwap:()=>{delete a.swaps[a.recipe];renderApp();},
+  openPlan:()=>{a.sheet='plan';renderApp();},
+  planDay:()=>{a.planDay=+arg;renderApp();},
+  planMeal:()=>{a.planMeal=arg;renderApp();},
+  addToPlan:()=>{const r=R(a.recipe);a.prevPlan=JSON.parse(JSON.stringify(a.plan));a.plan[a.planDay]=a.plan[a.planDay]||{};a.plan[a.planDay][a.planMeal]={rid:r.id,swap:a.swaps[r.id]||null};a.viewDay=a.planDay;a.sheet=null;a.stack=[];a.screen='plan';S.screens.plan=1;toast('Added to '+WEEK[a.planDay].n+' '+a.planMeal.toLowerCase(),'plan');renderApp(true);
+    S.planned.push(`${r.name}${a.swaps[r.id]?' (with swap)':''} → ${DAYFULL[a.planDay]} ${a.planMeal}`);mark('planAdded');sendToSheet('plan');},
+  viewDay:()=>{a.viewDay=+arg;renderApp();},
+  addFromPlan:()=>{a.planDay=a.viewDay;a.planMeal=arg;a.filters.breakfast=arg==='Breakfast';tab('recipes');},
+  shopTick:()=>{a.shop[arg]=!a.shop[arg];renderApp();},
+  share:()=>{a.shared=!a.shared;renderApp();},
+  logout:()=>{S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
+ };
+ if(H[act])H[act]();if(S)persist();});
+const UNDO={allergen:()=>{const a=A();if(a.draft&&a.undo){a.draft.allergens[a.undo.k]=a.undo.v;}},pantry:()=>{const a=A();a.pantry.pop();if(a.savedRecent)a.recents.shift();},swap:()=>{const a=A();delete a.swaps[a.recipe];},plan:()=>{const a=A();if(a.prevPlan)a.plan=a.prevPlan;}};
+function renderAppHidden(){const a=A();const P=prof();renderApp();const el=$('#app');const list=a._hidden||[];
+ const html=`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span><h2 class="a-h">${list.length} recipe${list.length===1?'':'s'} hidden</h2><div class="a-cap">These can’t be made to fit ${esc(P.name)}’s profile, even with a swap, so we keep them out of the results.</div>${list.map(x=>{const r=R(x.id);return `<div class="a-reason unc"><div class="a-row" style="gap:8px">${sic('unc',20)}<span class="a-strong">${esc(r.name)}</span></div><span class="a-cap">${P.sugar?x.sugar+' g sugar per serving — ':''}${esc(x.why)}</span></div>`;}).join('')}${B('Back to results','closeSheet',null,'s')}</div></div>`;
+ el.insertAdjacentHTML('beforeend',html);}
+
+
+
+/* ============ sign-up + page shell ============ */
+const root=$('#root');
+function render(){
+ if(!S){root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="welcome">${welcomeHTML()}</div></div></div>`;return;}
+ if(!$('#app'))root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="app" role="application" aria-label="Meal Planner and Ingredient Checker"></div></div></div>`;
+ renderApp(true);}
+function welcomeHTML(){const ok=W.name.trim()&&W.group&&W.consent;
+ return `${statusTop(false)}<div class="a-scroll"><div class="a-body" style="padding-top:28px">
+  <div class="a-row" style="gap:10px"><span style="width:44px;height:44px;border-radius:14px;background:#1D4ED8;display:flex;align-items:center;justify-content:center">${ic('shield',24,'#fff')}</span><span style="font-size:15px;font-weight:700;line-height:1.25;color:#1E40AF">Meal Planner &amp;<br>Ingredient Checker</span></div>
+  <div><h1 class="a-title">Eat safely, plan easily</h1><div class="a-cap" style="font-size:17px;line-height:24px;margin-top:6px">Check if packaged food is safe for you or your child, and plan meals that fit your allergies or sugar limit.</div></div>
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Your first name</span><input class="a-input" id="wName" value="${esc(W.name)}" placeholder="e.g. Sara" autocomplete="given-name"></label>
+  <div class="a-small" style="font-size:15px">What brings you here?</div>
+  <div class="a-chips">${Object.entries(GROUPS).map(([k,l])=>`<button class="a-chip ${W.group===k?'on':''}" data-w="group" data-arg="${k}" aria-pressed="${W.group===k}">${W.group===k?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
+  <button class="a-opt ${W.consent?'on':''}" data-w="consent" aria-pressed="${W.consent}" style="padding:14px"><span class="a-check">${W.consent?ic('check',18,'#fff',3):''}</span><span class="a-cap" style="flex:1;color:#111827">I agree that how I use this app (time spent and what I tap) is recorded for a university HCI project.</span></button>
+  <button class="a-btn p" data-w="start" ${ok?'':'disabled'}>Get started</button>
+  <div class="a-cap" id="wHint">${ok?'Next, you’ll set up who you check food for.':'Enter your name, choose one option and tick the box.'}</div>
+  ${sheetReady()?'':'<div class="a-cap" style="color:#92400E;border:1px dashed #B45309;border-radius:10px;padding:8px 10px">Setup note (only you see this until it’s fixed): visits aren’t saved yet. Paste your Google Sheet link into SHEET_URL in index.html.</div>'}
+ </div></div>`;}
+document.addEventListener('click',e=>{const w=e.target.closest('[data-w]');if(!w)return;const k=w.dataset.w;
+ if(k==='group')W.group=w.dataset.arg;
+ if(k==='consent')W.consent=!W.consent;
+ if(k==='start'){if(!(W.name.trim()&&W.group&&W.consent))return;S=newSession(W.name,W.group,(Date.now()-W.t0)/1000);logClick('sign-up','Get started (account created)');S.app=newApp(S.name,S.group);S.screens.p1=1;
+  W={name:'',group:'',consent:false,t0:Date.now()};saveNow();sendToSheet('start');render();return;}
+ const el=$('#welcome');if(el){const sc=el.querySelector('.a-scroll').scrollTop;el.innerHTML=welcomeHTML();el.querySelector('.a-scroll').scrollTop=sc;}});
+document.addEventListener('input',e=>{const t=e.target;
+ if(t.id==='wName'){W.name=t.value;const ok=W.name.trim()&&W.group&&W.consent;const b=$('#welcome [data-w="start"]');if(b)b.disabled=!ok;const h=$('#wHint');if(h)h.textContent=ok?'Next, you’ll set up who you check food for.':'Enter your name, choose one option and tick the box.';return;}
+ if(!A())return;
+ if(t.id==='aName'){A().draft.name=t.value;const h=$('#p2hint');if(h)h.textContent=p2Missing();const nb=$('#p2next');if(nb)nb.disabled=!!p2Missing();const q=$('#p2q');if(q)q.textContent=`Which foods must ${t.value.trim()||'they'} avoid?`;}
+ if(t.id==='aSearch'){A().recipeQ=t.value;const l=$('#recList');if(l)l.innerHTML=recipeListHTML();}
+ if(t.id==='aTypedName')A().typed.name=t.value; if(t.id==='aTypedText'){A().typed.text=t.value;const b=$('#typedCheck');if(b)b.disabled=!t.value.trim();}
+ if(t.id==='aMissing'){A().missing=t.value;const b=$('#missCheck');if(b)b.disabled=!t.value.trim();}
+ if(t.id==='aReport')A().report.text=t.value;
+});
+document.addEventListener('change',e=>{const t=e.target;if(t.closest('#app')&&S&&FIELD_NAMES[t.id]){logClick('typed',FIELD_NAMES[t.id]+': “'+t.value.slice(0,50)+'”');persist();}});
+
+/* ============ boot: returning visitors continue where they left off ============ */
+(function boot(){const saved=store.get('mp.visitor');if(saved&&saved.app&&saved.id){S=saved;S.left=false;const a=S.app;a.toast=null;a.sheet=null;if(a.screen==='checking')a.screen='scan';logClick('return','Came back to the website');}render();})();
+})();
+</script>
+</body>
+</html>
