@@ -2439,7 +2439,7 @@
     "treeNuts": "S",
     "peanut": "S",
     "milk": "S",
-    "gluten": "N",
+    "gluten": "S",
     "diabetes10g": "U"
    }
   },
@@ -2711,7 +2711,7 @@
     "treeNuts": "N",
     "peanut": "S",
     "milk": "U",
-    "gluten": "N",
+    "gluten": "S",
     "diabetes10g": "O"
    }
   },
@@ -8756,5 +8756,6 @@
     "diabetes10g": "S"
    }
   }
- ]
+ ],
+ "checked": "2026-11-23T21:32:48.551Z"
 }
