@@ -369,15 +369,19 @@ function fromOFF(p,code){const text=p.ingredients_text_en||p.ingredients_text||'
  if(n.sugars_serving!=null)sugar=+(+n.sugars_serving).toFixed(1);else if(sugar100!=null&&+p.serving_quantity>0)sugar=+(sugar100*p.serving_quantity/100).toFixed(1);
  const nm=p.product_name_en||p.product_name||'';const br=(p.brands||'').split(',')[0].trim();
  return{name:[nm,br].filter(Boolean).join(' · ')||'Barcode '+code,size:[p.quantity,p.serving_size?'serving '+p.serving_size:''].filter(Boolean).join(' · ')||'Barcode '+code,ings,tagIngs:tagNames,may,ref,refKnown:!!ings.length&&Array.isArray(p.allergens_tags),sugar,sugar100,noIngs:!ings.length,source:'barcode',barcode:code,text:text.slice(0,400)};}
+/* built-in list of real products (products.json, from Open Food Facts) — instant lookups, and a backup when the online database is busy */
+let LOCAL=null,LOCALP=null;function localDB(){if(LOCAL)return Promise.resolve(LOCAL);return LOCALP||(LOCALP=fetch('products.json').then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>(LOCAL=j||{})));}
 async function lookupBarcode(code,how){const a=A();if(!a)return;code=String(code||'').replace(/\D/g,'');
  if(code.length<8||code.length>14){toast('Barcode numbers have 8 to 13 digits');renderApp();return;}
  logClick('scan','Barcode '+(how==='camera'?'scanned with camera':'typed')+': '+code);S.c.scans++;
- a.busy='Looking up the product…';renderApp();let prod=null,err=null;
- try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),10000);
+ a.busy='Looking up the product…';renderApp();let prod=null,err=null,saved=false;
+ const L=await localDB();if(L[code]){prod=L[code];saved=true;}
+ if(!prod)try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),10000);
   const r=await fetch('https://world.openfoodfacts.org/api/v2/product/'+code+'.json?fields=product_name,product_name_en,brands,quantity,serving_size,serving_quantity,ingredients_text,ingredients_text_en,ingredients_tags,allergens_tags,traces_tags,nutriments',{signal:ctl.signal});
   clearTimeout(tm);const j=await r.json();if(j&&j.status===1&&j.product)prod=j.product;}catch(e){err=e;}
+ if(!prod&&L[code]){prod=L[code];saved=true;}
  if(A()!==a)return;a.busy=null;
- const o=prod?fromOFF(prod,code):{name:err?'Couldn’t reach the product database':'Product not found',size:'Barcode '+code,ings:[],may:[],ref:[],sugar:null,noIngs:true,notFound:true,offline:!!err,source:'barcode',barcode:code,text:''};
+ const o=prod?Object.assign(fromOFF(prod,code),{saved}):{name:err?'Couldn’t reach the product database':'Product not found',size:'Barcode '+code,ings:[],may:[],ref:[],sugar:null,noIngs:true,notFound:true,offline:!!err,source:'barcode',barcode:code,text:''};
  a.cur=makeProduct(o);go('checking');}
 /* camera barcode scanning (html5-qrcode) and label reading (tesseract.js), loaded only when needed */
 const LIBS={};function lib(src){return LIBS[src]||(LIBS[src]=new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=res;s.onerror=()=>{delete LIBS[src];rej(new Error('load'));};document.head.appendChild(s);}));}
@@ -486,7 +490,7 @@ function back(){const a=A();S.c.backs++;if(a.sheet){a.sheet=null;renderApp();ret
 function tab(screen){const a=A();a.toast=null;a.stack=[];a.screen=screen;a.sheet=null;onEnter(screen);renderApp(true);}
 function toast(text,undo){A().toast={text,undo,id:Date.now()};const id=A().toast.id;setTimeout(()=>{if(A()&&A().toast&&A().toast.id===id){A().toast=null;renderApp();}},4500);}
 function onEnter(sc){const a=A();S.screens[sc]=1;
- if(sc==='scan'){mark('scanOpen');a.scanT0=Date.now();}
+ if(sc==='scan'){mark('scanOpen');a.scanT0=Date.now();localDB();}
  if(sc==='typed'&&a.scanT0==null)a.scanT0=Date.now();
  if(sc==='recipes')mark('recipesOpen');
  if(sc==='checking'){clearTimeout(checkingTimer);a.chk=0;const step=()=>{a.chk++;if(A()!==a)return;if(a.chk<4){renderApp();checkingTimer=setTimeout(step,450);}else{try{navigator.vibrate&&navigator.vibrate(60);}catch(e){}a.stack.pop();a.screen='result';a.lastResult=null;onEnter('result');renderApp(true);}};checkingTimer=setTimeout(step,450);}
@@ -581,7 +585,7 @@ const SCREENS={
   const needFix=ev.why.includes('noings')||ev.why.includes('unread');
   const fix=needFix?`${B(ic('cam',20,'#fff')+'Photograph the ingredients','photoLabel',null,'p')}${B(ic('kb',20,'#1E40AF')+'Type the ingredients','typeFor',null,'s')}<div class="a-cap" style="text-align:center">We only show “Safe” when every ingredient is confirmed.</div>`:'';
   const actions=k==='bad'?`${B('Scan another product','scanAnother',null,'p')}<div class="a-row"><button class="a-btn" disabled aria-describedby="nosave">Save to Pantry</button>${B('Report issue','go','report','s')}</div><div class="a-cap" id="nosave">You can’t save food that isn’t safe for ${esc(P.name)}.</div>`:k==='safe'?`${B('Save to Pantry','savePantry',null,'p')}${B('Scan another product','scanAnother',null,'s')}<div class="a-row">${B('Another profile','tab','profiles','s')}${B('Report issue','go','report','s')}</div>`:`${fix}${B('Scan another product','scanAnother',null,needFix?'s':'p')}${needFix?'':B('Report issue','go','report','s')}`;
-  const src={barcode:'Open Food Facts product database'+(p.barcode?' · barcode '+p.barcode:''),photo:'text read from your label photo',typed:'ingredients you typed',sample:'sample product'}[p.source]||'product information';
+  const src={barcode:'Open Food Facts product database'+(p.saved?' (copy saved in the app)':'')+(p.barcode?' · barcode '+p.barcode:''),photo:'text read from your label photo',typed:'ingredients you typed',sample:'sample product'}[p.source]||'product information';
   return{nav:'none',topBg:pal.bg,dark:k==='bad',body:`<div class="a-banner" style="background:${pal.bg};color:${pal.fg}">${sic(k,44,k==='bad')}<div style="flex:1"><div class="eb">${pal.eb}</div><div class="a-title" style="color:${k==='bad'?'#fff':'#111827'}">${esc(pal.t)}</div><div>${esc(sub)}</div></div></div>
    <div class="a-body" style="padding-top:14px"><div class="a-row"><span class="a-tile">${ic('pkg',26,'#6B7280',1.8)}</span><div class="grow"><div class="a-h">${esc(p.name)}</div><div class="a-cap">${esc(p.size||'')}${p.size?' · ':''}${p.source==='barcode'||p.source==='sample'?'scanned just now':'checked just now'}</div></div></div>
    ${reasons.join('')}

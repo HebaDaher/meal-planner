@@ -1,0 +1,26 @@
+name: Build product list
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/build-products.mjs
+      - .github/workflows/products.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/build-products.mjs
+      - name: Save the product list
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add products.json test-products.json
+          git commit -m "Update built-in product list from Open Food Facts" || echo "No changes"
+          git push
