@@ -6,7 +6,7 @@
 <title>Meal Planner &amp; Ingredient Checker</title>
 <meta name="description" content="Check if packaged food is safe for your allergies or sugar limit, and plan meals that fit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
 <style>
 html,body{margin:0}
 [hidden]{display:none!important}
@@ -252,6 +252,16 @@ textarea.a-input{min-height:120px;resize:none;line-height:24px}
 .textsize[aria-pressed="true"]{background:#1D4ED8;color:#fff}
 .app.big .a-scroll,.app.big .a-foot{zoom:1.2}
 .goal-tags{color:#166534;font-size:14px;font-weight:600}
+.app[dir=rtl]{font-family:"Noto Sans Arabic","Inter",system-ui,sans-serif}
+.app[dir=rtl] [data-act=back] svg,.app[dir=rtl] .a-item>svg:last-child{transform:scaleX(-1)}
+.app[dir=rtl] #aBarcode,.app[dir=rtl] .num,.app[dir=rtl] #wAge,.app[dir=rtl] #aTypedSugar{direction:ltr;text-align:right}
+.app[dir=rtl] #aBarcode:placeholder-shown,.app[dir=rtl] #wAge:placeholder-shown,.app[dir=rtl] #aTypedSugar:placeholder-shown{direction:rtl}
+.toprow{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.langbtn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:22px;border:2px solid #1D4ED8;background:#fff;color:#1D4ED8;font-weight:700;font-size:16px;cursor:pointer;font-family:"Noto Sans Arabic","Inter",sans-serif}
+.agenote{font-size:15px;color:#1E40AF;font-weight:600}
+.offlink{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;border:2px solid #D9DEE7;background:#fff;color:#1E40AF;font-weight:700;text-decoration:none;padding:0 14px;text-align:center}
+.offcard{background:#EFF4FF;border:1px solid #DBE6FE;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.sres{display:flex;flex-direction:column;gap:8px}
 </style>
 </head>
 <body>
@@ -371,15 +381,23 @@ function fromOFF(p,code){const text=p.ingredients_text_en||p.ingredients_text||'
  return{name:[nm,br].filter(Boolean).join(' · ')||'Barcode '+code,size:[p.quantity,p.serving_size?'serving '+p.serving_size:''].filter(Boolean).join(' · ')||'Barcode '+code,ings,tagIngs:tagNames,may,ref,refKnown:!!ings.length&&Array.isArray(p.allergens_tags),sugar,sugar100,noIngs:!ings.length,source:'barcode',barcode:code,text:text.slice(0,400)};}
 /* built-in list of real products (products.json, from Open Food Facts) — instant lookups, and a backup when the online database is busy */
 let LOCAL=null,LOCALP=null;function localDB(){if(LOCAL)return Promise.resolve(LOCAL);return LOCALP||(LOCALP=fetch('products.json').then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>(LOCAL=j||{})));}
+async function searchProducts(q){const a=A();q=String(q||'').trim();a.sq=q;if(q.length<2){a.sstat='Type at least 2 letters.';renderApp();return;}
+ logClick('search','Searched products: “'+q.slice(0,50)+'”');if(a.scanT0==null)a.scanT0=Date.now();a.sres=[];a.sstat='Searching…';renderApp();
+ const L=await localDB();const ql=q.toLowerCase();const out=[];const seen=new Set();
+ for(const [c,r] of Object.entries(L)){const hay=((r.product_name_en||'')+' '+(r.product_name||'')+' '+(r.brands||'')).toLowerCase();if(ql.split(/\s+/).every(w=>hay.includes(w))){out.push({code:c,rec:r,local:true,name:fromOFF(r,c).name});seen.add(c);if(out.length>=8)break;}}
+ let online=true;try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),8000);
+  const res=await fetch('https://world.openfoodfacts.org/cgi/search.pl?search_terms='+encodeURIComponent(q)+'&search_simple=1&action=process&json=1&page_size=12&fields=code,product_name,product_name_en,brands,quantity,serving_size,serving_quantity,ingredients_text,ingredients_text_en,ingredients_tags,allergens_tags,traces_tags,nutriments',{signal:ctl.signal});clearTimeout(tm);
+  const j=await res.json();for(const x of (j.products||[])){if(!x.code||seen.has(x.code)||!(x.product_name||x.product_name_en))continue;seen.add(x.code);out.push({code:x.code,rec:x,local:false,name:fromOFF(x,x.code).name});if(out.length>=16)break;}}catch(e){online=false;}
+ if(A()!==a)return;a.sres=out;a.sstat=out.length?(out.length+' products found'):(online?'No products found. Try another name, or scan the barcode.':'Couldn’t reach Open Food Facts. Showing saved products only.');if(!online&&out.length)a.sstat='Couldn’t reach Open Food Facts. Showing saved products only.';renderApp();}
 async function lookupBarcode(code,how){const a=A();if(!a)return;code=String(code||'').replace(/\D/g,'');
  if(code.length<8||code.length>14){toast('Barcode numbers have 8 to 13 digits');renderApp();return;}
  logClick('scan','Barcode '+(how==='camera'?'scanned with camera':'typed')+': '+code);S.c.scans++;
  a.busy='Looking up the product…';renderApp();let prod=null,err=null,saved=false;
- const L=await localDB();const alts=[code,code.replace(/^0+(?=\d{8})/,''),code.padStart(13,'0'),code.length===13&&code[0]==='0'?code.slice(1):code];const hit=alts.find(c=>L[c]);if(hit){prod=L[hit];saved=true;}
- if(!prod)try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),10000);
+ const L=await localDB();const alts=[code,code.replace(/^0+(?=\d{8})/,''),code.padStart(13,'0'),code.length===13&&code[0]==='0'?code.slice(1):code];
+ try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),6000);
   const r=await fetch('https://world.openfoodfacts.org/api/v2/product/'+code+'.json?fields=product_name,product_name_en,brands,quantity,serving_size,serving_quantity,ingredients_text,ingredients_text_en,ingredients_tags,allergens_tags,traces_tags,nutriments',{signal:ctl.signal});
   clearTimeout(tm);const j=await r.json();if(j&&j.status===1&&j.product)prod=j.product;}catch(e){err=e;}
- if(!prod){const h2=alts.find(c=>L[c]);if(h2){prod=L[h2];saved=true;}}
+ if(!prod||!((prod.ingredients_text_en||prod.ingredients_text||'').trim()||(prod.ingredients_tags||[]).length)){const h2=alts.find(c=>L[c]);if(h2){prod=L[h2];saved=true;}}
  if(A()!==a)return;a.busy=null;
  const o=prod?Object.assign(fromOFF(prod,code),{saved}):{name:err?'Couldn’t reach the product database':'Product not found',size:'Barcode '+code,ings:[],may:[],ref:[],sugar:null,noIngs:true,notFound:true,offline:!!err,source:'barcode',barcode:code,text:''};
  a.cur=makeProduct(o);go('checking');}
@@ -389,7 +407,7 @@ const QR_SRC='https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.j
 const OCR_SRC='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
 let CAM=null,camEl=null;
 async function stopCam(){const c=CAM;CAM=null;camEl=null;if(c){try{if(c.isScanning)await c.stop();}catch(e){}try{c.clear();}catch(e){}}}
-function camMsg(t){const a=A();if(a)a.camErr=t;const m=document.getElementById('camMsg');if(m){m.textContent=t;m.hidden=false;}}
+function camMsg(t){const a=A();if(a)a.camErr=t;const m=document.getElementById('camMsg');if(m){m.textContent=t;m.hidden=false;localize(m);}}
 async function syncCam(){const a=A();const el=document.getElementById('reader');
  if(!a||a.screen!=='scan'||a.camMode==='label'||!el||a.busy||a.sheet){if(CAM||camEl)stopCam();return;}
  if(el===camEl)return;await stopCam();camEl=el;
@@ -402,7 +420,7 @@ async function syncCam(){const a=A();const el=document.getElementById('reader');
  catch(e){if(CAM===c)CAM=null;const denied=/NotAllowed|Permission/i.test(String(e&&(e.name||e)));camMsg(denied?'Camera permission was not given. Allow the camera in your browser, or type the barcode number below.':'No camera found on this device. Type the barcode number below, or try a sample product.');}}
 async function runOCR(file){const a=A();if(!file||!a)return;logClick('photo','Took a photo of the ingredient label');if(a.scanT0==null)a.scanT0=Date.now();
  a.busy='Reading the label… 0%';await stopCam();renderApp();
- try{await lib(OCR_SRC);const r=await Tesseract.recognize(file,'eng',{logger:m=>{if(m&&m.status==='recognizing text'&&A()===a&&a.busy){a.busy='Reading the label… '+Math.round((m.progress||0)*100)+'%';const b=document.getElementById('busyTxt');if(b)b.textContent=a.busy;}}});
+ try{await lib(OCR_SRC);const r=await Tesseract.recognize(file,'eng',{logger:m=>{if(m&&m.status==='recognizing text'&&A()===a&&a.busy){a.busy='Reading the label… '+Math.round((m.progress||0)*100)+'%';const b=document.getElementById('busyTxt');if(b){b.textContent=a.busy;localize(b);}}}});
   const text=((r&&r.data&&r.data.text)||'').replace(/\s*\n\s*/g,' ').replace(/\s{2,}/g,' ').trim();
   if(A()!==a)return;a.busy=null;
   if(text.length<8){failMark();a.typed={name:'Label photo',text:'',sugar:'',source:'photo',note:'We couldn’t read the text. Take a closer, sharper photo in good light — or type the ingredients.'};}
@@ -424,14 +442,132 @@ function afterResult(){const a=A(),p=curProduct(),ev=resultEval(),P=prof();
  if(failed)failMark();else if(S.failAt!=null){const r=+((Date.now()-S.failAt)/1000).toFixed(1);S.recov=S.recov==null?r:Math.max(S.recov,r);S.failAt=null;}
  mark('firstResult');sendToSheet('scan');}
 
+/* ============ Arabic translation (العربية) ============ */
+const AR={
+'Meal Planner &':'مخطط الوجبات و','Ingredient Checker':'فاحص المكونات','Meal Planner and Ingredient Checker':'مخطط الوجبات وفاحص المكونات',
+'Eat safely, plan easily':'كُل بأمان، وخطّط بسهولة','Check if packaged food is safe for you or your child, and plan meals that fit your allergies or sugar limit.':'تحقّق مما إذا كان الطعام المعلّب آمناً لك أو لطفلك، وخطّط لوجبات تناسب حساسيتك أو حد السكر لديك.',
+'Your first name':'اسمك الأول','Your age':'عمرك','What brings you here?':'ما الذي جاء بك إلى هنا؟','Has food allergies':'لدي حساسية من أطعمة','Has diabetes':'لدي سكري','Parent of a child with allergies':'والد/والدة طفل لديه حساسية','Wants to eat healthier':'أريد أن آكل بشكل صحي أكثر','Just exploring':'أستكشف فقط',
+'I agree that how I use this app (time spent and what I tap) is recorded for a university HCI project.':'أوافق على تسجيل طريقة استخدامي للتطبيق (الوقت وما أضغط عليه) لمشروع جامعي في تفاعل الإنسان مع الحاسوب.',
+'Get started':'ابدأ','Enter your name, choose one option and tick the box.':'أدخل اسمك وعمرك، واختر خياراً واحداً، وضع علامة في المربع.','Enter your name and age, choose one option and tick the box.':'أدخل اسمك وعمرك، واختر خياراً واحداً، وضع علامة في المربع.','Next, you’ll set up who you check food for.':'بعد ذلك، ستُعدّ الملف الشخصي لمن تفحص الطعام له.',
+'Larger text':'نص أكبر','Larger text: Off':'نص أكبر: متوقف','Larger text: On':'نص أكبر: مفعّل','e.g. Sara':'مثال: سارة','e.g. 50':'مثال: 50',
+'Larger text is on because you are over 45. You can turn it off at the top.':'تم تفعيل النص الأكبر لأن عمرك أكثر من 45. يمكنك إيقافه من الأعلى.',
+'Home':'الرئيسية','Recipes':'الوصفات','Scan':'مسح','Plan':'الخطة','Profiles':'الملفات','App navigation':'التنقل في التطبيق','Profiles and settings':'الملفات والإعدادات',
+'Good morning,':'صباح الخير،','Checking food for':'نفحص الطعام لـ','Set up who you check food for':'أعِدّ ملف من تفحص الطعام له','Add a profile with allergies or a sugar limit so results fit that person.':'أضف ملفاً فيه الحساسية أو حد السكر لتناسب النتائج ذلك الشخص.','Add a profile':'أضف ملفاً',
+'Scan the ingredient label or barcode — results in seconds.':'امسح ملصق المكونات أو الباركود — النتائج خلال ثوانٍ.','Scan a product':'امسح منتجاً','Type ingredients instead':'اكتب المكونات بدلاً من ذلك','Recent scans':'آخر عمليات المسح','See all':'عرض الكل','No scans yet. Your checked products will appear here.':'لا توجد عمليات مسح بعد. ستظهر هنا المنتجات التي تفحصها.',
+'Plan a healthy week':'خطّط لأسبوع صحي','Plan your meals':'خطّط لوجباتك','Find recipes':'ابحث عن وصفات','My week':'أسبوعي',
+'Choose who you’re checking food for.':'اختر من تفحص الطعام له.','Active':'نشط','The active profile is named on every scan and result, so you always know who you’re checking for.':'يظهر اسم الملف النشط في كل مسح ونتيجة، لتعرف دائماً لمن تفحص.','Log out':'تسجيل الخروج','No allergies or limits set':'لا توجد حساسية أو حدود',
+'New profile':'ملف جديد','Who is this profile for?':'لمن هذا الملف؟','Choose all that apply. We only ask about what you pick.':'اختر كل ما ينطبق. نسأل فقط عمّا تختاره.','I have food allergies':'لدي حساسية من أطعمة','Avoid allergens like nuts, milk or gluten':'تجنّب مسببات الحساسية مثل المكسرات أو الحليب أو الغلوتين','I have diabetes':'لدي سكري','Track sugar against my limit':'تتبّع السكر حسب الحد المسموح لي','My child has food allergies':'طفلي لديه حساسية من أطعمة','Make a profile for your child':'أنشئ ملفاً لطفلك','I want to eat healthier':'أريد أن آكل بشكل صحي أكثر','Plan balanced meals that fit my goals':'خطّط لوجبات متوازنة تناسب أهدافي',
+'Choose at least one option to continue.':'اختر خياراً واحداً على الأقل للمتابعة.','You can add more profiles later for other family members.':'يمكنك إضافة ملفات أخرى لاحقاً لأفراد العائلة.','Back':'رجوع','Next':'التالي',
+'Profile name':'اسم الملف','e.g. your child’s first name':'مثال: اسم طفلك الأول','Tap to select. Tap again to remove.':'اضغط للاختيار. اضغط مرة أخرى للإزالة.','Choose any that apply, or tap “No food allergies”.':'اختر ما ينطبق، أو اضغط «لا توجد حساسية من أطعمة».','No food allergies':'لا توجد حساسية من أطعمة',
+'1 · Mild':'1 · خفيفة','5 · Life-threatening':'5 · مهددة للحياة','Choose a severity from 1 to 5.':'اختر درجة الشدة من 1 إلى 5.','Choose any. We use them to suggest recipes and plan the week.':'اختر ما تريد. نستخدمها لاقتراح الوصفات وتخطيط الأسبوع.',
+'Less sugar':'سكر أقل','More protein':'المزيد من البروتين','Vegetarian':'نباتي','Low carb':'قليل الكربوهيدرات','Quick meals (20 min or less)':'وجبات سريعة (20 دقيقة أو أقل)','High protein':'بروتين عالٍ','Quick':'سريع',
+'Track sugar per serving':'تتبّع السكر في الحصة','For diabetes or eating less sugar — set your own limit':'لمرضى السكري أو لتقليل السكر — حدّد الحد الخاص بك','Track sugar':'تتبّع السكر','Sugar limit per serving':'حد السكر في الحصة','Lower':'أقل','Higher':'أعلى',
+'Add a profile name to continue.':'أضف اسماً للملف للمتابعة.','Choose at least one food to avoid.':'اختر طعاماً واحداً على الأقل لتجنّبه.','Choose any food allergies, or tap “No food allergies”.':'اختر أي حساسية من أطعمة، أو اضغط «لا توجد حساسية من أطعمة».','Choose a severity for each allergy.':'اختر درجة الشدة لكل حساسية.','Choose at least one healthy-eating goal.':'اختر هدفاً واحداً على الأقل للأكل الصحي.','Turn on sugar tracking or go back and choose allergies.':'فعّل تتبّع السكر أو ارجع واختر الحساسية.',
+'Adult':'بالغ','AVOID':'تجنّب','ALSO CHECKS OTHER NAMES':'يفحص أيضاً الأسماء الأخرى','SUGAR':'السكر','HEALTHY GOALS':'أهداف صحية','Edit':'تعديل','Not tracked':'غير متتبّع','Results check sugar only':'النتائج تفحص السكر فقط','Nothing to avoid':'لا شيء لتجنّبه','None':'لا شيء',
+'How results will look':'شكل النتائج','Contains something to avoid':'يحتوي على شيء يجب تجنّبه','Part of the label couldn’t be checked':'تعذّر فحص جزء من الملصق','No conflict found in everything checked':'لا يوجد تعارض في كل ما تم فحصه','Save profile':'احفظ الملف',
+'Not safe':'غير آمن','Uncertain':'غير مؤكد','Safe':'آمن','Over limit':'تجاوز الحد','NOT SAFE':'غير آمن','SAFE':'آمن','OVER LIMIT':'تجاوز الحد','UNCERTAIN — NOT MARKED SAFE':'غير مؤكد — لم يُصنّف آمناً','Can’t confirm yet':'لا يمكن التأكيد بعد',
+'Close scanner':'إغلاق الماسح','Barcode':'الباركود','Ingredient label':'ملصق المكونات','Point the camera at the barcode':'وجّه الكاميرا نحو الباركود','Or type the barcode number':'أو اكتب الرقم','Barcode number':'رقم الباركود','Check':'افحص',
+'Starting the camera… allow camera access if your browser asks.':'جارٍ تشغيل الكاميرا… اسمح بالوصول إلى الكاميرا إذا طلب المتصفح.','Photograph the ingredient list':'صوّر قائمة المكونات','Fill the photo with the list, hold steady and avoid glare.':'اجعل القائمة تملأ الصورة، وثبّت الهاتف وتجنّب اللمعان.','Take or choose a photo':'التقط صورة أو اخترها',
+'Can’t scan? Type the ingredients':'لا يمكنك المسح؟ اكتب المكونات','No product with you? Try a sample product':'ليس معك منتج؟ جرّب منتجاً تجريبياً','Search by product name':'ابحث باسم المنتج',
+'No camera found on this device. Type the barcode number below, or try a sample product.':'لم يتم العثور على كاميرا في هذا الجهاز. اكتب رقم الباركود بالأسفل أو جرّب منتجاً تجريبياً.','Camera permission was not given. Allow the camera in your browser, or type the barcode number below.':'لم يتم منح إذن الكاميرا. اسمح بالكاميرا في المتصفح أو اكتب رقم الباركود بالأسفل.','The camera scanner couldn’t load. Type the barcode number below.':'تعذّر تحميل ماسح الكاميرا. اكتب رقم الباركود بالأسفل.','The camera scanner couldn’t start. Type the barcode number below.':'تعذّر تشغيل ماسح الكاميرا. اكتب رقم الباركود بالأسفل.',
+'Barcode numbers have 8 to 13 digits':'أرقام الباركود من 8 إلى 13 خانة','Looking up the product…':'جارٍ البحث عن المنتج…','Label captured':'تم التقاط الملصق','Product found':'تم العثور على المنتج','Ingredients received':'تم استلام المكونات','Read the ingredients':'قراءة المكونات','Read the ingredients…':'قراءة المكونات…','Checked “may contain” warnings':'تم فحص تحذيرات «قد يحتوي»','Checked “may contain” warnings…':'فحص تحذيرات «قد يحتوي»…','Your phone vibrates when the result is ready.':'يهتز هاتفك عندما تصبح النتيجة جاهزة.',
+'No “may contain” warnings':'لا توجد تحذيرات «قد يحتوي»','Nothing to avoid.':'لا شيء لتجنّبه.','Save to Pantry':'احفظ في المخزن','Scan another product':'امسح منتجاً آخر','Another profile':'ملف آخر','Report issue':'أبلغ عن مشكلة','Saved to Pantry':'تم الحفظ في المخزن','Undo':'تراجع',
+'Photograph the ingredients':'صوّر المكونات','Type the ingredients':'اكتب المكونات','We only show “Safe” when every ingredient is confirmed.':'لا نعرض «آمن» إلا عندما يتم التأكد من كل المكونات.',
+'Always check the pack — recipes can change.':'تحقّق دائماً من العبوة — قد تتغير الوصفات.','“Safe” = no conflict in the information checked. Always check the pack.':'«آمن» = لا تعارض في المعلومات التي تم فحصها. تحقّق دائماً من العبوة.',
+'This product has no ingredient list':'لا توجد قائمة مكونات لهذا المنتج','This barcode isn’t in the product database yet':'هذا الباركود غير موجود في قاعدة بيانات المنتجات بعد','Couldn’t reach the product database':'تعذّر الوصول إلى قاعدة بيانات المنتجات','Check your internet connection — or photograph or type the ingredients.':'تحقّق من اتصال الإنترنت — أو صوّر المكونات أو اكتبها.','Some ingredients couldn’t be read':'تعذّرت قراءة بعض المكونات','Retake the photo or type the missing ingredients.':'أعد التقاط الصورة أو اكتب المكونات الناقصة.',
+'The ingredient list didn’t show this, so we won’t mark it safe. Check the pack.':'قائمة المكونات لم تُظهر ذلك، لذلك لن نصنّفه آمناً. تحقّق من العبوة.','Sugar per serving isn’t listed':'كمية السكر في الحصة غير مذكورة','Check the nutrition label on the pack.':'تحقّق من ملصق القيم الغذائية على العبوة.','No connection to the product database':'لا يوجد اتصال بقاعدة بيانات المنتجات','Barcode not found — check it another way':'لم يتم العثور على الباركود — افحصه بطريقة أخرى','No ingredient list found for this product':'لم يتم العثور على قائمة مكونات لهذا المنتج','Product not found':'لم يتم العثور على المنتج',
+'View on Open Food Facts':'عرض في ⁨Open Food Facts⁩','Add this product to Open Food Facts':'أضف هذا المنتج إلى ⁨Open Food Facts⁩','Help others: add its photos and ingredients to the free database.':'ساعد الآخرين: أضف صوره ومكوناته إلى قاعدة البيانات المجانية.',
+'Check the label text':'راجِع نص الملصق','Type ingredients':'اكتب المكونات','Product name (optional)':'اسم المنتج (اختياري)','e.g. Granola Bar':'مثال: جرانولا بار','Ingredients':'المكونات','e.g. oats, honey, almonds, sunflower oil':'مثال: شوفان، عسل، لوز، زيت دوار الشمس','Separate with commas. Include any “may contain” line from the pack.':'افصل بينها بفواصل. أضف أي سطر «قد يحتوي» من العبوة.','Sugar per serving, in grams (from the nutrition label)':'السكر في الحصة بالغرام (من ملصق القيم الغذائية)','e.g. 6':'مثال: 6','Check ingredients':'افحص المكونات','Photograph the label instead':'صوّر الملصق بدلاً من ذلك',
+'We also check other names, like “Prunus dulcis” for almonds or “casein” for milk — in English and Arabic.':'نفحص أيضاً الأسماء الأخرى، مثل «Prunus dulcis» للوز أو «الكازين» للحليب — بالإنجليزية والعربية.','We read this from your photo. Fix anything that looks wrong, then tap Check ingredients.':'قرأنا هذا من صورتك. صحّح أي شيء يبدو خاطئاً، ثم اضغط «افحص المكونات».','We couldn’t read the text. Take a closer, sharper photo in good light — or type the ingredients.':'تعذّرت قراءة النص. التقط صورة أقرب وأوضح في إضاءة جيدة — أو اكتب المكونات.','The photo reader couldn’t start on this device. Please type the ingredients instead.':'تعذّر تشغيل قارئ الصور على هذا الجهاز. يرجى كتابة المكونات بدلاً من ذلك.','Label photo':'صورة الملصق','Typed ingredients':'مكونات مكتوبة','read from your photo · checked just now':'مقروءة من صورتك · تم الفحص الآن','typed by you · checked just now':'كتبتها أنت · تم الفحص الآن','scanned just now':'تم المسح الآن','checked just now':'تم الفحص الآن',
+'Report a mismatch':'أبلغ عن عدم تطابق','Help keep results accurate':'ساعد في إبقاء النتائج دقيقة','What’s wrong?':'ما المشكلة؟','An ingredient is missing':'مكوّن ناقص','Wrong product':'منتج خاطئ','The label has changed':'تغيّر الملصق','The result looks wrong':'النتيجة تبدو خاطئة','Details (optional)':'التفاصيل (اختياري)','Send report':'أرسل البلاغ','Choose what’s wrong to send a report.':'اختر المشكلة لإرسال البلاغ.','Reports are checked before any product information changes.':'تُراجع البلاغات قبل تغيير أي معلومات عن المنتج.','Report sent — thank you':'تم إرسال البلاغ — شكراً لك','Close':'إغلاق',
+'Scan history':'سجل المسح','All':'الكل','No scans with this result.':'لا توجد عمليات مسح بهذه النتيجة.',
+'Search recipes':'ابحث في الوصفات','Search recipes, e.g. pancakes':'ابحث، مثال: فطائر','Fits my goals':'يناسب أهدافي','Breakfast':'فطور','Lunch':'غداء','Dinner':'عشاء','Snack':'وجبة خفيفة','Under 30 min':'أقل من 30 دقيقة','Fits your profile':'يناسب ملفك','1 swap needed':'يحتاج استبدالاً واحداً','No recipes match. Try another word or turn off a filter.':'لا توجد وصفات مطابقة. جرّب كلمة أخرى أو أوقف أحد الفلاتر.','Back to results':'العودة إلى النتائج',
+'Ingredient safety summary':'ملخص أمان المكونات','Add to weekly meal plan':'أضف إلى خطة الوجبات الأسبوعية','Swap':'استبدال','Real-world swaps that keep the recipe working':'بدائل واقعية تحافظ على نجاح الوصفة','Sugar per serving':'السكر في الحصة','Apply swap':'طبّق الاستبدال','Cancel':'إلغاء','Swap applied':'تم الاستبدال','Meal':'الوجبة','Day':'اليوم','The ingredients go straight to this week’s shopping list.':'تُضاف المكونات مباشرة إلى قائمة تسوق هذا الأسبوع.',
+'This week':'هذا الأسبوع','Add recipe':'أضف وصفة','Week at a glance':'الأسبوع في لمحة','Meals planned':'الوجبات المخطط لها','Average sugar':'متوسط السكر','Average protein':'متوسط البروتين','Vegetarian meals':'وجبات نباتية','High protein meals':'وجبات عالية البروتين','Low carb meals':'وجبات قليلة الكربوهيدرات','Quick meals':'وجبات سريعة','Add meals to see this week’s sugar, protein and vegetarian meals.':'أضف وجبات لترى سكر هذا الأسبوع وبروتينه والوجبات النباتية.','Shopping list':'قائمة التسوق','Share':'مشاركة','Link copied':'تم نسخ الرابط','Add recipes to build your list.':'أضف وصفات لتكوين قائمتك.',
+'Search products':'ابحث عن المنتجات','Product name or brand':'اسم المنتج أو العلامة التجارية','e.g. Almarai yogurt':'مثال: زبادي المراعي','Search':'بحث','Searching…':'جارٍ البحث…','Results from the app’s saved list and Open Food Facts.':'نتائج من القائمة المحفوظة في التطبيق ومن ⁨Open Food Facts⁩.','No products found. Try another name, or scan the barcode.':'لم يتم العثور على منتجات. جرّب اسماً آخر أو امسح الباركود.','Couldn’t reach Open Food Facts. Showing saved products only.':'تعذّر الوصول إلى ⁨Open Food Facts⁩. نعرض المنتجات المحفوظة فقط.','Type at least 2 letters.':'اكتب حرفين على الأقل.',
+'Milk':'حليب','Egg':'بيض','Gluten':'غلوتين','Peanut':'فول سوداني','Tree nuts':'مكسرات','Soy':'صويا','Fish':'سمك','Shellfish':'محار وقشريات','Sesame':'سمسم',
+'Granola Bar':'جرانولا بار','Rice Crackers':'مقرمشات الأرز','Oat Biscuits':'بسكويت الشوفان','Chocolate Spread':'كريمة الشوكولاتة','Trail Mix':'خليط مكسرات وفواكه مجففة',
+'Oat pancakes':'فطائر الشوفان','Classic pancakes':'فطائر كلاسيكية','Banana egg pancakes':'فطائر الموز والبيض','Almond flour pancakes':'فطائر دقيق اللوز','Maple syrup pancakes':'فطائر شراب القيقب','Chocolate chip pancakes':'فطائر رقائق الشوكولاتة','Greek yogurt berry bowl':'وعاء زبادي يوناني بالتوت','Veggie omelette':'أومليت بالخضار','Overnight oats':'شوفان منقوع','Lentil salad':'سلطة العدس','Chicken & veg stir-fry':'دجاج وخضار سوتيه','Chickpea & spinach curry':'كاري الحمص والسبانخ','Tofu & veggie rice bowl':'وعاء أرز بالتوفو والخضار','Grilled chicken salad':'سلطة دجاج مشوي','Hummus & veggie wrap':'لفافة حمص وخضار','Baked salmon & greens':'سلمون مخبوز مع خضار',
+'Rolled oats':'شوفان','Eggs':'بيض','Cinnamon':'قرفة','White sugar':'سكر أبيض','Wholewheat flour':'دقيق القمح الكامل','Ripe bananas':'موز ناضج','Almond flour':'دقيق اللوز','Maple syrup':'شراب القيقب','Wheat flour':'دقيق القمح','Chocolate chips':'رقائق الشوكولاتة','Greek yogurt':'زبادي يوناني','Mixed berries':'توت مشكّل','Chia seeds':'بذور الشيا','Spinach':'سبانخ','Feta cheese':'جبنة فيتا','Green lentils':'عدس أخضر','Cucumber':'خيار','Olive oil':'زيت زيتون','Chicken breast':'صدر دجاج','Mixed vegetables':'خضار مشكّلة','Soy sauce':'صلصة الصويا','Chickpeas':'حمص','Chopped tomatoes':'طماطم مقطعة','Onion':'بصل','Curry spices':'بهارات الكاري','Firm tofu':'توفو','Brown rice':'أرز بني','Broccoli':'بروكلي','Mixed leaves':'أوراق خضراء مشكّلة','Cherry tomatoes':'طماطم كرزية','Wholewheat wraps':'خبز تورتيلا من القمح الكامل','Hummus (tahini)':'حمص (طحينة)','Grated carrot':'جزر مبشور','Salmon fillets':'شرائح سلمون','Green beans':'فاصوليا خضراء','Lemon':'ليمون','Stevia / erythritol blend':'خليط ستيفيا / إريثريتول','Mashed ripe banana':'موز ناضج مهروس','0 g sugar · low GI · same sweetness':'0 غ سكر · مؤشر سكري منخفض · نفس الحلاوة','Natural sugar · adds fibre':'سكر طبيعي · يضيف أليافاً',
+'It has 2 high-sugar ingredients.':'يحتوي على مكونين عاليي السكر.','The syrup is the main ingredient, so there is no good swap.':'الشراب هو المكون الرئيسي، لذلك لا يوجد بديل جيد.',
+'Mon':'إثن','Tue':'ثلا','Wed':'أرب','Thu':'خمي','Fri':'جمع','Sat':'سبت','Sun':'أحد','Monday':'الاثنين','Tuesday':'الثلاثاء','Wednesday':'الأربعاء','Thursday':'الخميس','Friday':'الجمعة','Saturday':'السبت','Sunday':'الأحد',
+'Setup note (only you see this until it’s fixed): visits aren’t saved yet. Paste your Google Sheet link into SHEET_URL in index.html.':'ملاحظة إعداد: الزيارات لا تُحفظ بعد.'
+};
+const AR_AL={'tree nuts':'المكسرات','tree nut':'المكسرات','milk':'الحليب','egg':'البيض','eggs':'البيض','gluten':'الغلوتين','peanut':'الفول السوداني','peanuts':'الفول السوداني','soy':'الصويا','soybeans':'الصويا','fish':'السمك','shellfish':'المحار والقشريات','sesame':'السمسم','nuts':'المكسرات','allergens':'مسببات الحساسية','high protein':'بروتين عالٍ','vegetarian':'نباتي','low carb':'قليل الكربوهيدرات','quick':'سريع'};
+const AR_MEAL={breakfast:'فطور',lunch:'غداء',dinner:'عشاء',snack:'وجبة خفيفة'};
+const AR_MON={Jan:'يناير',Feb:'فبراير',Mar:'مارس',Apr:'أبريل',May:'مايو',Jun:'يونيو',Jul:'يوليو',Aug:'أغسطس',Sep:'سبتمبر',Oct:'أكتوبر',Nov:'نوفمبر',Dec:'ديسمبر'};
+const arList=s=>s.split(/, | or /).map(x=>{const k=x.trim().toLowerCase();return AR_AL[k]||AR[x.trim()]||x.trim();}).join('، ');
+const arMonths=s=>s.replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g,m=>AR_MON[m]);
+const arSev=w=>({'mild':'خفيفة','mild to moderate':'خفيفة إلى متوسطة','moderate':'متوسطة','severe':'شديدة','life-threatening':'مهددة للحياة'})[w]||w;
+const AR_RX=[
+ [/^(\d+) hidden — why\?$/,'$1 مخفية — لماذا؟'],[/^(\d+) recipes? hidden$/,'$1 وصفات مخفية'],[/^(\d+) recipes?$/,'$1 وصفات'],[/^(\d+) of (\d+)$/,'$1 من $2'],
+ [/^(\d+) min · (\S+) g sugar · (\S+) g protein$/,'$1 دقيقة · $2 غ سكر · $3 غ بروتين'],
+ [/^(\d+) min · (\d+) servings? · (\w+) · for (.+)$/,(m,a,b,c,d)=>`${a} دقيقة · ${b} حصص · ${AR_MEAL[c.toLowerCase()]||c} · لـ ${d}`],
+ [/^(.+) · (scanned|checked) just now$/,(m,a,b)=>`${tr(a)} · ${b==='scanned'?'تم المسح الآن':'تم الفحص الآن'}`],
+ [/^(\S+) g sugar per serving — (.+)$/,(m,a,b)=>`${a} غ سكر في الحصة — ${tr(b)}`],
+ [/^limit is (\S+) g\.?( 1 ingredient can be swapped\.)?$/,(m,a,b)=>`الحد ${a} غ.${b?' يمكن استبدال مكوّن واحد.':''}`],
+ [/^Not (.+)$/,(m,a)=>AR_AL[a.toLowerCase()]?`لا يطابق: ${arList(a)}`:m],
+ [/^(\d+ \w{3}) – (\d+ \w{3}) · (.+)$/,(m,a,b,c)=>`${arMonths(a)} – ${arMonths(b)} · ${c}`],[/^Day · (.+)$/,(m,a)=>`اليوم · ${arMonths(a)}`],
+ [/^(\S+) g \(limit (\S+) g\)$/,'$1 غ (الحد $2 غ)'],[/^(\S+) g of (\S+) g$/,'$1 غ من $2 غ'],[/^(\S+) grams of a (\S+) gram limit$/,'$1 غرام من حد $2 غرام'],[/^(\S+) g → (\S+) g$/,'$1 غ ← $2 غ'],
+ [/^(\S+) (g|ml)$/,(m,a,b)=>`${a} ${b==='g'?'غ':'مل'}`],[/^(\d+) (cup|cups|tbsp|tsp|can|cans)$/,(m,a,b)=>`${a} ${({cup:'كوب',cups:'أكواب',tbsp:'ملعقة كبيرة',tsp:'ملعقة صغيرة',can:'علبة',cans:'علب'})[b]}`],[/^(\d+) (head)$/,'$1 رأس'],
+ [/^(.+)’s profile saved$/,'تم حفظ ملف $1'],[/^(.+) \(you\)$/,'$1 (أنت)'],[/^(.+) \(swapped\)$/,(m,a)=>`${tr(a)} (مستبدَلة)`],
+ [/^All (\d+) ingredients read — including other names( for nuts like “Prunus dulcis”)?\.$/,(m,a,b)=>`تمت قراءة جميع المكونات (${a}) — بما في ذلك الأسماء الأخرى${b?' للمكسرات مثل «Prunus dulcis»':''}.`],
+ [/^Allergy filter comes from (.+)’s profile$/,'فلتر الحساسية مأخوذ من ملف $1'],[/^Sugar limit comes from (.+)’s profile$/,'حد السكر مأخوذ من ملف $1'],
+ [/^Add to (\w+) (breakfast|lunch|dinner|snack)$/,(m,a,b)=>`أضف إلى ${AR_MEAL[b]} يوم ${AR[a]||a}`],[/^Added to (\w+) (breakfast|lunch|dinner|snack)$/,(m,a,b)=>`تمت الإضافة إلى ${AR_MEAL[b]} ${AR[a]||a}`],
+ [/^Barcode (\d+)$/,'الباركود $1'],[/^Check (.+)’s profile$/,'راجِع ملف $1'],[/^Checked other names for (.+?)(…?)$/,(m,a,b)=>`تم فحص الأسماء الأخرى لـ${arList(a)}${b}`],
+ [/^Checking for (.+?)(?: · (.+))?$/,(m,a,b)=>`الفحص لـ ${a}${b?' · '+(b.startsWith('sugar ≤')?b.replace('sugar ≤','السكر ≤').replace(' g',' غ'):arList(b)):''}`],
+ [/^Child · managed by (.+)$/,'طفل · يديره $1'],[/^Contains (.+?) \((.+)\)$/,(m,a,b)=>`يحتوي على ${arList(a)} (${b})`],[/^Contains: (.+)$/,'يحتوي على: $1'],
+ [/^Does (.+) have any food allergies too\?$/,'هل لدى $1 حساسية من أطعمة أيضاً؟'],[/^Fits (.+)’s profile$/,'يناسب ملف $1'],[/^Hold still — checking against (.+)’s profile$/,'ثبّت الهاتف — نفحص حسب ملف $1'],
+ [/^How severe is (.+)’s (.+) allergy\?$/,(m,a,b)=>`ما شدة حساسية ${a} من ${arList(b)}؟`],[/^How severe is the (.+) allergy\?$/,(m,b)=>`ما شدة الحساسية من ${arList(b)}؟`],[/^Is this food safe for (.+)\?$/,'هل هذا الطعام آمن لـ $1؟'],
+ [/^May contain: (.+)$/,(m,a)=>`قد يحتوي على: ${arList(a)}`],[/^May contain (.+)$/,(m,a)=>`قد يحتوي على ${arList(a)}`],
+ [/^(.+) · Healthy eating$/,'$1 · أكل صحي'],[/^(.+) · Type 2 diabetes$/,'$1 · سكري النوع الثاني'],
+ [/^Product database lists:? (.+?)( — check the pack)?$/,(m,a,b)=>`قاعدة بيانات المنتجات تذكر: ${arList(a)}${b?' — تحقّق من العبوة':''}`],
+ [/^Recipes that fit (.+)’s profile, added to a weekly plan and shopping list\.$/,'وصفات تناسب ملف $1، تُضاف إلى خطة أسبوعية وقائمة تسوق.'],[/^Recipes that match (.+)’s goals: (.+)$/,(m,a,b)=>`وصفات تطابق أهداف ${a}: ${b.split(' · ').map(x=>AR[x]||x).join(' · ')}`],
+ [/^Reading the label… (\d+)%$/,'جارٍ قراءة الملصق… $1%'],[/^See all (\d+) ingredients$/,'عرض جميع المكونات ($1)'],[/^All (\d+) ingredients$/,'جميع المكونات ($1)'],
+ [/^Severity (\d) of 5 — (.+)$/,(m,a,b)=>`الشدة ${a} من 5 — ${arSev(b)}`],
+ [/^Source: (.+) · checked (.+)$/,(m,a,b)=>`المصدر: ${a.replace('Open Food Facts product database','قاعدة بيانات ⁨Open Food Facts⁩').replace(' (copy saved in the app)',' (نسخة محفوظة في التطبيق)').replace(' (live)',' (مباشر)').replace('barcode','الباركود').replace('text read from your label photo','نص مقروء من صورة الملصق').replace('ingredients you typed','مكونات كتبتها').replace('sample product','منتج تجريبي')} · وقت الفحص ${b.replace(' AM',' ص').replace(' PM',' م')}`],
+ [/^Step (\d) of 3$/,'الخطوة $1 من 3'],[/^Sugar ≤ (\S+) g \/ serving$/,'السكر ≤ $1 غ / حصة'],[/^Sugar: (\S+) g per serving$/,'السكر: $1 غ في الحصة'],[/^≤ (\S+) g per serving$/,'≤ $1 غ في الحصة'],[/^▏= (.+)’s limit$/,'▏= حد $1'],[/^Carbs (\S+) g$/,'الكربوهيدرات $1 غ'],
+ [/^That’s over (.+)’s limit of (\S+) g per serving\.$/,'هذا يتجاوز حد $1 البالغ $2 غ في الحصة.'],[/^Within (.+)’s limit of (\S+) g\.$/,'ضمن حد $1 البالغ $2 غ.'],
+ [/^These don’t fit (.+)’s profile or goals, so we keep them out of the results\. Turn off “Fits my goals” to see them\.$/,'هذه لا تناسب ملف $1 أو أهدافه، لذلك نخفيها من النتائج. أوقف «يناسب أهدافي» لعرضها.'],
+ [/^Warning printed on the pack\.(?: Not in (.+)’s profile\.)?$/,(m,a)=>`تحذير مطبوع على العبوة.${a?' ليس في ملف '+a+'.':''}`],
+ [/^What are (your|.+’s) healthy-eating goals\?$/,(m,a)=>a==='your'?'ما أهدافك للأكل الصحي؟':`ما أهداف ${a.replace(/’s$/,'')} للأكل الصحي؟`],
+ [/^Which foods must (.+) avoid\?$/,(m,a)=>`ما الأطعمة التي يجب أن يتجنبها ${a==='they'?'هذا الشخص':a}؟`],[/^You can’t save food that isn’t safe for (.+)\.$/,'لا يمكنك حفظ طعام غير آمن لـ $1.'],
+ [/^(?:Listed as “(.+)” — )?this is (.+?)\. (.+)’s severity: (\S+) of 5\.$/,(m,a,b,c,d)=>`${a?'مذكور باسم «'+a+'» — ':''}هذا من ${arList(b.replace(/^an? /,''))}. شدة حساسية ${c}: ${d} من 5.`],
+ [/^Over (.+)’s sugar limit$/,'تجاوز حد السكر لـ $1'],[/^Not safe for (.+)$/,'غير آمن لـ $1'],[/^Safe for (.+)$/,'آمن لـ $1'],[/^Can’t be added for (.+)$/,'لا يمكن إضافتها لـ $1'],
+ [/^No (.+) found$/,(m,a)=>`لم يُعثر على ${arList(a)}`],[/^No conflicts with (.+)’s profile$/,'لا تعارض مع ملف $1'],[/^No ingredients (.+) must avoid\.$/,'لا توجد مكونات يجب أن يتجنبها $1.'],[/^No (.+)$/,(m,a)=>{const l=arList(a);return l!==a?`بدون ${l}`:m;}],
+ [/^Now checking food for (.+)$/,'الآن نفحص الطعام لـ $1'],[/^(Now within|Still over) (.+)’s (\S+) g limit · carbs (\S+) g → (\S+) g$/,(m,a,b,c,d,e)=>`${a==='Now within'?'أصبح ضمن':'ما زال يتجاوز'} حد ${b} البالغ ${c} غ · الكربوهيدرات ${d} غ ← ${e} غ`],
+ [/^Photograph the ingredient list or type it, and we’ll check it for (.+)\.$/,'صوّر قائمة المكونات أو اكتبها، وسنفحصها لـ $1.'],
+ [/^Swap (.+) \((.+)\) for:$/,(m,a,b)=>`استبدل ${AR[a.charAt(0).toUpperCase()+a.slice(1)]||a} (${b}) بـ:`],[/^Swap (.+)$/,(m,a)=>`استبدل ${AR[a.charAt(0).toUpperCase()+a.slice(1)]||a}`],
+ [/^From (\d+) recipes? · safe and swapped ingredients only$/,'من $1 وصفات · مكونات آمنة ومستبدَلة فقط'],[/^For (.+) · newest first$/,'لـ $1 · الأحدث أولاً'],[/^Scanned (.+)$/,(m,a)=>`تم المسح ${a==='just now'?'الآن':a}`],
+ [/^(.+) · (\S+ ?\S*)$/,(m,a,b)=>{const ta=AR[a]||a,tb=AR[b]||b;return ta!==a?`${ta} · ${tb}`:m;}],
+ [/^(.+) (\d+)$/,(m,a,b)=>AR[a]?`${AR[a]} ${b}`:m],[/^(.+) severity$/,(m,a)=>AR[a]?`شدة ${AR[a]}`:m],
+ [/^(\d+) g · (contains|high sugar|swapped from)(.*)$/,(m,a,b,c)=>`${a} غ · ${b==='contains'?'يحتوي على '+arList(c.trim()):b==='high sugar'?'سكر عالٍ':'بدلاً من '+(AR[c.trim().charAt(0).toUpperCase()+c.trim().slice(1)]||c.trim())}`],
+ [/^Over the (\S+) g limit$/,'يتجاوز حد $1 غ'],
+ [/^([a-z ]+) \((\d)\/5\)$/,(m,a,b)=>AR_AL[a]?`${AR_AL[a]} (${b}/5)`:m],[/^sugar ≤ (\S+) g \/ serving$/,'السكر ≤ $1 غ / حصة'],[/^(vegetarian|high protein|low carb|quick)$/,(m,a)=>AR_AL[a]],
+ [/^serving (.+)$/,(m,a)=>'حصة '+a.replace(/(\d)\s?g\b/g,'$1 غ').replace(/(\d)\s?ml\b/g,'$1 مل')],
+ [/^(.+) · checked for (.+)$/,'$1 · تم الفحص لـ $2'],[/^(.+) — (.+) must avoid$/,(m,a,b)=>`${arList(a)} — يجب أن يتجنبها ${b}`],
+ [/^· Saved list$/,'· القائمة المحفوظة'],[/^· Open Food Facts$/,'· Open Food Facts'],[/^Larger text is on because you are over 45/,'تم تفعيل النص الأكبر لأن عمرك أكثر من 45. يمكنك إيقافه من الأعلى.'],
+ [/^(\d+) products? found$/,'تم العثور على $1 منتج'],[/^Saved list · (.+)$/,'القائمة المحفوظة · $1'],[/^Open Food Facts · (.+)$/,'Open Food Facts · $1']
+];
+function tr(s){const k=String(s).replace(/\s+/g,' ').trim();if(!k||!/[A-Za-z]/.test(k))return s;let v=AR[k];
+ if(v==null){for(const [rx,rp] of AR_RX){if(rx.test(k)){const out=k.replace(rx,rp);if(out!==k){v=out;break;}}}}
+ if(v==null&&k.includes(' · ')){const parts=k.split(' · ');const t=parts.map(p=>{const x=tr(p);return x;});if(t.some((x,i)=>x!==parts[i]))v=t.join(' · ');}
+ if(v==null&&/^✓ /.test(k)){const x=tr(k.slice(2));if(x!==k.slice(2))v='✓ '+x;}
+ return v==null?s:s.replace(k,v);}
+function localize(root){if(!root)return;if(LANG!=='ar'){if(root.getAttribute&&root.getAttribute('dir')==='rtl'){root.removeAttribute('dir');root.removeAttribute('lang');}return;}
+ if(root.classList&&root.classList.contains('app')){root.setAttribute('dir','rtl');root.setAttribute('lang','ar');}
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const ns=[];while(w.nextNode())ns.push(w.currentNode);
+ ns.forEach(n=>{if(n.parentElement&&n.parentElement.closest('.num,.notr,script,style,textarea'))return;const t=tr(n.nodeValue);if(t!==n.nodeValue)n.nodeValue=t;});
+ root.querySelectorAll('[placeholder],[aria-label]').forEach(e=>['placeholder','aria-label'].forEach(at=>{const v=e.getAttribute(at);if(v){const t=tr(v);if(t!==v)e.setAttribute(at,t);}}));}
+
 /* ============ visitor tracking (sent to your Google Sheet) ============ */
 const GROUPS={allergy:'Has food allergies',diabetes:'Has diabetes',parent:'Parent of a child with allergies',healthy:'Wants to eat healthier',other:'Just exploring'};
 const HGOALS={protein:{label:'More protein',tag:'High protein',test:r=>r.protein>=15},veg:{label:'Vegetarian',tag:'Vegetarian',test:r=>!!r.veg},lowcarb:{label:'Low carb',tag:'Low carb',test:r=>r.carbs<=20},quick:{label:'Quick meals (20 min or less)',tag:'Quick',test:r=>r.mins<=20}};
-const SCREEN_NAMES={home:'Home',profiles:'Profiles',p1:'Create profile · step 1',p2:'Create profile · step 2',p3:'Create profile · review',scan:'Camera',checking:'Checking ingredients',result:'Result',ingredients:'Ingredient list',typed:'Type ingredients',report:'Report issue',history:'Scan history',recipes:'Recipes',recipe:'Recipe',plan:'Meal plan'};
-const FIELD_NAMES={aBarcode:'Barcode typed',aTypedSugar:'Sugar per serving typed',aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
+const SCREEN_NAMES={search:'Search products',home:'Home',profiles:'Profiles',p1:'Create profile · step 1',p2:'Create profile · step 2',p3:'Create profile · review',scan:'Camera',checking:'Checking ingredients',result:'Result',ingredients:'Ingredient list',typed:'Type ingredients',report:'Report issue',history:'Scan history',recipes:'Recipes',recipe:'Recipe',plan:'Meal plan'};
+const FIELD_NAMES={aQuery:'Product search typed',wAge:'Age',aBarcode:'Barcode typed',aTypedSugar:'Sugar per serving typed',aName:'Profile name',aSearch:'Recipe search',aTypedName:'Product name',aTypedText:'Ingredients typed',aMissing:'Missing ingredients typed',aReport:'Report details'};
 const TRUTH={granola:['tree','soy'],crackers:['sesame','soy','gluten'],oat:['gluten','milk'],choc:['milk','soy','tree'],trail:['tree','peanut']};
-let BIG=!!store.get('mp.big');
-let S=null, checkingTimer=null, saveT=null, W={name:'',group:'',consent:false,t0:Date.now()};
+let BIG=!!store.get('mp.big');const ageOk=v=>/^\d{1,3}$/.test(String(v).trim())&&+v>=5&&+v<=120;let LANG=store.get('mp.lang')==='ar'?'ar':'en';
+let S=null, checkingTimer=null, saveT=null, W={name:'',age:'',group:'',consent:false,bigTouched:false,t0:Date.now()};
 const A=()=>S&&S.app;
 const prof=()=>A().profiles.find(p=>p.id===A().active);
 const secs=()=>+((Date.now()-S.t0)/1000).toFixed(1);
@@ -451,7 +587,7 @@ const SHEET_URL='https://script.google.com/macros/s/AKfycbw7Lp5hIRFJJjrMOD-lb2ye
 const sheetReady=()=>/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec/.test(SHEET_URL);
 function rowFor(){const M=S.M,a=A(),d=new Date(S.startedAt);const mn=s=>s==null||s===''?'':+(s/60).toFixed(2);const span=(x,y)=>M[x]!=null&&M[y]!=null&&M[y]>=M[x]?mn(M[y]-M[x]):'';
  const core=(M.profileSaved!=null?1:0)+(S.checks.length?1:0)+(S.planned.length?1:0);
- return {'Date':d.toLocaleDateString('en-GB'),'Start time':d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),'Session ID':S.id,'Name':S.name,'Problem':GROUPS[S.group]||S.group,'Device':S.device,
+ return {'Date':d.toLocaleDateString('en-GB'),'Start time':d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),'Session ID':S.id,'Name':S.name,'Problem':GROUPS[S.group]||S.group,'Age':S.age||'','Language':LANG==='ar'?'Arabic':'English','Larger text':(BIG?'On':'Off')+(S.autoBig?(S.bigTouched&&!BIG?' (auto on, turned off)':' (auto, age over 45)'):''),'Device':S.device,
   'Status':S.left?'Left the website':'Using the website',
   'Total minutes in website':mn((S.lastAct-S.t0-(S.away||0))/1000),
   'Sign-up (min)':mn(S.signupS),
@@ -491,7 +627,7 @@ function tab(screen){const a=A();a.toast=null;a.stack=[];a.screen=screen;a.sheet
 function toast(text,undo){A().toast={text,undo,id:Date.now()};const id=A().toast.id;setTimeout(()=>{if(A()&&A().toast&&A().toast.id===id){A().toast=null;renderApp();}},4500);}
 function onEnter(sc){const a=A();S.screens[sc]=1;
  if(sc==='scan'){mark('scanOpen');a.scanT0=Date.now();localDB();}
- if(sc==='typed'&&a.scanT0==null)a.scanT0=Date.now();
+ if((sc==='typed'||sc==='search')&&a.scanT0==null)a.scanT0=Date.now();
  if(sc==='recipes')mark('recipesOpen');
  if(sc==='checking'){clearTimeout(checkingTimer);a.chk=0;const step=()=>{a.chk++;if(A()!==a)return;if(a.chk<4){renderApp();checkingTimer=setTimeout(step,450);}else{try{navigator.vibrate&&navigator.vibrate(60);}catch(e){}a.stack.pop();a.screen='result';a.lastResult=null;onEnter('result');renderApp(true);}};checkingTimer=setTimeout(step,450);}
  if(sc==='result')afterResult();
@@ -514,6 +650,7 @@ function renderApp(scrollTop){const el=$('#app');if(!el||!A())return;const a=A()
  el.className='app'+(o.cls?' '+o.cls:'')+(BIG?' big':'');
  el.innerHTML=`${statusTop(o.dark,o.topBg)}<div class="a-scroll">${o.body}</div>${o.foot?`<div class="a-foot">${o.foot}</div>`:''}${o.nav?nav(o.nav):''}${o.sheet?`<div class="a-sheetwrap"><button class="a-dim" data-act="closeSheet" aria-label="Close"></button><div class="a-sheet" role="dialog" aria-modal="true"><span class="handle"></span>${o.sheet}</div></div>`:''}${toastHTML}`;
  if(a.busy)el.insertAdjacentHTML('beforeend',`<div class="busy" role="status" aria-live="polite"><div><span class="spin"></span><span id="busyTxt">${esc(a.busy)}</span></div></div>`);
+ localize(el);
  const sc=el.querySelector('.a-scroll');if(sc)sc.scrollTop=st;persist();setTimeout(syncCam,0);}
 
 const SCREENS={
@@ -532,7 +669,7 @@ const SCREENS={
  profiles(){const a=A();return{nav:'profiles',body:`<div class="a-body"><div><h1 class="a-title">Profiles</h1><div class="a-cap" style="font-size:17px">Choose who you’re checking food for.</div></div>
   <div class="a-list">${a.profiles.map(p=>{const on=p.id===a.active;return `<button class="a-item ${on?'sel':''}" data-act="setActive" data-arg="${p.id}" aria-pressed="${on}">${avatar(p,44,on)}<span class="grow"><span class="a-strong" style="display:block">${esc(p.name)}${p.you?' (you)':''}</span><span class="a-cap">${esc(profSummary(p))}</span></span>${on?`<span class="a-badge" style="background:#1D4ED8;color:#fff">${ic('check',14,'#fff',3)}Active</span>`:''}</button>`;}).join('')}</div>
   ${B(ic('plus',20,'#1E40AF')+'Add a profile','startProfile',null,'dash')}
-  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">The active profile is named on every scan and result, so you always know who you’re checking for.</span></div><button class="textsize" style="align-self:stretch;justify-content:center" data-act="bigText" aria-pressed="${BIG}"><span style="font-size:13px">A</span><span style="font-size:19px">A</span> Larger text: ${BIG?'On':'Off'}</button>${B('Log out','logout',null,'s')}</div>`};},
+  <div class="a-src">${ic('info',20,'#4B5563')}<span class="a-cap">The active profile is named on every scan and result, so you always know who you’re checking for.</span></div><button class="langbtn notr" style="align-self:stretch;justify-content:center" data-act="lang" lang="${LANG==='ar'?'en':'ar'}">${LANG==='ar'?'English':'العربية'}</button><button class="textsize" style="align-self:stretch;justify-content:center" data-act="bigText" aria-pressed="${BIG}"><span style="font-size:13px">A</span><span style="font-size:19px">A</span> Larger text: ${BIG?'On':'Off'}</button>${B('Log out','logout',null,'s')}</div>`};},
  p1(){const d=A().draft;const opts=[['allergy','shield','I have food allergies','Avoid allergens like nuts, milk or gluten'],['diabetes','drop','I have diabetes','Track sugar against my limit'],['child','users','My child has food allergies','Make a profile for your child'],['healthy','fork','I want to eat healthier','Plan balanced meals that fit my goals']];
   return{foot:B('Back','back',null,'s')+B('Next','p1next',null,'p',d.who.length?'':'disabled'),body:`<div class="a-body">${stepHead(1)}<div><h1 class="a-title">Who is this profile for?</h1><div class="a-cap" style="font-size:17px">Choose all that apply. We only ask about what you pick.</div></div>
   <div class="a-list">${opts.map(([k,i,t,s])=>{const on=d.who.includes(k);return `<button class="a-opt ${on?'on':''}" data-act="toggleWho" data-arg="${k}" aria-pressed="${on}"><span style="width:52px;height:52px;border-radius:26px;background:${on?'#fff':'#EFF4FF'};display:flex;align-items:center;justify-content:center;flex:none">${ic(i,28,'#1D4ED8')}</span><span class="grow" style="flex:1"><span class="a-strong" style="display:block">${t}</span><span class="a-cap">${s}</span></span><span class="a-check">${on?ic('check',18,'#fff',3):''}</span></button>`;}).join('')}</div>
@@ -557,7 +694,7 @@ const SCREENS={
    <div class="a-row"><div class="grow"><div class="a-small">SUGAR</div><div class="a-strong">${d.sugarOn?'≤ '+d.sugar+' g per serving':'Not tracked'}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div>
    ${d.who.includes('healthy')?`<div class="a-row"><div class="grow"><div class="a-small">HEALTHY GOALS</div><div class="a-strong">${esc([d.sugarOn?'Less sugar':'',...(d.goals||[]).map(k=>HGOALS[k].label)].filter(Boolean).join(' · ')||'None')}</div></div><button class="a-btn t" style="width:auto;padding:0 6px" data-act="editProfile">Edit</button></div>`:''}</div>
   <div class="a-card"><span class="a-strong">How results will look</span>${[['bad','Contains something to avoid'],['unc','Part of the label couldn’t be checked'],['safe','No conflict found in everything checked']].map(([k,t])=>`<div class="a-row">${badge(k)}<span class="a-cap">${t}</span></div>`).join('')}</div></div>`};},
- scan(){const a=A();const P=prof();const lab=a.camMode==='label';const al=Object.keys(P.allergens||{});
+ scan(){const a=A();const P=prof();a.sres=a.sres||[];const lab=a.camMode==='label';const al=Object.keys(P.allergens||{});
   return{cls:'cam',dark:true,body:`<div class="a-body">
   <div class="a-row"><button class="cam-round" style="width:44px;height:44px" data-act="back" aria-label="Close scanner">${ic('x',22,'#fff')}</button><button class="cam-pill" data-act="tab" data-arg="profiles" style="border:0;color:#fff;cursor:pointer">Checking for ${esc(P.name)}${al.length?' · '+esc(al.map(k=>ALLERGENS[k].label).join(', ')):P.sugar?' · sugar ≤ '+P.sugar+' g':''}</button></div>
   <div class="cam-seg" role="tablist"><button class="${!lab?'on':''}" data-act="camMode" data-arg="barcode" role="tab" aria-selected="${!lab}">Barcode</button><button class="${lab?'on':''}" data-act="camMode" data-arg="label" role="tab" aria-selected="${lab}">Ingredient label</button></div>
@@ -565,6 +702,7 @@ const SCREENS={
    <form class="bc-row" onsubmit="return false"><input class="a-input bc-in" id="aBarcode" inputmode="numeric" autocomplete="off" placeholder="Or type the barcode number" value="${esc(a.bc||'')}" aria-label="Barcode number"><button class="a-btn p" data-act="lookupTyped" type="submit">Check</button></form>`
   :`<div class="vf label-vf"><div class="label-tip">${ic('cam',40,'#fff',1.6)}<b>Photograph the ingredient list</b><span>Fill the photo with the list, hold steady and avoid glare.</span></div></div>
    <button class="a-btn p" data-act="photoLabel">${ic('cam',20,'#fff')}Take or choose a photo</button>`}
+  <button class="cam-link" data-act="go" data-arg="search">${ic('search',20,'#fff')}Search by product name</button>
   <button class="cam-link" data-act="go" data-arg="typed">${ic('kb',20,'#fff')}Can’t scan? Type the ingredients</button>
   <details class="samples"><summary>No product with you? Try a sample product</summary><div class="pick-row">${Object.keys(PRODUCTS).filter(k=>PRODUCTS[k].source==='sample').map(k=>`<button data-act="pickSample" data-arg="${k}">${esc(PRODUCTS[k].name)}</button>`).join('')}</div></details>
   </div>`};},
@@ -585,13 +723,19 @@ const SCREENS={
   const needFix=ev.why.includes('noings')||ev.why.includes('unread');
   const fix=needFix?`${B(ic('cam',20,'#fff')+'Photograph the ingredients','photoLabel',null,'p')}${B(ic('kb',20,'#1E40AF')+'Type the ingredients','typeFor',null,'s')}<div class="a-cap" style="text-align:center">We only show “Safe” when every ingredient is confirmed.</div>`:'';
   const actions=k==='bad'?`${B('Scan another product','scanAnother',null,'p')}<div class="a-row"><button class="a-btn" disabled aria-describedby="nosave">Save to Pantry</button>${B('Report issue','go','report','s')}</div><div class="a-cap" id="nosave">You can’t save food that isn’t safe for ${esc(P.name)}.</div>`:k==='safe'?`${B('Save to Pantry','savePantry',null,'p')}${B('Scan another product','scanAnother',null,'s')}<div class="a-row">${B('Another profile','tab','profiles','s')}${B('Report issue','go','report','s')}</div>`:`${fix}${B('Scan another product','scanAnother',null,needFix?'s':'p')}${needFix?'':B('Report issue','go','report','s')}`;
-  const src={barcode:'Open Food Facts product database'+(p.saved?' (copy saved in the app)':'')+(p.barcode?' · barcode '+p.barcode:''),photo:'text read from your label photo',typed:'ingredients you typed',sample:'sample product'}[p.source]||'product information';
+  const src={barcode:'Open Food Facts product database'+(p.saved?' (copy saved in the app)':' (live)')+(p.barcode?' · barcode '+p.barcode:''),photo:'text read from your label photo',typed:'ingredients you typed',sample:'sample product'}[p.source]||'product information';
   return{nav:'none',topBg:pal.bg,dark:k==='bad',body:`<div class="a-banner" style="background:${pal.bg};color:${pal.fg}">${sic(k,44,k==='bad')}<div style="flex:1"><div class="eb">${pal.eb}</div><div class="a-title" style="color:${k==='bad'?'#fff':'#111827'}">${esc(pal.t)}</div><div>${esc(sub)}</div></div></div>
    <div class="a-body" style="padding-top:14px"><div class="a-row"><span class="a-tile">${ic('pkg',26,'#6B7280',1.8)}</span><div class="grow"><div class="a-h">${esc(p.name)}</div><div class="a-cap">${esc(p.size||'')}${p.size?' · ':''}${p.source==='barcode'||p.source==='sample'?'scanned just now':'checked just now'}</div></div></div>
    ${reasons.join('')}
    ${!p.noIngs?`<button class="a-item" data-act="go" data-arg="ingredients"><span class="grow a-strong">See all ${(p.ings||[]).length} ingredients</span>${ic('chevR',20,'#4B5563')}</button>`:''}
    <div class="a-src">${ic('info',20,'#4B5563')}<div><div class="a-cap">Source: ${esc(src)} · checked ${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</div><div class="a-small" style="color:#111827;font-size:15px;line-height:20px">${k==='safe'?'“Safe” = no conflict in the information checked. Always check the pack.':'Always check the pack — recipes can change.'}</div></div></div>
+   ${p.barcode&&!p.notFound?`<a class="offlink" data-act="extLink" href="https://world.openfoodfacts.org/product/${encodeURIComponent(p.barcode)}" target="_blank" rel="noopener">${ic('search',18,'#1E40AF')}View on Open Food Facts</a>`:''}
+   ${p.barcode&&p.notFound&&!p.offline?`<div class="offcard"><span class="a-cap">Help others: add its photos and ingredients to the free database.</span><a class="offlink" data-act="extLink" href="https://world.openfoodfacts.org/cgi/product.pl?type=search_or_add&action=process&code=${encodeURIComponent(p.barcode)}" target="_blank" rel="noopener">${ic('plus',18,'#1E40AF')}Add this product to Open Food Facts</a></div>`:''}
    ${actions}</div>`};},
+ search(){const a=A();const P=prof();const r=a.sres||[];return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">Search products</div><div class="a-cap">Checking for ${esc(P.name)}</div></div></div>
+  <form class="bc-row" onsubmit="return false"><input class="a-input" id="aQuery" autocomplete="off" placeholder="e.g. Almarai yogurt" value="${esc(a.sq||'')}" aria-label="Product name or brand"><button class="a-btn p" data-act="doSearch" type="submit">Search</button></form>
+  <div class="a-cap" id="sStatus">${esc(a.sstat||'Results from the app’s saved list and Open Food Facts.')}</div>
+  <div class="sres">${r.map((x,i)=>`<button class="a-item" data-act="pickResult" data-arg="${i}"><span class="a-tile">${ic('pkg',24,'#6B7280',1.8)}</span><span class="grow" style="display:flex;flex-direction:column;gap:2px"><span class="a-strong" dir="auto">${esc(x.name)}</span><span class="a-cap"><span class="num">${esc(x.code)}</span> · ${x.local?'Saved list':'Open Food Facts'}</span></span>${ic('chevR',20,'#4B5563')}</button>`).join('')}</div></div>`};},
  ingredients(){const p=curProduct();const ev=resultEval();const list=[...ev.list].sort((x,y)=>({bad:0,unc:1,safe:2}[x.k]-{bad:0,unc:1,safe:2}[y.k]));const P=prof();
   return{body:`<div class="a-body"><div class="a-row">${backBtn()}<div class="grow"><div class="a-h">All ${p.ings.length} ingredients</div><div class="a-cap">${esc(p.name)} · checked for ${esc(P.name)}</div></div></div>
   <div class="a-card" style="padding:2px 14px;gap:0">${list.map((x,i)=>`<div class="a-row" style="padding:10px 0;${i<list.length-1?'border-bottom:1px solid #E5E7EB':''}">${sic(x.k,18)}<div class="grow"><div class="${x.k==='safe'?'':'a-strong'}">${esc(x.n)}</div>${x.k==='bad'?`<div class="a-cap" style="color:#991B1B">${ALLERGENS[x.allergen].label} — ${esc(P.name)} must avoid</div>`:''}</div></div>`).join('')}${(p.may||[]).map(m=>`<div class="a-row" style="padding:10px 0;border-top:1px solid #E5E7EB">${sic('unc',18)}<div class="grow"><div class="a-strong">May contain: ${ALLERGENS[m].label.toLowerCase()}</div><div class="a-cap" style="color:#92400E">Warning printed on the pack</div></div></div>`).join('')}</div></div>`};},
@@ -696,6 +840,8 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
     a.setup=false;a.active=p.id;a.stack=[];a.screen='home';a.draft=null;toast(p.name+'’s profile saved');renderApp(true);
     if(S.M.profileSaved==null){mark('profileSaved');S.profileText=`${p.name} (${p.kind==='child'?'child':'self'}): ${profSummary(p)}`;}else S.profileText+=` | ${p.name}: ${profSummary(p)}`;sendToSheet('profile');},
   pickSample:()=>{S.c.scans++;if(a.scanT0==null)a.scanT0=Date.now();a.cur=arg;go('checking');},
+  doSearch:()=>{searchProducts(($('#aQuery')||{}).value||'');},
+  pickResult:()=>{const x=(a.sres||[])[+arg];if(!x)return;S.c.scans++;a.cur=makeProduct(Object.assign(fromOFF(x.rec,x.code),{saved:!!x.local}));go('checking');},
   lookupTyped:()=>{const v=($('#aBarcode')||{}).value||'';a.bc=v;lookupBarcode(v,'typed');},
   photoLabel:()=>{const f=document.getElementById('photoIn');if(f){f.value='';f.click();}},
   typeFor:()=>{const p=curProduct();a.typed={name:p.notFound?'':p.name,text:'',sugar:'',source:'typed',note:''};go('typed');},
@@ -728,7 +874,9 @@ document.addEventListener('click',e=>{const app=e.target.closest('#app');if(!app
   addFromPlan:()=>{a.planDay=a.viewDay;a.planMeal=arg;a.filters.breakfast=arg==='Breakfast';tab('recipes');},
   shopTick:()=>{a.shop[arg]=!a.shop[arg];renderApp();},
   share:()=>{a.shared=!a.shared;renderApp();},
-  bigText:()=>{BIG=!BIG;store.set('mp.big',BIG);renderApp();},
+  bigText:()=>{BIG=!BIG;S.bigTouched=true;store.set('mp.big',BIG);renderApp();},
+  lang:()=>{LANG=LANG==='ar'?'en':'ar';store.set('mp.lang',LANG);renderApp();},
+  extLink:()=>{},
   logout:()=>{stopCam();S.left=true;sendToSheet('logout');S=null;try{localStorage.removeItem('mp.visitor');}catch(err){}render();}
  };
  if(H[act])H[act]();if(S)persist();});
@@ -742,34 +890,39 @@ function renderAppHidden(){const a=A();const P=prof();renderApp();const el=$('#a
 /* ============ sign-up + page shell ============ */
 const root=$('#root');
 function render(){
- if(!S){root.innerHTML=`<div class="site"><div class="shell"><div class="app${BIG?' big':''}" id="welcome">${welcomeHTML()}</div></div></div>`;return;}
+ if(!S){root.innerHTML=`<div class="site"><div class="shell"><div class="app${BIG?' big':''}" id="welcome">${welcomeHTML()}</div></div></div>`;localize($('#welcome'));return;}
  if(!$('#app'))root.innerHTML=`<div class="site"><div class="shell"><div class="app" id="app" role="application" aria-label="Meal Planner and Ingredient Checker"></div><input type="file" id="photoIn" accept="image/*" hidden></div></div>`;
  renderApp(true);}
-function welcomeHTML(){const ok=W.name.trim()&&W.group&&W.consent;
+function welcomeHTML(){const ok=W.name.trim()&&ageOk(W.age)&&W.group&&W.consent;
  return `${statusTop(false)}<div class="a-scroll"><div class="a-body" style="padding-top:20px">
-  <button class="textsize" data-w="big" aria-pressed="${BIG}"><span style="font-size:13px">A</span><span style="font-size:19px">A</span> Larger text</button>
+  <div class="toprow"><button class="langbtn notr" data-w="lang" lang="${LANG==='ar'?'en':'ar'}">${LANG==='ar'?'English':'العربية'}</button><button class="textsize" data-w="big" aria-pressed="${BIG}"><span style="font-size:13px">A</span><span style="font-size:19px">A</span> Larger text</button></div>
   <div class="a-row" style="gap:10px"><span style="width:44px;height:44px;border-radius:14px;background:#1D4ED8;display:flex;align-items:center;justify-content:center">${ic('shield',24,'#fff')}</span><span style="font-size:15px;font-weight:700;line-height:1.25;color:#1E40AF">Meal Planner &amp;<br>Ingredient Checker</span></div>
   <div><h1 class="a-title">Eat safely, plan easily</h1><div class="a-cap" style="font-size:17px;line-height:24px;margin-top:6px">Check if packaged food is safe for you or your child, and plan meals that fit your allergies or sugar limit.</div></div>
   <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Your first name</span><input class="a-input" id="wName" value="${esc(W.name)}" placeholder="e.g. Sara" autocomplete="given-name"></label>
+  <label style="display:flex;flex-direction:column;gap:6px"><span class="a-small" style="font-size:15px">Your age</span><input class="a-input" id="wAge" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" value="${esc(W.age)}" placeholder="e.g. 50" style="max-width:160px"><span class="agenote" id="wAgeNote">${ageOk(W.age)&&+W.age>45&&BIG&&!W.bigTouched?'Larger text is on because you are over 45. You can turn it off at the top.':''}</span></label>
   <div class="a-small" style="font-size:15px">What brings you here?</div>
   <div class="a-chips">${Object.entries(GROUPS).map(([k,l])=>`<button class="a-chip ${W.group===k?'on':''}" data-w="group" data-arg="${k}" aria-pressed="${W.group===k}">${W.group===k?ic('check',18,'#1D4ED8',2.6):''}${l}</button>`).join('')}</div>
   <button class="a-opt ${W.consent?'on':''}" data-w="consent" aria-pressed="${W.consent}" style="padding:14px"><span class="a-check">${W.consent?ic('check',18,'#fff',3):''}</span><span class="a-cap" style="flex:1;color:#111827">I agree that how I use this app (time spent and what I tap) is recorded for a university HCI project.</span></button>
   <button class="a-btn p" data-w="start" ${ok?'':'disabled'}>Get started</button>
-  <div class="a-cap" id="wHint">${ok?'Next, you’ll set up who you check food for.':'Enter your name, choose one option and tick the box.'}</div>
+  <div class="a-cap" id="wHint">${ok?'Next, you’ll set up who you check food for.':'Enter your name and age, choose one option and tick the box.'}</div>
   ${sheetReady()?'':'<div class="a-cap" style="color:#92400E;border:1px dashed #B45309;border-radius:10px;padding:8px 10px">Setup note (only you see this until it’s fixed): visits aren’t saved yet. Paste your Google Sheet link into SHEET_URL in index.html.</div>'}
  </div></div>`;}
 document.addEventListener('click',e=>{const w=e.target.closest('[data-w]');if(!w)return;const k=w.dataset.w;
  if(k==='group')W.group=w.dataset.arg;
  if(k==='consent')W.consent=!W.consent;
- if(k==='big'){BIG=!BIG;store.set('mp.big',BIG);render();return;}
- if(k==='start'){if(!(W.name.trim()&&W.group&&W.consent))return;S=newSession(W.name,W.group,(Date.now()-W.t0)/1000);logClick('sign-up','Get started (account created)');S.app=newApp(S.name,S.group);S.screens.p1=1;
-  W={name:'',group:'',consent:false,t0:Date.now()};saveNow();sendToSheet('start');render();return;}
- const el=$('#welcome');if(el){const sc=el.querySelector('.a-scroll').scrollTop;el.innerHTML=welcomeHTML();el.querySelector('.a-scroll').scrollTop=sc;}});
+ if(k==='big'){BIG=!BIG;W.bigTouched=true;store.set('mp.big',BIG);render();return;}
+ if(k==='lang'){LANG=LANG==='ar'?'en':'ar';store.set('mp.lang',LANG);render();return;}
+ if(k==='start'){if(!(W.name.trim()&&ageOk(W.age)&&W.group&&W.consent))return;S=newSession(W.name,W.group,(Date.now()-W.t0)/1000);S.age=+W.age;S.autoBig=+W.age>45&&!W.bigTouched;logClick('sign-up','Get started (account created)');S.app=newApp(S.name,S.group);S.screens.p1=1;
+  W={name:'',age:'',group:'',consent:false,bigTouched:false,t0:Date.now()};saveNow();sendToSheet('start');render();return;}
+ const el=$('#welcome');if(el){const sc=el.querySelector('.a-scroll').scrollTop;el.innerHTML=welcomeHTML();localize(el);el.querySelector('.a-scroll').scrollTop=sc;}});
 document.addEventListener('input',e=>{const t=e.target;
- if(t.id==='wName'){W.name=t.value;const ok=W.name.trim()&&W.group&&W.consent;const b=$('#welcome [data-w="start"]');if(b)b.disabled=!ok;const h=$('#wHint');if(h)h.textContent=ok?'Next, you’ll set up who you check food for.':'Enter your name, choose one option and tick the box.';return;}
+ if(t.id==='wName'||t.id==='wAge'){if(t.id==='wName')W.name=t.value;else{t.value=t.value.replace(/\D/g,'').slice(0,3);W.age=t.value;
+   if(!W.bigTouched&&ageOk(W.age)){const want=+W.age>45;if(want!==BIG){BIG=want;store.set('mp.big',BIG);const wl=$('#welcome');wl.classList.toggle('big',BIG);const tb=wl.querySelector('[data-w=big]');if(tb)tb.setAttribute('aria-pressed',BIG);}}
+   const nt=$('#wAgeNote');if(nt){nt.textContent=ageOk(W.age)&&+W.age>45&&BIG&&!W.bigTouched?'Larger text is on because you are over 45. You can turn it off at the top.':'';localize(nt);}}
+  const ok=W.name.trim()&&ageOk(W.age)&&W.group&&W.consent;const b=$('#welcome [data-w="start"]');if(b)b.disabled=!ok;const h=$('#wHint');if(h){h.textContent=ok?'Next, you’ll set up who you check food for.':'Enter your name and age, choose one option and tick the box.';localize(h);}return;}
  if(!A())return;
- if(t.id==='aName'){A().draft.name=t.value;const h=$('#p2hint');if(h)h.textContent=p2Missing();const nb=$('#p2next');if(nb)nb.disabled=!!p2Missing();const q=$('#p2q');if(q){const d=A().draft,nm=t.value.trim()||'they';q.textContent=(d.who.includes('allergy')||d.who.includes('child'))?`Which foods must ${nm} avoid?`:`Does ${nm} have any food allergies too?`;}}
- if(t.id==='aSearch'){A().recipeQ=t.value;const l=$('#recList');if(l)l.innerHTML=recipeListHTML();}
+ if(t.id==='aName'){A().draft.name=t.value;const h=$('#p2hint');if(h)h.textContent=p2Missing();const nb=$('#p2next');if(nb)nb.disabled=!!p2Missing();const ph=$('#p2hint');if(ph)localize(ph);const q=$('#p2q');if(q){const d=A().draft,nm=t.value.trim()||'they';q.textContent=(d.who.includes('allergy')||d.who.includes('child'))?`Which foods must ${nm} avoid?`:`Does ${nm} have any food allergies too?`;localize(q);}}
+ if(t.id==='aSearch'){A().recipeQ=t.value;const l=$('#recList');if(l){l.innerHTML=recipeListHTML();localize(l);}}
  if(t.id==='aTypedName')A().typed.name=t.value; if(t.id==='aTypedText'){A().typed.text=t.value;const b=$('#typedCheck');if(b)b.disabled=!t.value.trim();}
  if(t.id==='aMissing'){A().missing=t.value;const b=$('#missCheck');if(b)b.disabled=!t.value.trim();}
  if(t.id==='aReport')A().report.text=t.value;

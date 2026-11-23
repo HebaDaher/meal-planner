@@ -10,9 +10,9 @@
  *  - "Usability goals": all 7 goals with the task, how it is measured, the target and the live result.
  */
 const VISITORS_TAB = 'Visitors', SCANS_TAB = 'Scans', CLICKS_TAB = 'Clicks', GOALS_TAB = 'Usability goals';
-const VERSION = 'v3.1';
+const VERSION = 'v3.2';
 const HEADERS = [
-  'Date', 'Start time', 'Session ID', 'Name', 'Problem', 'Device', 'Status',
+  'Date', 'Start time', 'Session ID', 'Name', 'Problem', 'Age', 'Language', 'Larger text', 'Device', 'Status',
   'Total minutes in website', 'Sign-up (min)',
   'Create profile (min) – Goal 1', 'Profile saved',
   'Products checked', 'Fastest scan → result (sec) – Goal 2', 'Slowest scan → result (sec)',
@@ -159,5 +159,5 @@ function goals_(ss) {
 
 // Open the web-app link in a browser to check it works.
 function doGet() {
-  return ContentService.createTextOutput('Connected (v3.1): your website can now send visits to this sheet.');
+  return ContentService.createTextOutput('Connected (v3.2): your website can now send visits to this sheet.');
 }
